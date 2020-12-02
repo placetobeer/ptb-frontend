@@ -5,14 +5,19 @@
   "projects": {
     "ptb-frontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "css"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "ngx-build-plus:browser",
           "options": {
+            "extraWebpackConfig": "webpack.config.js",
             "outputPath": "dist/ptb-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -24,6 +29,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/tailwindcss/dist/tailwind.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -60,66 +66,67 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "ngx-build-plus:dev-server",
           "options": {
-            "browserTarget": "ptb-frontend:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "ptb-frontend:build:production"
+            "browserTarget": "ptb-frontend:build",
+            "extraWebpackConfig": "webpack.config.js",
+            "configurations": {
+              "production": {
+                "browserTarget": "ptb-frontend:build:production"
+              }
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "ptb-frontend:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "codeCoverage": true,
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ptb-frontend:serve"
           },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ptb-frontend:serve:production"
+          "extract-i18n": {
+            "builder": "@angular-devkit/build-angular:extract-i18n",
+            "options": {
+              "browserTarget": "ptb-frontend:build"
+            }
+          },
+          "test": {
+            "builder": "ngx-build-plus:karma",
+            "options": {
+              "codeCoverage": true,
+              "main": "src/test.ts",
+              "polyfills": "src/polyfills.ts",
+              "tsConfig": "tsconfig.spec.json",
+              "karmaConfig": "karma.conf.js",
+              "assets": [
+                "src/favicon.ico",
+                "src/assets"
+              ],
+              "styles": [
+                "src/styles.css"
+              ],
+              "scripts": []
+            }
+          },
+          "lint": {
+            "builder": "@angular-devkit/build-angular:tslint",
+            "options": {
+              "tsConfig": [
+                "tsconfig.app.json",
+                "tsconfig.spec.json",
+                "e2e/tsconfig.json"
+              ],
+              "exclude": [
+                "**/node_modules/**"
+              ]
+            }
+          },
+          "e2e": {
+            "builder": "@angular-devkit/build-angular:protractor",
+            "options": {
+              "protractorConfig": "e2e/protractor.conf.js",
+              "devServerTarget": "ptb-frontend:serve"
+            },
+            "configurations": {
+              "production": {
+                "devServerTarget": "ptb-frontend:serve:production"
+              }
             }
           }
         }
       }
-    }},
-  "defaultProject": "ptb-frontend"
+    }
+  }
 }
