@@ -18,13 +18,13 @@ export class HubpageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadGroupsByUserId();
-    this.currentGroup = this.loadedGroups[0];
   }
 
   loadGroupsByUserId(): void {
     this.http.get<Group[]>('http://localhost:8080/groups', {params: new HttpParams().set('userId', String(this.userId))})
       .subscribe(groups => {
       this.loadedGroups = groups;
+      this.currentGroup = this.loadedGroups[0];
     });
   }
 

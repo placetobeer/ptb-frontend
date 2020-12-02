@@ -1,2 +1,2 @@
-<app-header></app-header>
+<app-header *ngIf="currentGroup != null" groupName="{{currentGroup.name}}"></app-header>
 <app-placeholder></app-placeholder>
