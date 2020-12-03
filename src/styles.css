@@ -1,3 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.btn {
+  @apply w-1/2 flex items-center justify-center rounded-md border border-gray-300
+}
+
+
