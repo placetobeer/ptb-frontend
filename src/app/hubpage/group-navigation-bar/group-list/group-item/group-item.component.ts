@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-group-item',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./group-item.component.css']
 })
 export class GroupItemComponent implements OnInit {
-
+  @Input() groupName: string;
   constructor() { }
 
   ngOnInit(): void {
