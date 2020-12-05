@@ -10,7 +10,7 @@ import {map} from 'rxjs/operators';
 })
 export class HubpageComponent implements OnInit {
 
-  userId = 1;
+  userId = 4;
   loadedGroups: Group[];
   currentGroup: Group;
 
