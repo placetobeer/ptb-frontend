@@ -1,6 +1,5 @@
 <header class="flex items-center py-3 bg-ptb-gray">
-  <app-header *ngIf="currentGroup != null" groupName="{{currentGroup.name}}"></app-header>
-  <app-header *ngIf="currentGroup == null" groupName="Place to Beer"></app-header>
+  <app-header [groupName]="dataService.selectedGroup == null ? 'Place to Beer' : dataService.selectedGroup.name"></app-header>
 </header>
 
 <div class="grid grid-cols-4">
