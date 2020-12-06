@@ -1,3 +1,7 @@
 .btn {
-  @apply bg-ptb-gray rounded-lg py-0.5 px-7 shadow-sm
+  @apply bg-ptb-gray-500 rounded-lg py-0.5 px-7 shadow-sm
+}
+
+.ptb-list-item {
+  @apply bg-ptb-blue-400 rounded-full p-1 hover:bg-ptb-blue-300 flex items-center
 }
