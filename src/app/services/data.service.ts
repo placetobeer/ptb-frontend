@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Group} from '../entities/group.model';
-import {HttpGroupServiceService} from './httpServices/http-group-service.service';
+import {HttpGroupService} from './httpServices/http-group.service';
+import {HttpMembershipService} from './httpServices/http-membership.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,18 +9,29 @@ import {HttpGroupServiceService} from './httpServices/http-group-service.service
 export class DataService {
 
   userGroups: Group[];
+  nonSelectedGroups: Group[];
   selectedGroup: Group;
-  private userId = 1;
+  userMembershipMap = new Map();
+  private userId = 4;
 
-  constructor(private httGroupService: HttpGroupServiceService) {
+  constructor(private httGroupService: HttpGroupService, private httpMembershipService: HttpMembershipService) {
     this.loadUserGroups();
   }
 
   loadUserGroups(): void {
     this.httGroupService.loadGroupsByUserId(this.userId).subscribe(groups => {
       this.userGroups = groups;
-      this.selectedGroup = groups[0];
+
+      this.nonSelectedGroups = groups.filter(group => group !== this.selectedGroup);
     });
   }
 
+  selectGroup(group: Group): void {
+    if (!this.userMembershipMap.has(group.id)){
+      this.httpMembershipService.loadUserMembershipsByGroupId(group.id)
+        .subscribe(userMemberhips => this.userMembershipMap.set(group.id, userMemberhips));
+    }
+    this.selectedGroup = group;
+    this.nonSelectedGroups = this.userGroups.filter(obj => obj !== this.selectedGroup);
+  }
 }

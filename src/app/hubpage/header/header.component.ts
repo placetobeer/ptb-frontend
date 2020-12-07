@@ -8,7 +8,8 @@ import {Component, Input, OnInit} from '@angular/core';
 export class HeaderComponent implements OnInit {
   @Input() groupName: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

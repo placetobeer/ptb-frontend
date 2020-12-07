@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from '../../../services/data.service';
+import {Group} from '../../../entities/group.model';
 
 @Component({
   selector: 'app-group-list',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupListComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dataService: DataService) { }
 
   ngOnInit(): void {
   }
 
+  changeSelectedGroup(group: Group): void {
+    this.dataService.selectGroup(group);
+  }
 }

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HttpGroupServiceService } from './http-group-service.service';
+import { HttpGroupService } from './http-group.service';
 
 describe('HttpGroupServiceService', () => {
-  let service: HttpGroupServiceService;
+  let service: HttpGroupService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HttpGroupServiceService);
+    service = TestBed.inject(HttpGroupService);
   });
 
   it('should be created', () => {
