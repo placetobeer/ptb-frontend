@@ -14,12 +14,12 @@ export class DataService {
   userMembershipMap = new Map();
   private userId = 4;
 
-  constructor(private httGroupService: HttpGroupService, private httpMembershipService: HttpMembershipService) {
+  constructor(private httpGroupService: HttpGroupService, private httpMembershipService: HttpMembershipService) {
     this.loadUserGroups();
   }
 
   loadUserGroups(): void {
-    this.httGroupService.loadGroupsByUserId(this.userId).subscribe(groups => {
+    this.httpGroupService.loadGroupsByUserId(this.userId).subscribe(groups => {
       this.userGroups = groups;
 
       this.nonSelectedGroups = groups.filter(group => group !== this.selectedGroup);
@@ -27,7 +27,7 @@ export class DataService {
   }
 
   selectGroup(group: Group): void {
-    if (!this.userMembershipMap.has(group.id)){
+    if (!this.userMembershipMap.has(group.id)) {
       this.httpMembershipService.loadUserMembershipsByGroupId(group.id)
         .subscribe(userMemberhips => this.userMembershipMap.set(group.id, userMemberhips));
     }

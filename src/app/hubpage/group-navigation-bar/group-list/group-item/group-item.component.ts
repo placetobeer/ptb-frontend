@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class GroupItemComponent implements OnInit {
   @Input() groupName: string;
+
   constructor() { }
 
   ngOnInit(): void {

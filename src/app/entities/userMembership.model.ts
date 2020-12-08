@@ -1,6 +1,11 @@
 import {User} from './user.model';
 
-export interface UserMembership {
+export class UserMembership {
   user: User;
   role: string;
+
+  constructor(user: User, role: string) {
+    this.user = user;
+    this.role = role;
+  }
 }
