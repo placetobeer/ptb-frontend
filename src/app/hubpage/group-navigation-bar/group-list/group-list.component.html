@@ -1,6 +1,6 @@
 <div class="py-4">
-<p *ngIf="dataService.selectedGroup === null">Please select a group</p>
+<p *ngIf="dataService.selectedGroup == null">Please select a group</p>
 <app-group-item-active *ngIf="dataService.selectedGroup != null" [group]="dataService.selectedGroup"></app-group-item-active>
-<p *ngIf="dataService.selectedGroup !== null">Select other group</p>
+<p *ngIf="dataService.selectedGroup != null">Select other group</p>
 <app-group-item *ngFor="let group of dataService.nonSelectedGroups" [groupName]="group.name" (click)="this.changeSelectedGroup(group)"></app-group-item>
 </div>
