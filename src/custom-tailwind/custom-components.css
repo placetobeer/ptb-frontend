@@ -3,5 +3,5 @@
 }
 
 .ptb-list-item {
-  @apply bg-ptb-blue-400 rounded-full p-1 hover:bg-ptb-blue-300 flex items-center
+  @apply bg-ptb-gray-400 rounded-md border-solid border border-ptb-gray-800 p-1 hover:bg-ptb-gray-300 cursor-pointer flex items-center
 }

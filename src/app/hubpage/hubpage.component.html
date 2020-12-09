@@ -2,11 +2,11 @@
   <app-header [groupName]="dataService.selectedGroup == null ? 'Place to Beer' : dataService.selectedGroup.name"></app-header>
 </header>
 
-<div class="grid grid-cols-4">
+<div class="grid grid-cols-4 divide-x-2 divide-ptb-gray-500 h-full">
   <div class="col-span-3">
     <app-placeholder></app-placeholder>
   </div>
-  <div class="border-ptb-gray-500 h-full">
+  <div class="bg-ptb-gray-100">
     <app-group-navigation-bar></app-group-navigation-bar>
   </div>
 </div>
