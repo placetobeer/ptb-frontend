@@ -19,19 +19,35 @@ export class DataService {
   }
 
   loadUserGroups(): void {
-    this.httpGroupService.loadGroupsByUserId(this.userId).subscribe(groups => {
-      this.userGroups = groups;
+    this.httpGroupService.loadGroupsByUserId(this.userId).subscribe({
+      next: groups => {
+        this.userGroups = groups;
 
-      this.nonSelectedGroups = groups.filter(group => group !== this.selectedGroup);
+        this.nonSelectedGroups = groups.filter(group => group !== this.selectedGroup);
+      },
+      error: error => {
+        this.handleError(error);
+      }
     });
   }
 
   selectGroup(group: Group): void {
     if (!this.userMembershipMap.has(group.id)) {
       this.httpMembershipService.loadUserMembershipsByGroupId(group.id)
-        .subscribe(userMemberhips => this.userMembershipMap.set(group.id, userMemberhips));
+        .subscribe({
+          next: userMemberships => {
+            this.userMembershipMap.set(group.id, userMemberships);
+          },
+          error: error => {
+            this.handleError(error);
+          }
+        });
     }
     this.selectedGroup = group;
     this.nonSelectedGroups = this.userGroups.filter(obj => obj !== this.selectedGroup);
+  }
+
+  handleError(error: any): void {
+    console.error('There was an error!', error);
   }
 }
