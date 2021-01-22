@@ -12,6 +12,7 @@ import { GroupItemComponent } from './hubpage/group-navigation-bar/group-list/gr
 import { GroupItemActiveComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-item-active.component';
 import {CommonModule} from '@angular/common';
 import { GroupItemActiveUserItemComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-item-active-user-item/group-item-active-user-item.component';
+import { PopupComponent } from './popups/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { GroupItemActiveUserItemComponent } from './hubpage/group-navigation-bar
     GroupListComponent,
     GroupItemComponent,
     GroupItemActiveComponent,
-    GroupItemActiveUserItemComponent
+    GroupItemActiveUserItemComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
