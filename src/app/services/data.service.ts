@@ -48,6 +48,7 @@ export class DataService {
   }
 
   handleError(error: any): void {
+    // todo open error popup
     console.error('There was an error!', error);
   }
 }
