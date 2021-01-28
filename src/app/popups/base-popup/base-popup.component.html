@@ -1,0 +1,5 @@
+<app-popup [id]="id">
+  <app-base-popup-header (xPressed)="close()"></app-base-popup-header>
+  <ng-content></ng-content>
+  <app-base-popup-button-bar [buttonMap]="buttonMap" (buttonClick)="onButtonClick($event)"></app-base-popup-button-bar>
+</app-popup>

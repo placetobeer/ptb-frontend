@@ -1,0 +1,3 @@
+<div>
+  <button *ngFor="let buttonEntry of buttonMap | keyvalue" class="btn" (click)="onButtonClick(buttonEntry.value)" > {{buttonEntry.key}}</button>
+</div>

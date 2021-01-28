@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {PopupComponent} from './popup/popup.component';
+import {PopupComponent} from './abstract-popup/popup.component';
 
 @Injectable({
   providedIn: 'root'

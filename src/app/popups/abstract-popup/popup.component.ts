@@ -33,12 +33,12 @@ export class PopupComponent implements OnInit, OnDestroy {
 
   open(): void{
     this.element.style.display = 'block';
-    document.body.classList.add('popup-open');
+    document.body.classList.add('abstract-popup-open');
   }
 
   close(): void{
     this.element.style.display = 'none';
-    document.body.classList.remove('popup-open');
+    document.body.classList.remove('abstract-popup-open');
   }
 
   private movePopupToBottomOfPage(): any{

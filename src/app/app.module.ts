@@ -12,7 +12,11 @@ import { GroupItemComponent } from './hubpage/group-navigation-bar/group-list/gr
 import { GroupItemActiveComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-item-active.component';
 import {CommonModule} from '@angular/common';
 import { GroupItemActiveUserItemComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-item-active-user-item/group-item-active-user-item.component';
-import { PopupComponent } from './popups/popup/popup.component';
+import { PopupComponent } from './popups/abstract-popup/popup.component';
+import { BasePopupComponent } from './popups/base-popup/base-popup.component';
+import { BasePopupHeaderComponent } from './popups/base-popup/base-popup-header/base-popup-header.component';
+import { BasePopupButtonBarComponent } from './popups/base-popup/base-popup-button-bar/base-popup-button-bar.component';
+import { GroupEditPopupComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-edit-popup.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { PopupComponent } from './popups/popup/popup.component';
     GroupItemComponent,
     GroupItemActiveComponent,
     GroupItemActiveUserItemComponent,
-    PopupComponent
+    PopupComponent,
+    BasePopupComponent,
+    BasePopupHeaderComponent,
+    BasePopupButtonBarComponent,
+    GroupEditPopupComponent
   ],
   imports: [
     BrowserModule,
