@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PopupService} from '../../popups/popup.service';
 
 @Component({
   selector: 'app-group-navigation-bar',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupNavigationBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private popupService: PopupService) { }
 
   ngOnInit(): void {
   }
 
+  createGroupClick(): void {
+    this.popupService.open('create-group');
+  }
 }
