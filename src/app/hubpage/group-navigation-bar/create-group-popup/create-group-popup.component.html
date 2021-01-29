@@ -1,3 +1,21 @@
 <app-base-popup [id]="id" [buttonMap]="buttonMap" (buttonClicked)="onButtonClick($event)">
-  <!--todo @lucie put your component here-->
+  <form class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
+    <div class="grid grid-cols-1 gap-4">
+      <div name="input-field" class="div-input-field">
+        <input class="input-field" type="text" id="groupName" placeholder=" " />
+        <label class="label-input-field" for="groupName">Group name</label>
+      </div>
+
+      <div name="member-list">
+        Member list coming soon!
+      </div>
+
+      <div name="add-member-bar">
+        Possibility to add members coming soon!
+      </div>
+    </div>
+
+  </form>
+  <br>
+
 </app-base-popup>

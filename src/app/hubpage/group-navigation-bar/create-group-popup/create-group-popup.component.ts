@@ -9,8 +9,9 @@ import {PopupService} from '../../../popups/popup.service';
 export class CreateGroupPopupComponent implements OnInit {
 
   buttonMap: Map<string, string> = new Map<string, string>([
-    ['Cancel', 'cancel'],
-    ['Ok', 'ok']
+    ['Ok', 'ok'],
+    ['Create', 'create'],
+    ['Cancel', 'cancel']
   ]);
 
   id = 'create-group';
@@ -27,6 +28,11 @@ export class CreateGroupPopupComponent implements OnInit {
         break;
       case 'ok':
         console.log('OK!');
+        break;
+      case 'create':
+        // todo: implement real event
+        console.log('group created!');
+        break;
     }
   }
 }
