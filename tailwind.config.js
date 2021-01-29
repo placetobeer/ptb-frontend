@@ -67,6 +67,12 @@ module.exports = {
           '800': '#738086',
           '900': '#5e696d'
         }
+      },
+      transformOrigin: {
+        "0": "0%",
+      },
+      zIndex: {
+        "-1": "-1",
       }
     },
     linearGradientColors: theme => theme('colors'),
@@ -74,6 +80,7 @@ module.exports = {
     conicGradientColors: theme => theme('colors'),
   },
   variants: {
+    borderColor: ['responsive', 'hover', 'focus', 'focus-within'],
     extend: {},
   },
   plugins: [
