@@ -2,7 +2,13 @@
   <form class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
     <div class="grid grid-cols-1 gap-4">
       <div name="input-field" class="div-input-field">
-        <input class="input-field" type="text" id="groupName" placeholder=" " />
+        <input #groupName
+          (keyup.enter)="onInputGroupName(groupName.value)"
+          (blur)="onInputGroupName(groupName.value)"
+          class="input-field"
+          type="text"
+          id="groupName"
+        />
         <label class="label-input-field" for="groupName">Group name</label>
       </div>
 

@@ -2,17 +2,18 @@ import {Injectable} from '@angular/core';
 import {Group} from '../entities/group.model';
 import {HttpGroupService} from './httpServices/http-group.service';
 import {HttpMembershipService} from './httpServices/http-membership.service';
+import {User} from '../entities/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
   userGroups: Group[];
   nonSelectedGroups: Group[];
   selectedGroup: Group;
   userMembershipMap = new Map();
   private userId = 4;
+  groupName;
 
   constructor(private httpGroupService: HttpGroupService, private httpMembershipService: HttpMembershipService) {
     this.loadUserGroups();
@@ -50,5 +51,20 @@ export class DataService {
   handleError(error: any): void {
     // todo open error popup
     console.error('There was an error!', error);
+  }
+
+  // tslint:disable-next-line:typedef ban-types
+  createGroup(currentUser: User, groupName: String){
+    this.groupName = groupName;
+    this.httpGroupService.createGroupByUserIdAndGroupName(currentUser.id, groupName)
+      .subscribe({
+        next: group => {
+          this.userGroups.push(group);
+          this.selectGroup(group);
+        },
+        error: error => {
+          this.handleError(error);
+        }
+      });
   }
 }
