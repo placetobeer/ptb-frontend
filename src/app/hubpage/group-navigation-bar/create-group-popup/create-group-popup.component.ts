@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PopupService} from '../../../popups/popup.service';
-import {User} from "../../../entities/user.model";
-import {DataService} from "../../../services/data.service";
+import {DataService} from '../../../services/data.service';
 
 @Component({
   selector: 'app-create-group-popup',
@@ -15,15 +14,12 @@ export class CreateGroupPopupComponent implements OnInit {
   ]);
 
   id = 'create-group';
-  private groupName = ' ';
-  private currentUser;
+  groupName = '';
+  private currentUserId = this.dataService.userId;
 
   constructor(private popupService: PopupService, private dataService: DataService) { }
 
-  ngOnInit(): void {
-    // todo: remove mock
-    this.currentUser = new User(7, 'Christopholus');
-  }
+  ngOnInit(): void {}
 
   onButtonClick(buttonName: string): void {
     switch (buttonName){
@@ -31,14 +27,13 @@ export class CreateGroupPopupComponent implements OnInit {
         this.popupService.close(this.id);
         break;
       case 'create':
-        this.dataService.createGroup(this.currentUser, this.groupName);
+        this.dataService.createGroup(this.currentUserId, this.groupName);
         this.popupService.close(this.id);
         break;
     }
   }
 
-  // tslint:disable-next-line:typedef
-  onInputGroupName(groupName: string) {
+  onInputGroupName(groupName: string): void {
     this.groupName = groupName;
   }
 }

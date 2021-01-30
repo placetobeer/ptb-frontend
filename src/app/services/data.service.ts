@@ -12,8 +12,7 @@ export class DataService {
   nonSelectedGroups: Group[];
   selectedGroup: Group;
   userMembershipMap = new Map();
-  private userId = 4;
-  groupName;
+  userId = 4;
 
   constructor(private httpGroupService: HttpGroupService, private httpMembershipService: HttpMembershipService) {
     this.loadUserGroups();
@@ -53,10 +52,8 @@ export class DataService {
     console.error('There was an error!', error);
   }
 
-  // tslint:disable-next-line:typedef ban-types
-  createGroup(currentUser: User, groupName: String){
-    this.groupName = groupName;
-    this.httpGroupService.createGroupByUserIdAndGroupName(currentUser.id, groupName)
+  createGroup(currentUserId: number, groupName: string): void{
+    this.httpGroupService.createGroupByUserIdAndGroupName(currentUserId, groupName)
       .subscribe({
         next: group => {
           this.userGroups.push(group);

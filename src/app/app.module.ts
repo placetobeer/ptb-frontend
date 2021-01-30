@@ -18,6 +18,7 @@ import { BasePopupHeaderComponent } from './popups/base-popup/base-popup-header/
 import { BasePopupButtonBarComponent } from './popups/base-popup/base-popup-button-bar/base-popup-button-bar.component';
 import { GroupEditPopupComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-edit-popup.component';
 import { CreateGroupPopupComponent } from './hubpage/group-navigation-bar/create-group-popup/create-group-popup.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -37,11 +38,12 @@ import { CreateGroupPopupComponent } from './hubpage/group-navigation-bar/create
     GroupEditPopupComponent,
     CreateGroupPopupComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    CommonModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        CommonModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
