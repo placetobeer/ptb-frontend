@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PopupService} from '../../../popups/popup.service';
 import {DataService} from '../../../services/data.service';
 
@@ -29,11 +29,12 @@ export class CreateGroupPopupComponent implements OnInit {
       case 'create':
         this.dataService.createGroup(this.currentUserId, this.groupName);
         this.popupService.close(this.id);
+        this.clearInput();
         break;
     }
   }
 
-  onInputGroupName(groupName: string): void {
-    this.groupName = groupName;
+  clearInput(): void{
+    this.groupName = '';
   }
 }
