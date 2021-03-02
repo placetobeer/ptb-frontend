@@ -17,7 +17,6 @@ export class PopupComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (!this.id){
-      // todo open error popup here
       console.log('ERROR: popup has no id');
     }
 

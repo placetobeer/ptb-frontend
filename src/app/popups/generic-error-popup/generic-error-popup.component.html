@@ -1,0 +1,20 @@
+<app-base-popup [id]="id" [buttonMap]="buttonMap" (buttonClicked)="onButtonClick($event)">
+  <form class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
+    <div class="grid grid-cols-1 gap-4">
+      <div name="title">
+        <h2>Error</h2>
+      </div>
+
+      <div name="error-message">
+        <img src='assets/img/brokenglass.png'>
+      </div>
+      <div name="error-message">
+        {{errorMessage}}
+      </div>
+
+    </div>
+
+  </form>
+  <br>
+
+</app-base-popup>

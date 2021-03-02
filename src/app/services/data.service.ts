@@ -3,6 +3,8 @@ import {Group} from '../entities/group.model';
 import {HttpGroupService} from './httpServices/http-group.service';
 import {HttpMembershipService} from './httpServices/http-membership.service';
 import {User} from '../entities/user.model';
+import {PopupService} from '../popups/popup.service';
+import {PopupHelperService} from '../popups/popup-helper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,10 @@ export class DataService {
   userMembershipMap = new Map();
   userId = 4;
 
-  constructor(private httpGroupService: HttpGroupService, private httpMembershipService: HttpMembershipService) {
+  constructor(
+    private httpGroupService: HttpGroupService,
+    private httpMembershipService: HttpMembershipService,
+    private popupHelperService: PopupHelperService) {
     this.loadUserGroups();
   }
 
@@ -47,8 +52,8 @@ export class DataService {
     this.nonSelectedGroups = this.userGroups.filter(obj => obj !== this.selectedGroup);
   }
 
-  handleError(error: any): void {
-    // todo open error popup
+  handleError(error: Error): void {
+    this.popupHelperService.openError(error.message);
     console.error('There was an error!', error);
   }
 
