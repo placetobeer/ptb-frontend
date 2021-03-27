@@ -20,7 +20,6 @@ import { GroupEditPopupComponent } from './hubpage/group-navigation-bar/group-li
 import { CreateGroupPopupComponent } from './hubpage/group-navigation-bar/create-group-popup/create-group-popup.component';
 import {FormsModule} from '@angular/forms';
 import { GenericErrorPopupComponent } from './popups/generic-error-popup/generic-error-popup.component';
-import { GenericConfirmationPopupComponent } from './popups/generic-confirmation-popup/generic-confirmation-popup.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +38,7 @@ import { GenericConfirmationPopupComponent } from './popups/generic-confirmation
     BasePopupButtonBarComponent,
     GroupEditPopupComponent,
     CreateGroupPopupComponent,
-    GenericErrorPopupComponent,
-    GenericConfirmationPopupComponent
+    GenericErrorPopupComponent
   ],
     imports: [
         BrowserModule,
