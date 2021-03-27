@@ -9,16 +9,8 @@ import {PopupService} from '../../popups/popup.service';
 })
 export class PlaceholderComponent implements OnInit {
 
-  constructor(public dataService: DataService, private popupService: PopupService) { }
+  constructor(public dataService: DataService) { }
 
   ngOnInit(): void {
-  }
-
-  openPopup(): any {
-    this.popupService.open('placeholder-popup');
-  }
-
-  closePopup(): any {
-    this.popupService.close('placeholder-popup');
   }
 }
