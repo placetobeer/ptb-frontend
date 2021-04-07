@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PopupService} from '../../../popups/popup.service';
 import {DataService} from '../../../services/data.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-create-group-popup',
@@ -8,37 +9,22 @@ import {DataService} from '../../../services/data.service';
   styleUrls: ['./create-group-popup.component.css']
 })
 export class CreateGroupPopupComponent implements OnInit {
-  buttonMap: Map<string, string> = new Map<string, string>([
-    ['Create', 'create'],
-    ['Cancel', 'cancel']
-  ]);
-
+  @ViewChild('f', {static: false}) form: NgForm;
   id = 'create-group';
-  groupName = '';
   private currentUserId = this.dataService.userId;
 
   constructor(private popupService: PopupService, private dataService: DataService) { }
 
   ngOnInit(): void {}
 
-  onButtonClick(buttonName: string): void {
-    switch (buttonName){
-      case 'create':
-        this.create();
-        break;
-      case 'cancel':
-        this.popupService.close(this.id);
-        break;
-    }
-  }
-
-  private clearInput(): void{
-    this.groupName = '';
-  }
-
-  private create(): void{
-    this.dataService.createGroup(this.currentUserId, this.groupName);
+  onSubmit(): void {
+    this.dataService.createGroup(this.currentUserId, this.form.value.groupName);
+    this.form.reset();
     this.popupService.close(this.id);
-    this.clearInput();
+  }
+
+  onCancel(): void {
+    this.popupService.close(this.id);
+    this.form.reset();
   }
 }
