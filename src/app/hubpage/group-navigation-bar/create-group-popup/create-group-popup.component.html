@@ -15,7 +15,7 @@
         Possibility to add members coming soon!
       </div>
       <div class="flex flex-row justify-end space-x-4">
-        <button type="submit" class="btn bg-ptb-orange-500">Create</button>
+        <button type="submit" class="btn bg-ptb-orange-500" [disabled]="!f.valid">Create</button>
         <button type="button" (click)="onCancel()" class="btn bg-ptb-gray-700">Cancel</button>
       </div>
 

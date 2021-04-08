@@ -24,7 +24,7 @@ export class CreateGroupPopupComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.popupService.close(this.id);
     this.form.reset();
+    this.popupService.close(this.id);
   }
 }
