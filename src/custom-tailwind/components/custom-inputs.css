@@ -1,18 +1,10 @@
-.btn {
-  @apply bg-ptb-gray-500 rounded-lg py-1 px-7 shadow-sm
-}
-
-.ptb-list-item {
-  @apply bg-ptb-gray-400 rounded-md border-solid border border-ptb-gray-800 p-1 hover:bg-ptb-gray-300 cursor-pointer flex items-center
-}
-
 /* apply following three classes to html structure div containing an input-field and a label to create a floating input-field*/
 .input-field {
   @apply block w-full appearance-none focus:outline-none bg-transparent
 }
 
 .div-input-field {
-  @apply w-1/3 relative my-4 border-b-2 border-ptb-gray-800 focus-within:border-ptb-orange-600
+  @apply w-1/3 relative my-4 border-b-2 border-ptb-gray-800 focus-within:border-ptb-dark-blue-500
 }
 
 .label-input-field {
@@ -25,5 +17,5 @@ input:not(:placeholder-shown) ~ label {
 }
 
 input:focus-within ~ label {
-  @apply text-ptb-orange-600;
+  @apply text-ptb-dark-blue-500;
 }

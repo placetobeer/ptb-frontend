@@ -1,0 +1,11 @@
+.btn {
+  @apply bg-ptb-gray-500 rounded-lg py-1 px-7 shadow-sm
+}
+
+.btn-create {
+  @apply bg-ptb-orange-500
+}
+
+.btn-cancel {
+  @apply bg-ptb-gray-700
+}
