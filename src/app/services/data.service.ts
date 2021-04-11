@@ -69,4 +69,16 @@ export class DataService {
         }
       });
   }
+
+  setActiveGroupName(newGroupName: string): void {
+    this.httpGroupService.setGroupNameByGroupId(this.selectedGroup.id, newGroupName)
+      .subscribe({
+        next: response => {
+          this.selectedGroup.name = newGroupName;
+        },
+        error: error => {
+          this.handleError(error);
+        }
+      });
+  }
 }

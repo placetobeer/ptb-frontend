@@ -1,3 +1,16 @@
 <app-base-popup [id]="id" [buttonMap]="buttonMap" (buttonClicked)="onButtonClick($event)">
+  <form #groupForm="ngForm" (ngSubmit)="onSubmit()" class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
 
+    <div id="input-field" class="div-input-field">
+      <label>
+        Groupname: <input  class="input-field" name="groupName" [ngModel]="group.name" maxlength="255" minlength="3" required>
+      </label>
+    </div>
+
+    <div class="flex flex-row justify-end space-x-4">
+      <button type="submit" class="btn btn-create" [disabled]="!groupForm.valid">Apply</button>
+      <button type="button" (click)="onCancel()" class="btn btn-cancel">Cancel</button>
+    </div>
+
+  </form>
 </app-base-popup>
