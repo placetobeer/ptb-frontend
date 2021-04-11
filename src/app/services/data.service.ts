@@ -5,6 +5,7 @@ import {HttpMembershipService} from './httpServices/http-membership.service';
 import {User} from '../entities/user.model';
 import {PopupService} from '../popups/popup.service';
 import {PopupHelperService} from '../popups/popup-helper.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -51,9 +52,8 @@ export class DataService {
     this.selectedGroup = group;
     this.nonSelectedGroups = this.userGroups.filter(obj => obj !== this.selectedGroup);
   }
-
-  handleError(error: Error): void {
-    this.popupHelperService.openError(error.message);
+  handleError(error: HttpErrorResponse): void {
+    this.popupHelperService.openError(error.message + '\n' + '\n' + error.error);
     console.error('There was an error!', error);
   }
 
