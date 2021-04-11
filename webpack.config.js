@@ -12,6 +12,13 @@ module.exports = {
               require('postcss-import'),
               require('tailwindcss'),
               require('autoprefixer'),
+              require('@fullhuman/postcss-purgecss')({
+                content: [
+                  './**/*.html',
+                  './**/*.ts',
+                ],
+                defaultExtractor: content => content.match(/[A-Za-z0-9-_/]+/g) || []
+              })
             ],
           },
         },
