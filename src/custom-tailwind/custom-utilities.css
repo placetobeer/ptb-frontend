@@ -1,9 +1,0 @@
-@layer utilities {
-  input.ng-invalid.ng-touched{
-    background-color: #e79a7b;
-  }
-
-  button:disabled{
-    opacity: 20%;
-  }
-}

@@ -1,0 +1,9 @@
+@layer base {
+  input.ng-invalid.ng-touched{
+    @apply bg-ptb-orange-400;
+  }
+
+  button:disabled{
+    @apply opacity-20;
+  }
+}
