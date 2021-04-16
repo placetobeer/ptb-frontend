@@ -11,9 +11,22 @@
         Member list coming soon!
       </div>
 
-      <div id="add-member-bar">
-        Possibility to add members coming soon!
+      <div class="grid grid-cols-3">
+        <div>
+          <input id="add-member" name="add-member" class="input-field" type="text" ngModel/>
+          <label class="label-input-field" for="add-member">Email address</label>
+        </div>
+
+        <div id="grant-admin-role">
+          <input type="checkbox" ngModel>
+          <label class="text-ptb-gray-800 text-sm" for="grant-admin-role">Grant admin role</label>
+        </div>
+
+        <div>
+          <button class="btn btn-create">Add to group</button>
+        </div>
       </div>
+
       <div class="flex flex-row justify-end space-x-4">
         <button type="submit" class="btn btn-create" [disabled]="!f.valid">Create</button>
         <button type="button" (click)="onCancel()" class="btn btn-cancel">Cancel</button>
