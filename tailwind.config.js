@@ -75,9 +75,6 @@ module.exports = {
         "-1": "-1",
       }
     },
-    linearGradientColors: theme => theme('colors'),
-    radialGradientColors: theme => theme('colors'),
-    conicGradientColors: theme => theme('colors'),
   },
   variants: {
     borderColor: ['responsive', 'hover', 'focus', 'focus-within'],
