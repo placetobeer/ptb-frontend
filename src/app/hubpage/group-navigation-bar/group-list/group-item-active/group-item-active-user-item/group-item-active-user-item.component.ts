@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserMembership} from '../../../../../entities/userMembership.model';
+import {GroupsMembership} from '../../../../../entities/groupsMembership.model';
 
 @Component({
   selector: 'app-group-item-active-user-item',
@@ -7,7 +7,7 @@ import {UserMembership} from '../../../../../entities/userMembership.model';
   styleUrls: ['./group-item-active-user-item.component.css']
 })
 export class GroupItemActiveUserItemComponent implements OnInit {
-  @Input() userMembership: UserMembership;
+  @Input() userMembership: GroupsMembership;
 
   constructor() { }
 

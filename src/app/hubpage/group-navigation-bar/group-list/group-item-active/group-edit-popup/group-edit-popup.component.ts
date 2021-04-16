@@ -1,8 +1,9 @@
-import {AfterViewChecked, AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { DataService } from 'src/app/services/data.service';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {DataService} from 'src/app/services/data.service';
 import {Group} from '../../../../../entities/group.model';
 import {PopupService} from '../../../../../popups/popup.service';
+import {GroupRole} from '../../../../../entities/groupRole.enum';
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -14,6 +15,7 @@ export class GroupEditPopupComponent implements OnInit {
   @Input() group: Group;
 
   id = 'group-edit';
+  isUserOwner;
   initialValues;
 
   buttonMap: Map<string, string> = new Map<string, string>([
@@ -27,6 +29,8 @@ export class GroupEditPopupComponent implements OnInit {
     this.initialValues = {
       groupName : this.dataService.selectedGroup.name
     };
+
+    this.isUserOwner = this.dataService.getUsersMembershipOfSelectedGroup().role === GroupRole.OWNER;
   }
 
   onButtonClick(buttonName: string): void {
@@ -54,7 +58,7 @@ export class GroupEditPopupComponent implements OnInit {
     if (groupNameInput.untouched || !groupNameInput.valid){
       return;
     }
-    this.dataService.setActiveGroupName(groupNameInput.value);
+    this.dataService.setActiveGroupName(this.group, groupNameInput.value);
   }
 
   private closePopup(): void {
@@ -74,5 +78,10 @@ export class GroupEditPopupComponent implements OnInit {
 
   onCancel(): void {
     this.closePopup();
+  }
+
+  onDeleteGroup(): void {
+    // todo confirmation popup
+    this.dataService.deleteGroup(this.group);
   }
 }
