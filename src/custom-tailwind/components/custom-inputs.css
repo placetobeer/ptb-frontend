@@ -11,11 +11,14 @@
   @apply absolute top-0 duration-300 origin-0 text-ptb-gray-800
 }
 
-input:focus-within ~ label,
-input:not(:placeholder-shown) ~ label {
-  @apply transform scale-75 -translate-y-6;
+label.label-input-field {
+  top: 0%;
+  transform: translateY(-100%);
+  font-size: 11px;
 }
 
-input:focus-within ~ label {
-  @apply text-ptb-dark-blue-500;
+input:not(:focus) + label.label-input-field {
+  top: 50%;
+  transform: translateY(-150%);
+  font-size: 14px;
 }
