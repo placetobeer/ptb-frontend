@@ -1,9 +1,9 @@
 .btn {
-  @apply bg-ptb-gray-500 rounded-lg py-1 px-7 shadow-sm
+  @apply bg-ptb-gray-500 rounded-lg py-1 px-7 shadow-sm font-semibold focus:outline-none
 }
 
 .btn-create {
-  @apply bg-ptb-orange-500
+  @apply text-ptb-orange-500 border border-ptb-orange-500 hover:bg-ptb-orange-500 hover:text-white hover:border-transparent
 }
 
 .btn-cancel {

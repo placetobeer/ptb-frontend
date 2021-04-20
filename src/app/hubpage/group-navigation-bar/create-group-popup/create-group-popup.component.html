@@ -1,29 +1,28 @@
 <app-base-popup [id]="id">
   <form (ngSubmit)="onSubmit()" class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill" #f="ngForm">
     <div class="grid grid-cols-1 gap-4">
-      <div id="input-field" class="div-input-field">
-        <input id="groupName" name="groupName" class="input-field"
-          type="text" ngModel required/>
-        <label class="label-input-field" for="groupName">Group name</label>
-      </div>
-
       <div id="member-list">
         Member list coming soon!
       </div>
 
-      <div class="grid grid-cols-3">
-        <div>
-          <input id="add-member" name="add-member" class="input-field" type="text" ngModel/>
-          <label class="label-input-field" for="add-member">Email address</label>
+      <div class="div-input-field" [ngClass]="{'border-red-700':groupName.touched && groupName.invalid}">
+        <input id="groupName" name="groupName" class="input-field" type="text" ngModel required #groupName="ngModel"/>
+        <label class="label-input-field" [ngClass]="{'text-red-700':groupName.touched && groupName.invalid}" for="groupName">Group name</label>
+      </div>
+
+      <div class="grid gap-x-8 grid-cols-4">
+        <div class="div-input-field w-full" [ngClass]="{'border-red-700':email.touched && email.invalid}">
+          <input id="add-member" name="add-member" class="input-field" type="text" ngModel email #email="ngModel"/>
+          <label class="label-input-field" [ngClass]="{'text-red-700':email.touched && email.invalid}" for="add-member">Email address</label>
         </div>
 
-        <div id="grant-admin-role">
-          <input type="checkbox" ngModel>
+        <div class="my-auto space-x-3">
+          <input id="grant-admin-role" type="checkbox" ngModel>
           <label class="text-ptb-gray-800 text-sm" for="grant-admin-role">Grant admin role</label>
         </div>
 
-        <div>
-          <button class="btn btn-create">Add to group</button>
+        <div class="my-auto">
+          <button class="btn btn-create" [disabled]="!email.valid">Add to group</button>
         </div>
       </div>
 
