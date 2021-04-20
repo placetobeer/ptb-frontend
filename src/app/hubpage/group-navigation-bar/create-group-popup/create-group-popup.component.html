@@ -1,15 +1,17 @@
 <app-base-popup [id]="id">
   <form (ngSubmit)="onSubmit()" class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill" #f="ngForm">
     <div class="grid grid-cols-1 gap-4">
-      <div id="member-list">
-        Member list coming soon!
-      </div>
-
       <div class="div-input-field" [ngClass]="{'border-red-700':groupName.touched && groupName.invalid}">
         <input id="groupName" name="groupName" class="input-field" type="text" ngModel required #groupName="ngModel"/>
         <label class="label-input-field" [ngClass]="{'text-red-700':groupName.touched && groupName.invalid}" for="groupName">Group name</label>
       </div>
 
+<!--      Memberlist-->
+      <div name="member-list">
+        Member list coming soon!
+      </div>
+
+<!--      Add member-->
       <div class="grid gap-x-8 grid-cols-4">
         <div class="div-input-field w-full" [ngClass]="{'border-red-700':email.touched && email.invalid}">
           <input id="add-member" name="add-member" class="input-field" type="text" ngModel email #email="ngModel"/>
