@@ -9,17 +9,18 @@
 <!--      Memberlist-->
       <div class="w-1/3">
         <div class="text-md italic mb-3">Already in group</div>
-        <div class="border border-ptb-gray-800 p-3 bg-white">
+        <div class="border border-ptb-gray-700 py-3 px-6 bg-white flex items-center justify-between">
           <div class="text-md">{{ owner.name }}</div>
+          <div class="text-md text-ptb-orange-600">{{ eRole.OWNER }}</div>
         </div>
         <app-member-item *ngFor="let invitation of invitations"></app-member-item>
       </div>
 
 <!--      Add member-->
       <div class="grid gap-x-8 grid-cols-4">
-        <div class="div-input-field w-full" [ngClass]="{'border-red-700':email.touched && email.invalid}">
-          <input id="email" name="email" class="input-field" type="text" ngModel email #email="ngModel"/>
-          <label class="label-input-field" [ngClass]="{'text-red-700':email.touched && email.invalid}" for="email">Email address</label>
+        <div class="div-input-field w-full" [ngClass]="{'border-red-700':emailControl.touched && emailControl.invalid}">
+          <input id="email" name="email" class="input-field" type="text" ngModel email #emailControl="ngModel"/>
+          <label class="label-input-field" [ngClass]="{'text-red-700':emailControl.touched && emailControl.invalid}" for="email">Email address</label>
         </div>
 
         <div class="my-auto space-x-3">
@@ -28,7 +29,7 @@
         </div>
 
         <div class="my-auto">
-          <button type="button" class="btn btn-create" (click)="onAddMember()" [disabled]="!email.valid">Add to group</button>
+          <button type="button" class="btn btn-create" [disabled]="emailControl.invalid" (click)="onAddMember()" >Add to group</button>
         </div>
       </div>
 

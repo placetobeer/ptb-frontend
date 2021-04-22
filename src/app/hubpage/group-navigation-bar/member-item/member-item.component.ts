@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Subject} from 'rxjs';
 import {Invitation} from '../../../entities/invitation.model';
 import {InvitationService} from '../../../services/invitation.service';
+import {Role} from '../../../entities/role.enum';
 
 @Component({
   selector: 'app-member-item',
@@ -10,6 +11,8 @@ import {InvitationService} from '../../../services/invitation.service';
 })
 export class MemberItemComponent implements OnInit {
   email;
+  eRole = Role;
+  grantAdmin = false;
 
   constructor(private invitationService: InvitationService) { }
 
