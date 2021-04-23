@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs';
-import {Invitation} from '../entities/invitation.model';
+import {Invitation} from '../requests/invitation-request.model';
 
 @Injectable({
   providedIn: 'root'
