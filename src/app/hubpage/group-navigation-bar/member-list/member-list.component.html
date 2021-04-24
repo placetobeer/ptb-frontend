@@ -3,5 +3,5 @@
     <div class="text-md">{{ owner.name }}</div>
     <div class="text-md text-ptb-orange-600">{{ role.OWNER }}</div>
   </div>
-  <app-member-item *ngFor="let invitation of invitations" [invitations]="invitations"></app-member-item>
+  <app-member-item *ngFor="let invitation of invitationService.invitations" [email]="invitation.email" [grantAdmin]="invitation.grantAdmin"></app-member-item>
 </div>

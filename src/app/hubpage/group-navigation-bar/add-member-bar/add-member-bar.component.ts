@@ -22,6 +22,6 @@ export class AddMemberBarComponent implements OnInit {
 
   onAddMember(): void {
     const newInvitation = new Invitation(0, this.owner, this.subForm.value.email, this.grantAdmin);
-    this.invitationService.transferInvitationData(newInvitation);
+    this.invitationService.addInvitation(newInvitation);
   }
 }

@@ -13,18 +13,12 @@ import {InvitationService} from '../../../services/invitation.service';
 export class CreateGroupPopupComponent implements OnInit {
   @ViewChild('f', {static: false}) form: NgForm;
   id = 'create-group';
-  invitations: Invitation[] = [];
   // TODO: replace Mock
   ownerId = this.dataService.userId;
 
   constructor(private popupService: PopupService, private dataService: DataService, public invitationService: InvitationService) { }
 
   ngOnInit(): void {
-    this.invitationService.invitationDataEmitter.subscribe(
-      (invitation: Invitation) => {
-        this.invitations.push(invitation);
-      }
-    );
   }
 
   onSubmit(): void {

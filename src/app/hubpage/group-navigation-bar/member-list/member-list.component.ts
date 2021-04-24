@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Invitation} from '../../../requests/invitation-request.model';
-import {GroupRole} from "../../../entities/groupRole.enum";
-import {User} from "../../../entities/user.model";
+import {GroupRole} from '../../../entities/groupRole.enum';
+import {User} from '../../../entities/user.model';
+import {InvitationService} from "../../../services/invitation.service";
 
 @Component({
   selector: 'app-member-list',
@@ -9,12 +10,11 @@ import {User} from "../../../entities/user.model";
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  @Input() invitations: Invitation[];
   role = GroupRole;
   // TODO: replace Mock
   owner: User = new User(22, 'Hugo Boss');
 
-  constructor() { }
+  constructor(public invitationService: InvitationService) { }
 
   ngOnInit(): void {
   }

@@ -10,9 +10,9 @@ import {GroupRole} from '../../../../entities/groupRole.enum';
   styleUrls: ['./member-item.component.css']
 })
 export class MemberItemComponent implements OnInit {
-  @Input() invitations: Invitation[];
+  @Input() email: string;
+  @Input() grantAdmin: boolean;
   role = GroupRole;
-  grantAdmin = false;
 
   constructor() { }
 
