@@ -6,18 +6,11 @@ import {Invitation} from '../requests/invitation-request.model';
   providedIn: 'root'
 })
 export class InvitationService {
-  invitationEmitter = new Subject<Invitation>();
-  invitationList: Invitation[] = [];
-  invitationChanged = new Subject<Invitation[]>();
+  invitationDataEmitter = new Subject<Invitation>();
   constructor() { }
 
-  addInvitation(newInvitation: Invitation): void {
-    this.invitationList.push(newInvitation);
-    this.invitationChanged.next(this.invitationList.slice());
-    this.invitationEmitter.next(newInvitation);
+  transferInvitationData(newInvitation: Invitation): void {
+    this.invitationDataEmitter.next(newInvitation);
   }
 
-  getInvitations(): Invitation[]{
-    return this.invitationList.slice();
-  }
 }

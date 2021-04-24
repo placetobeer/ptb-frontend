@@ -16,17 +16,15 @@ export class CreateGroupPopupComponent implements OnInit {
   @ViewChild('f', {static: false}) form: NgForm;
   id = 'create-group';
   invitations: Invitation[];
-  eRole = GroupRole;
   // TODO: replace Mock
   ownerId = this.dataService.userId;
-  owner: User = new User(this.ownerId, 'Hugo Boss');
 
   constructor(private popupService: PopupService, private dataService: DataService, public invitationService: InvitationService) { }
 
   ngOnInit(): void {
-    this.invitationService.invitationChanged.subscribe(
-      (invitations: Invitation[]) => {
-        this.invitations = invitations;
+    this.invitationService.invitationDataEmitter.subscribe(
+      (invitation: Invitation) => {
+        this.invitations.push(invitation);
       }
     );
   }
@@ -42,9 +40,4 @@ export class CreateGroupPopupComponent implements OnInit {
     this.popupService.close(this.id);
   }
 
-  onAddMember(): void {
-    const value = this.form.value;
-    const newInvitation = new Invitation(null, value.email, this.eRole.MEMBER);
-    this.invitationService.addInvitation(newInvitation);
-  }
 }

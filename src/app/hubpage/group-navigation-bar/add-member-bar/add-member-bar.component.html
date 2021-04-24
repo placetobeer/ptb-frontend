@@ -1,0 +1,15 @@
+<div class="grid gap-x-8 grid-cols-3" ngModelGroup="invitationData" #invitationData="ngModelGroup">
+  <div class="div-input-field w-full" [ngClass]="{'border-red-700':emailControl.touched && emailControl.invalid}">
+    <input id="email" name="email" class="input-field" type="text" ngModel email required #emailControl="ngModel"/>
+    <label class="label-input-field" [ngClass]="{'text-red-700':emailControl.touched && emailControl.invalid}" for="email">Email address</label>
+  </div>
+
+  <div class="my-auto space-x-3">
+    <input id="grant-admin-role" name="grant-admin-role" type="checkbox" ngModel>
+    <label class="text-ptb-gray-800 text-sm" for="grant-admin-role">Grant admin role</label>
+  </div>
+
+  <div class="my-auto">
+    <button type="submit" class="btn btn-create" [disabled]="emailControl.invalid" (click)="onAddMember()">Add to group</button>
+  </div>
+</div>
