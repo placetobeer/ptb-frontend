@@ -4,12 +4,12 @@ export class Invitation {
   groupId: number;
   emitter: User;
   email: string;
-  role: string;
+  grantAdmin: boolean;
 
-  constructor(groupId: number, emitter: User, email: string, role: string) {
+  constructor(groupId: number, emitter: User, email: string, grantAdmin: boolean) {
     this.groupId = groupId;
     this.email = email;
-    this.role = role;
+    this.grantAdmin = grantAdmin;
     this.emitter = emitter;
   }
 }
