@@ -2,7 +2,7 @@ import {User} from './user.model';
 import {Group} from './group.model';
 import {GroupRole} from './groupRole.enum';
 
-export class Invitation {
+export class InvitationResponse {
   id: number;
   group: Group;
   emitter: User;
