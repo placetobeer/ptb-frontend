@@ -3,9 +3,7 @@ import {PopupService} from '../../../popups/popup.service';
 import {DataService} from '../../../services/data.service';
 import {NgForm} from '@angular/forms';
 import {Invitation} from '../../../requests/invitation-request.model';
-import {User} from '../../../entities/user.model';
 import {InvitationService} from '../../../services/invitation.service';
-import {GroupRole} from '../../../entities/groupRole.enum';
 
 @Component({
   selector: 'app-create-group-popup',
@@ -15,7 +13,7 @@ import {GroupRole} from '../../../entities/groupRole.enum';
 export class CreateGroupPopupComponent implements OnInit {
   @ViewChild('f', {static: false}) form: NgForm;
   id = 'create-group';
-  invitations: Invitation[];
+  invitations: Invitation[] = [];
   // TODO: replace Mock
   ownerId = this.dataService.userId;
 

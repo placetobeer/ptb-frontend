@@ -6,10 +6,10 @@
         <label class="label-input-field" [ngClass]="{'text-red-700':groupName.touched && groupName.invalid}" for="groupName">Group name</label>
       </div>
 
-      <div class="text-md italic mb-3">Already in group</div>
+      <div class="text-md italic">Already in group</div>
       <app-member-list [invitations]="invitations"></app-member-list>
 
-      <div class="text-md italic mb-3">Add member</div>
+      <div class="text-md italic">Add member</div>
       <app-add-member-bar></app-add-member-bar>
 
       <div class="flex flex-row justify-end space-x-4">
