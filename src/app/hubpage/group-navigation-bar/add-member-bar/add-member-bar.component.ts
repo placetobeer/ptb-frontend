@@ -12,10 +12,10 @@ import {PopupHelperService} from '../../../popups/popup-helper.service';
 })
 export class AddMemberBarComponent implements OnInit {
   @ViewChild('subForm', {static: false}) subForm: NgForm;
-
+  errorMessage = 'No valid email address';
   // TODO: replace Mock
   owner = new User(22, 'Hugo Boss');
-  constructor(private invitationService: InvitationService, private popupHelperService: PopupHelperService) { }
+  constructor(private invitationService: InvitationService) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +25,9 @@ export class AddMemberBarComponent implements OnInit {
     if (this.validateAlreadyAdded()) {
       this.invitationService.addInvitation(newInvitation);
     } else {
-      this.openErrorPopup();
+      this.errorMessage = 'You have already added this email address';
+      this.subForm.reset();
+      // TODO make email control touched
     }
   }
 
@@ -36,9 +38,5 @@ export class AddMemberBarComponent implements OnInit {
       }
     }
     return true;
-  }
-
-  private openErrorPopup(): void {
-    this.popupHelperService.openError('You have already added this User.');
   }
 }
