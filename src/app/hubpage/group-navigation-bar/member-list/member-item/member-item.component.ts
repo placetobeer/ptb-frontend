@@ -12,11 +12,15 @@ import {GroupRole} from '../../../../entities/groupRole.enum';
 export class MemberItemComponent implements OnInit {
   @Input() email: string;
   @Input() grantAdmin: boolean;
+  @Input() index: number;
   role = GroupRole;
 
-  constructor() { }
+  constructor(private invitationService: InvitationService) { }
 
   ngOnInit(): void {
   }
 
+  onDeleteInvitation(index: number): void {
+    this.invitationService.invitations.splice(index, 1);
+  }
 }
