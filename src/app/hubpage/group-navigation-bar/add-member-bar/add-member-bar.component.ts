@@ -14,14 +14,13 @@ export class AddMemberBarComponent implements OnInit {
 
   // TODO: replace Mock
   owner = new User(22, 'Hugo Boss');
-  grantAdmin = false;
   constructor(private invitationService: InvitationService) { }
 
   ngOnInit(): void {
   }
 
   onAddMember(): void {
-    const newInvitation = new Invitation(0, this.owner, this.subForm.value.email, this.grantAdmin);
+    const newInvitation = new Invitation(0, this.owner, this.subForm.value.email, this.subForm.value.grantAdminRole);
     this.invitationService.addInvitation(newInvitation);
   }
 }
