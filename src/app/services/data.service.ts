@@ -6,6 +6,9 @@ import {PopupHelperService} from '../popups/popup-helper.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {GroupsMembership} from '../entities/groupsMembership.model';
 import {GroupRole} from '../entities/groupRole.enum';
+import {InvitationRequest} from "../requests/invitation-request.model";
+import {InvitationService} from "./invitation.service";
+import {User} from "../entities/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +19,13 @@ export class DataService {
   selectedGroup: Group;
   userMembershipMap: Map<number, GroupsMembership[]> = new Map();
   userId = 4;
+  owner = new User(22, 'Hugo Boss');
 
   constructor(
     private httpGroupService: HttpGroupService,
     private httpMembershipService: HttpMembershipService,
-    private popupHelperService: PopupHelperService) {
+    private popupHelperService: PopupHelperService,
+    private invitationService: InvitationService) {
     this.loadUserGroups();
   }
 
@@ -74,6 +79,20 @@ export class DataService {
         next: group => {
           this.userGroups.push(group);
           this.selectGroup(group);
+          this.sendInvitationRequest();
+        },
+        error: error => {
+          this.handleError(error);
+        }
+      });
+  }
+
+  private sendInvitationRequest(): void {
+    const invitationRequest = new InvitationRequest(this.selectedGroup.id, this.owner, this.invitationService.invitations);
+    this.httpGroupService.sendInvitations(invitationRequest)
+      .subscribe({
+        next: invitations => {
+          // TODO send or set invitations
         },
         error: error => {
           this.handleError(error);
