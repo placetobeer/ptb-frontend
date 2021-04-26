@@ -6,9 +6,9 @@ import {PopupHelperService} from '../popups/popup-helper.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {GroupsMembership} from '../entities/groupsMembership.model';
 import {GroupRole} from '../entities/groupRole.enum';
-import {InvitationRequest} from "../requests/invitation-request.model";
-import {InvitationService} from "./invitation.service";
-import {User} from "../entities/user.model";
+import {InvitationRequest} from '../requests/invitation-request.model';
+import {InvitationService} from './invitation.service';
+import {User} from '../entities/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -92,7 +92,7 @@ export class DataService {
     this.httpGroupService.sendInvitations(invitationRequest)
       .subscribe({
         next: invitations => {
-          // TODO send or set invitations
+          // TODO add to pending invitations
         },
         error: error => {
           this.handleError(error);
