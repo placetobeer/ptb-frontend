@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Invitation} from '../requests/invitation-request.model';
+import {InvitationRequest} from '../requests/invitation-request.model';
+import {Invitation} from '../entities/invitation.model';
 
 @Injectable({
   providedIn: 'root'

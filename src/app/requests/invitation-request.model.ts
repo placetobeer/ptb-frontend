@@ -1,15 +1,14 @@
 import {User} from '../entities/user.model';
+import {Invitation} from '../entities/invitation.model';
 
-export class Invitation {
+export class InvitationRequest {
   groupId: number;
   emitter: User;
-  email: string;
-  grantAdmin: boolean;
+  invitationList: Invitation[] = [];
 
-  constructor(groupId: number, emitter: User, email: string, grantAdmin: boolean) {
+  constructor(groupId: number, emitter: User, invitationList: Invitation[]) {
     this.groupId = groupId;
-    this.email = email;
-    this.grantAdmin = grantAdmin;
     this.emitter = emitter;
+    this.invitationList = invitationList;
   }
 }

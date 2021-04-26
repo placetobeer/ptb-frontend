@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
-import {Invitation} from '../../../../requests/invitation-request.model';
+import {InvitationRequest} from '../../../../requests/invitation-request.model';
 import {InvitationService} from '../../../../services/invitation.service';
 import {GroupRole} from '../../../../entities/groupRole.enum';
 

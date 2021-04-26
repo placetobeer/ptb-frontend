@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Invitation} from '../../../requests/invitation-request.model';
+import {InvitationRequest} from '../../../requests/invitation-request.model';
 import {GroupRole} from '../../../entities/groupRole.enum';
 import {User} from '../../../entities/user.model';
 import {InvitationService} from "../../../services/invitation.service";

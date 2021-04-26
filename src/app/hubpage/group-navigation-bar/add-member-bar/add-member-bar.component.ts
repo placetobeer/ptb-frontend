@@ -1,9 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Invitation} from '../../../requests/invitation-request.model';
 import {User} from '../../../entities/user.model';
 import {InvitationService} from '../../../services/invitation.service';
-import {PopupHelperService} from '../../../popups/popup-helper.service';
+import {Invitation} from '../../../entities/invitation.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-add-member-bar',
@@ -21,7 +20,7 @@ export class AddMemberBarComponent implements OnInit {
   }
 
   onAddMember(): void {
-    const newInvitation = new Invitation(0, this.owner, this.subForm.value.email, this.subForm.value.grantAdminRole);
+    const newInvitation = new Invitation(this.subForm.value.email, this.subForm.value.grantAdminRole);
     if (this.validateAlreadyAdded()) {
       this.invitationService.addInvitation(newInvitation);
     } else {

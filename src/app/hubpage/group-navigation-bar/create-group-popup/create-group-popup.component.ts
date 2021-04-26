@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {PopupService} from '../../../popups/popup.service';
 import {DataService} from '../../../services/data.service';
 import {NgForm} from '@angular/forms';
-import {Invitation} from '../../../requests/invitation-request.model';
+import {InvitationRequest} from '../../../requests/invitation-request.model';
 import {InvitationService} from '../../../services/invitation.service';
 
 @Component({
