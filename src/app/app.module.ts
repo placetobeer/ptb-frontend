@@ -20,6 +20,9 @@ import { GroupEditPopupComponent } from './hubpage/group-navigation-bar/group-li
 import { CreateGroupPopupComponent } from './hubpage/group-navigation-bar/create-group-popup/create-group-popup.component';
 import {FormsModule} from '@angular/forms';
 import { GenericErrorPopupComponent } from './popups/generic-error-popup/generic-error-popup.component';
+import { MemberItemComponent } from './hubpage/group-navigation-bar/member-list/member-item/member-item.component';
+import { MemberListComponent } from './hubpage/group-navigation-bar/member-list/member-list.component';
+import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member-bar/add-member-bar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { GenericErrorPopupComponent } from './popups/generic-error-popup/generic
     BasePopupButtonBarComponent,
     GroupEditPopupComponent,
     CreateGroupPopupComponent,
-    GenericErrorPopupComponent
+    GenericErrorPopupComponent,
+    MemberItemComponent,
+    MemberListComponent,
+    AddMemberBarComponent
   ],
     imports: [
         BrowserModule,
