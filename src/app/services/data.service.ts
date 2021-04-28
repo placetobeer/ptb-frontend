@@ -19,12 +19,12 @@ export class DataService {
   selectedGroup: Group;
   userMembershipMap: Map<number, GroupsMembership[]> = new Map();
   userId = 4;
+  groupCreated = false;
 
   constructor(
     private httpGroupService: HttpGroupService,
     private httpMembershipService: HttpMembershipService,
-    private popupHelperService: PopupHelperService,
-    private invitationService: InvitationService) {
+    private popupHelperService: PopupHelperService) {
     this.loadUserGroups();
   }
 
@@ -78,7 +78,7 @@ export class DataService {
         next: group => {
           this.userGroups.push(group);
           this.selectGroup(group);
-          this.invitationService.sendInvitationRequest();
+          this.groupCreated = true;
         },
         error: error => {
           this.handleError(error);

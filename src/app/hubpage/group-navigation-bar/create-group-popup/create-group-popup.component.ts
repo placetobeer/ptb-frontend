@@ -23,6 +23,9 @@ export class CreateGroupPopupComponent implements OnInit {
 
   onSubmit(): void {
     this.dataService.createGroup(this.ownerId, this.form.value.groupName);
+    if (this.dataService.groupCreated) {
+      this.invitationService.sendInvitationRequest();
+    }
     this.form.reset();
     this.popupService.close(this.id);
   }
