@@ -10,8 +10,10 @@ import {HttpInvitationService} from './httpServices/http-invitation.service';
 })
 export class InvitationService {
   invitations: Invitation[] = [];
+  pendingInvitations: Invitation[] = [];
   // TODO replace Mock
   owner = new User(22, 'Hugo Boss');
+  selectedGroupId = 44;
 
   constructor(private dataService: DataService, private httpInvitationService: HttpInvitationService) { }
 
@@ -20,11 +22,14 @@ export class InvitationService {
   }
 
   sendInvitationRequest(): void {
-    const invitationRequest = new InvitationRequest(this.dataService.selectedGroup.id, this.owner, this.invitations);
+    const invitationRequest = new InvitationRequest(this.selectedGroupId, this.owner, this.invitations);
     this.httpInvitationService.sendInvitations(invitationRequest)
       .subscribe({
         next: invitations => {
-          // TODO add to pending invitations
+          for (const invitation of invitations) {
+            this.pendingInvitations.push(invitation);
+            console.log(invitation);
+          }
         },
         error: error => {
           this.dataService.handleError(error);

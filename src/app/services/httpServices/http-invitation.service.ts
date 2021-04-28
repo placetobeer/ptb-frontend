@@ -25,6 +25,6 @@ export class HttpInvitationService {
   }
 
   sendInvitations(invitationRequest: InvitationRequest): Observable<any> {
-    return this.http.post<InvitationRequest>('http://localhost:8080/groups', {body: invitationRequest});
+    return this.http.post('http://localhost:8080/invitations', invitationRequest);
   }
 }
