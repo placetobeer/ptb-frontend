@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Group} from '../../entities/group.model';
 import {Observable} from 'rxjs';
-import {InvitationRequest} from "../../requests/invitation-request.model";
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +27,5 @@ export class HttpGroupService{
 
   deleteGroupByGroupId(groupId: number): Observable<any> {
     return this.http.delete('http://localhost:8080/groups/' + groupId);
-  }
-
-  sendInvitations(invitationRequest: InvitationRequest): Observable<any> {
-    return this.http.post<InvitationRequest>('http://localhost:8080/groups', {body: invitationRequest});
   }
 }

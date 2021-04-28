@@ -19,7 +19,6 @@ export class DataService {
   selectedGroup: Group;
   userMembershipMap: Map<number, GroupsMembership[]> = new Map();
   userId = 4;
-  owner = new User(22, 'Hugo Boss');
 
   constructor(
     private httpGroupService: HttpGroupService,
@@ -79,20 +78,7 @@ export class DataService {
         next: group => {
           this.userGroups.push(group);
           this.selectGroup(group);
-          this.sendInvitationRequest();
-        },
-        error: error => {
-          this.handleError(error);
-        }
-      });
-  }
-
-  private sendInvitationRequest(): void {
-    const invitationRequest = new InvitationRequest(this.selectedGroup.id, this.owner, this.invitationService.invitations);
-    this.httpGroupService.sendInvitations(invitationRequest)
-      .subscribe({
-        next: invitations => {
-          // TODO add to pending invitations
+          this.invitationService.sendInvitationRequest();
         },
         error: error => {
           this.handleError(error);
