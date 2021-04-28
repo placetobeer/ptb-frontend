@@ -1,0 +1,12 @@
+<div>
+  <div *ngIf="httpInvitationService.loadInvitationsByUserId(dataService.userId) == null">No pending invitation</div>
+
+  <span *ngIf="pendingInvitations != null">Remaining Invitations</span>
+
+  <app-invitation-item *ngFor="let invitationResponse of pendingInvitations"
+                       [invitationResponse]="invitationResponse"
+                       [emitter]="invitationResponse.emitter.name"
+                       [groupName]="invitationResponse.group.name"
+                       [role]="invitationResponse.role"
+                  ></app-invitation-item>
+</div>>
