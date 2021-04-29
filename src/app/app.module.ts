@@ -22,6 +22,9 @@ import {FormsModule} from '@angular/forms';
 import { GenericErrorPopupComponent } from './popups/generic-error-popup/generic-error-popup.component';
 import {InvitationListComponent} from './hubpage/group-navigation-bar/invitation-list/invitation-list.component';
 import {InvitationItemComponent} from './hubpage/group-navigation-bar/invitation-list/invitation-item/invitation-item.component';
+import { MemberItemComponent } from './hubpage/group-navigation-bar/member-list/member-item/member-item.component';
+import { MemberListComponent } from './hubpage/group-navigation-bar/member-list/member-list.component';
+import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member-bar/add-member-bar.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import {InvitationItemComponent} from './hubpage/group-navigation-bar/invitation
     GenericErrorPopupComponent,
     InvitationListComponent,
     InvitationItemComponent
+    MemberItemComponent,
+    MemberListComponent,
+    AddMemberBarComponent
   ],
     imports: [
         BrowserModule,

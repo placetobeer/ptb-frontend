@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {PopupService} from '../../../popups/popup.service';
 import {DataService} from '../../../services/data.service';
 import {NgForm} from '@angular/forms';
+import {InvitationRequest} from '../../../requests/invitation-request.model';
+import {InvitationService} from '../../../services/invitation.service';
 
 @Component({
   selector: 'app-create-group-popup',
@@ -11,14 +13,16 @@ import {NgForm} from '@angular/forms';
 export class CreateGroupPopupComponent implements OnInit {
   @ViewChild('f', {static: false}) form: NgForm;
   id = 'create-group';
-  private currentUserId = this.dataService.userId;
+  // TODO: replace Mock
+  ownerId = this.dataService.userId;
 
-  constructor(private popupService: PopupService, private dataService: DataService) { }
+  constructor(private popupService: PopupService, private dataService: DataService, public invitationService: InvitationService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   onSubmit(): void {
-    this.dataService.createGroup(this.currentUserId, this.form.value.groupName);
+    this.dataService.createGroup(this.ownerId, this.form.value.groupName);
     this.form.reset();
     this.popupService.close(this.id);
   }
@@ -27,4 +31,5 @@ export class CreateGroupPopupComponent implements OnInit {
     this.form.reset();
     this.popupService.close(this.id);
   }
+
 }
