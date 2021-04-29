@@ -45,7 +45,7 @@ import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member
     CreateGroupPopupComponent,
     GenericErrorPopupComponent,
     InvitationListComponent,
-    InvitationItemComponent
+    InvitationItemComponent,
     MemberItemComponent,
     MemberListComponent,
     AddMemberBarComponent
