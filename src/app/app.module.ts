@@ -23,6 +23,8 @@ import { GenericErrorPopupComponent } from './popups/generic-error-popup/generic
 import { MemberItemComponent } from './hubpage/group-navigation-bar/member-list/member-item/member-item.component';
 import { MemberListComponent } from './hubpage/group-navigation-bar/member-list/member-list.component';
 import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member-bar/add-member-bar.component';
+import { ErrorPageComponent } from './error/error-page/error-page.component';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -44,9 +46,11 @@ import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member
     GenericErrorPopupComponent,
     MemberItemComponent,
     MemberListComponent,
-    AddMemberBarComponent
+    AddMemberBarComponent,
+    ErrorPageComponent
   ],
     imports: [
+        AppRoutingModule,
         BrowserModule,
         HttpClientModule,
         CommonModule,
