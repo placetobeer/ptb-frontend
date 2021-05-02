@@ -4,7 +4,10 @@ import {NgModule} from '@angular/core';
 import {HubpageComponent} from './hubpage/hubpage.component';
 
 const routes: Routes = [
-  {path: 'hubpage', component: HubpageComponent },
+  {path: 'hubpage', component: HubpageComponent,
+    children: [
+      { path: ':id', component: HubpageComponent}
+    ]},
   {path: 'error', component: ErrorPageComponent},
   {path: '', redirectTo: '/hubpage', pathMatch: 'full'},
   {path: '**', redirectTo: '/error?message=Page+not+found'}
