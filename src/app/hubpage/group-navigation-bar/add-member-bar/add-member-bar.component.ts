@@ -23,10 +23,11 @@ export class AddMemberBarComponent implements OnInit {
     const newInvitation = new Invitation(this.subForm.value.email, this.subForm.value.grantAdminRole);
     if (this.validateAlreadyAdded()) {
       this.invitationService.addInvitation(newInvitation);
+      this.subForm.resetForm();
     } else {
       this.errorMessage = 'You have already added this email address';
-      this.subForm.reset();
-      // TODO make email control touched
+      this.subForm.resetForm();
+      this.subForm.controls.email.markAllAsTouched();
     }
   }
 
