@@ -19,7 +19,6 @@ export class DataService {
   selectedGroup: Group;
   userMembershipMap: Map<number, GroupsMembership[]> = new Map();
   userId = 4;
-  groupCreated = false;
 
   constructor(
     private httpGroupService: HttpGroupService,
@@ -73,12 +72,12 @@ export class DataService {
   }
 
   createGroup(currentUserId: number, groupName: string): void{
+    // TODO wrap in Promise -> subscribe in create-group-popup to promise for invitationRequest; next: resolve; error: reject
     this.httpGroupService.createGroupByUserIdAndGroupName(currentUserId, groupName)
       .subscribe({
         next: group => {
           this.userGroups.push(group);
           this.selectGroup(group);
-          this.groupCreated = true;
         },
         error: error => {
           this.handleError(error);

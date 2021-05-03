@@ -25,6 +25,8 @@ export class HttpInvitationService {
   }
 
   sendInvitations(invitationRequest: InvitationRequest): Observable<any> {
-    return this.http.post('http://localhost:8080/invitations', invitationRequest);
+    return this.http.post('http://localhost:8080/invitations', invitationRequest, { headers: new HttpHeaders({
+        'Content-Type': 'application/json;charset=UTF-8',
+      })});
   }
 }

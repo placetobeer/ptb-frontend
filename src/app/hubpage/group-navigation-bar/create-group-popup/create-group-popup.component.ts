@@ -24,10 +24,9 @@ export class CreateGroupPopupComponent implements OnInit {
   onSubmit(): void {
     this.dataService.createGroup(this.ownerId, this.form.value.groupName);
     // TODO send request after successfully saved group
+    // TODO subscribe on Promise with promise.then((res) => {})
     this.invitationService.sendInvitationRequest();
     console.log('sendInvitationRequest Methode wurde aufgerufen');
-    // if (this.dataService.groupCreated) {
-    // }
     this.form.reset();
     this.popupService.close(this.id);
   }
