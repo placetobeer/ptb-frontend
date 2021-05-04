@@ -24,18 +24,6 @@ export class DataService {
     this.loadUserGroups();
   }
 
-  loadUserGroups(): void {
-    this.httpGroupService.loadGroupsByUserId(this.userId).subscribe({
-      next: groups => {
-        this.userGroups = groups;
-
-        this.nonSelectedGroups = groups.filter(group => group !== this.selectedGroup);
-      },
-      error: error => {
-        this.handleError(error);
-      }
-    });
-  }
 
   selectGroup(group: Group): void {
     this.selectedGroup = group;
