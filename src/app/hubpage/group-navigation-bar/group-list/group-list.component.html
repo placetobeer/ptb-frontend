@@ -1,15 +1,12 @@
 <div class="flex flex-col space-y-2 py-4">
 
-  <div *ngIf="dataService.selectedGroup == null">Please select a group</div>
+  <div *ngIf="(groupService.currentGroup$ | async) == null">Please select a group</div>
   <div>
-    <app-group-item-active *ngIf="dataService.selectedGroup != null"
-                           [group]="dataService.selectedGroup"></app-group-item-active>
+    <app-group-item-active *ngIf="(groupService.currentGroup$ | async) != null"
+                           [group]="(groupService.currentGroup$ | async)"></app-group-item-active>
   </div>
 
-
-  <div *ngIf="dataService.selectedGroup != null">Switch hubpage to</div>
-  <app-group-item *ngFor="let group of dataService.nonSelectedGroups" [groupName]="group.name"
+  <div *ngIf="(groupService.currentGroup$ | async) != null">Switch hubpage to</div>
+  <app-group-item *ngFor="let group of (groupService.groupList$ | async)" [groupName]="group.name"
                   (click)="this.changeSelectedGroup(group)"></app-group-item>
-
-
 </div>

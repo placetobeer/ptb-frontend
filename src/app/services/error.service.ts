@@ -7,18 +7,9 @@ import {PopupHelperService} from '../popups/popup-helper.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ErrorService implements OnDestroy {
+export class ErrorService {
 
-  constructor(private groupService: GroupService, private popupHelperService: PopupHelperService) {}
-
-  private readonly errorSubscription = merge([this.groupService.groupList$]).subscribe({
-    error: error => {
-      this.handleError(error);
-    }});
-
-  ngOnDestroy(): void {
-    this.errorSubscription.unsubscribe();
-  }
+  constructor(private popupHelperService: PopupHelperService) {}
 
   handleError(error: HttpErrorResponse): void {
     this.popupHelperService.openError(error.message + '\n' + '\n' + error.error);

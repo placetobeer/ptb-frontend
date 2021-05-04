@@ -1,6 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ActivatedRoute, NavigationStart, Params, Router, UrlSegment} from '@angular/router';
+import {GroupService} from '../services/group.service';
+import {ErrorService} from '../services/error.service';
 
 @Component({
   selector: 'app-hubpage',
@@ -10,7 +12,7 @@ import {ActivatedRoute, NavigationStart, Params, Router, UrlSegment} from '@angu
 export class HubpageComponent implements OnInit, OnDestroy {
   private subscription;
 
-  constructor(public dataService: DataService, private route: ActivatedRoute, private router: Router) {
+  constructor(public groupService: GroupService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -28,20 +30,29 @@ export class HubpageComponent implements OnInit, OnDestroy {
     }
   }
 
-  parseCurrentRoute(): void{
+  private parseCurrentRoute(): void {
     const url = this.route.snapshot.url;
     const id = this.parseCurrentParams();
     this.doRouting(url, id);
   }
 
-  doRouting(url: UrlSegment[], id: number): void{
-
+  private doRouting(url: UrlSegment[], id: number): void{
+      // todo -1
+      const group = this.groupService.getGroup(id);
+      if (group == null){
+        this.router.navigate(['/error'], { queryParams: { message: 'There is no group with groupId ' + id} });
+      } else {
+        console.log(group);
+        this.groupService.selectGroup(group);
+      }
   }
 
-  parseCurrentParams(): number {
-    let id = this.route.snapshot.params.id;
-    if (id === null){
-      id = -1;
+  private parseCurrentParams(): number {
+    console.log(this.route.snapshot);
+    const id = this.route.snapshot.params.id;
+    console.log("the id is: " + id);
+    if (id == null){
+      return -1;
     }
     if (!Number.isInteger(id)){
       this.router.navigate(['/error'], { queryParams: { message: id + ' is not a groupId'} });
