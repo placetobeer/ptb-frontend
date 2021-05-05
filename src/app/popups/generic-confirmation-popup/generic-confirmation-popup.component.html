@@ -1,0 +1,19 @@
+<app-base-popup [id]="id" [buttonMap]="buttonMap" (buttonClicked)="onButtonClick($event)">
+  <form class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
+    <div class="grid grid-cols-1 gap-4">
+      <div name="confirmation-buttons">
+        <div name="button">
+          <button name="confirm">Ok</button>
+<!--          TODO-->
+        </div>
+        <div name="button">
+          <button name="cancel">Cancel</button>
+<!--          TODO-->
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+  <br>
+</app-base-popup>

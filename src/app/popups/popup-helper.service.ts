@@ -7,6 +7,7 @@ import {Subject} from 'rxjs';
 })
 export class PopupHelperService {
   messageSubject = new Subject<string>();
+  confirmation = Boolean;
 
   constructor(private popupservice: PopupService) {
   }
@@ -17,5 +18,7 @@ export class PopupHelperService {
       this.messageSubject.next('There is a Problem!');
     }
     this.popupservice.open('generic-error-popup');
-    }
+  }
+  openConfirmation(confirmationMessage: string): void{
+  }
 }
