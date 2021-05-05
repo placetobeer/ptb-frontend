@@ -3,6 +3,7 @@ import {Subject} from 'rxjs';
 import {InvitationRequest} from '../../../../requests/invitation-request.model';
 import {InvitationService} from '../../../../services/invitation.service';
 import {GroupRole} from '../../../../entities/groupRole.enum';
+import {Invitation} from "../../../../entities/invitation.model";
 
 @Component({
   selector: 'app-member-item',
@@ -10,9 +11,7 @@ import {GroupRole} from '../../../../entities/groupRole.enum';
   styleUrls: ['./member-item.component.css']
 })
 export class MemberItemComponent implements OnInit {
-  @Input() email: string;
-  @Input() grantAdmin: boolean;
-  @Input() index: number;
+  @Input() invitation: Invitation;
   role = GroupRole;
 
   constructor(private invitationService: InvitationService) { }
@@ -20,7 +19,7 @@ export class MemberItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onDeleteInvitation(index: number): void {
-    this.invitationService.invitations.splice(index, 1);
+  onDeleteInvitation(): void {
+    this.invitationService.invitations = this.invitationService.invitations.filter(element => element !== this.invitation);
   }
 }
