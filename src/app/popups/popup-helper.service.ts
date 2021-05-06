@@ -8,6 +8,8 @@ import {Subject} from 'rxjs';
 export class PopupHelperService {
   messageSubject = new Subject<string>();
   confirmation = Boolean;
+  confirmationSubject = new Subject<boolean>();
+  confirmationMessageSubject = new Subject<string>();
 
   constructor(private popupservice: PopupService) {
   }
@@ -20,5 +22,14 @@ export class PopupHelperService {
     this.popupservice.open('generic-error-popup');
   }
   openConfirmation(confirmationMessage: string): void{
+    if (confirmationMessage !== ''){
+      this.confirmationMessageSubject.next(confirmationMessage);
+    }else {
+      this.confirmationMessageSubject.next('you sure bro?');
+    }
+    this.popupservice.open('generic-confirmation-popup');
+  }
+  onConfirm(confirmation: boolean): void{
+    this.confirmationSubject.next(confirmation);
   }
 }

@@ -4,6 +4,7 @@ import {DataService} from 'src/app/services/data.service';
 import {Group} from '../../../../../entities/group.model';
 import {PopupService} from '../../../../../popups/popup.service';
 import {GroupRole} from '../../../../../entities/groupRole.enum';
+import {PopupHelperService} from '../../../../../popups/popup-helper.service';
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -23,7 +24,7 @@ export class GroupEditPopupComponent implements OnInit {
     ['Apply', 'apply']
   ]);
 
-  constructor(private popupService: PopupService, private dataService: DataService) { }
+  constructor(private popupService: PopupService, private dataService: DataService, private popuphelperService: PopupHelperService) { }
 
   ngOnInit(): void {
     this.initialValues = {
@@ -83,5 +84,13 @@ export class GroupEditPopupComponent implements OnInit {
   onDeleteGroup(): void {
     // todo confirmation popup
     this.dataService.deleteGroup(this.group);
+    /*this.popuphelperService.openConfirmation('');
+    this.popuphelperService.confirmationSubject.subscribe({
+      next: confirmation => {
+        if (confirmation){
+          this.dataService.deleteGroup(this.group);
+        }
+      }
+    });*/
   }
 }
