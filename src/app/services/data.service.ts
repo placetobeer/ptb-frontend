@@ -71,22 +71,6 @@ export class DataService {
     console.error('There was an error!', error);
   }
 
-  createGroup(currentUserId: number, groupName: string): void{
-    // TODO wrap in Promise -> subscribe in create-group-popup to promise for invitationRequest; next: resolve; error: reject
-    const createGroupAnswer = new Promise((resolve, reject) => {
-      this.httpGroupService.createGroupByUserIdAndGroupName(currentUserId, groupName)
-        .subscribe({
-          next: group => {
-            resolve(this.userGroups.push(group));
-            resolve(this.selectGroup(group));
-          },
-          error: error => {
-            reject(this.handleError(error));
-          }
-        });
-    });
-  }
-
   setActiveGroupName(group: Group, newGroupName: string): void {
     this.httpGroupService.setGroupNameByGroupId(group.id, newGroupName)
       .subscribe({
