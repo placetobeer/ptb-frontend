@@ -1,5 +1,7 @@
 # PtbFrontend
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c1e47a60c3e2461c8db2505ee03e48dc)](https://app.codacy.com/gh/placetobeer/ptb-frontend?utm_source=github.com&utm_medium=referral&utm_content=placetobeer/ptb-frontend&utm_campaign=Badge_Grade_Settings)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
 
 ## Development server
