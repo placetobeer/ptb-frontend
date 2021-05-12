@@ -52,7 +52,7 @@ import {GenericConfirmationPopupComponent} from './popups/generic-confirmation-p
     MemberItemComponent,
     MemberListComponent,
     AddMemberBarComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
     GenericConfirmationPopupComponent
   ],
     imports: [

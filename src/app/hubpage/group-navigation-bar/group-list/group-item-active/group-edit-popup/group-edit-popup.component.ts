@@ -5,6 +5,7 @@ import {Group} from '../../../../../entities/group.model';
 import {PopupService} from '../../../../../popups/popup.service';
 import {GroupRole} from '../../../../../entities/groupRole.enum';
 import {PopupHelperService} from '../../../../../popups/popup-helper.service';
+import {GroupService} from "../../../../../services/group.service";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -19,32 +20,15 @@ export class GroupEditPopupComponent implements OnInit {
   isUserOwner;
   initialValues;
 
-  buttonMap: Map<string, string> = new Map<string, string>([
-    ['Cancel', 'cancel'],
-    ['Apply', 'apply']
-  ]);
-
-  constructor(private popupService: PopupService, private dataService: DataService, private popuphelperService: PopupHelperService) { }
+  constructor(private popupService: PopupService, private groupService: GroupService, private dataService: DataService,
+              private popuphelperService: PopupHelperService) { }
 
   ngOnInit(): void {
     this.initialValues = {
-      groupName : this.dataService.selectedGroup.name
+      groupName : this.groupService.currentGroup.name
     };
 
     this.isUserOwner = this.dataService.getUsersMembershipOfSelectedGroup().role === GroupRole.OWNER;
-  }
-
-  onButtonClick(buttonName: string): void {
-    console.log(buttonName);
-    switch (buttonName){
-      case 'cancel':
-        this.closePopup();
-        break;
-      case 'apply':
-        this.applyGroupChanges();
-        this.closePopup();
-        break;
-    }
   }
 
   private applyGroupChanges(): void {
