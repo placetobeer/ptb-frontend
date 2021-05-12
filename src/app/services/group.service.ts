@@ -14,7 +14,6 @@ export class GroupService implements OnDestroy{
 
   constructor(private httpGroupService: HttpGroupService, private accountService: AccountService, private errorService: ErrorService) { }
 
-  // todo autoRefresh in ngOnInit?
   private readonly autoRefreshSubscription =  interval(120000).pipe(startWith(0)).subscribe(() => {
     this.loadUserGroups();
   });
@@ -32,6 +31,10 @@ export class GroupService implements OnDestroy{
     return this.groupListSubject.value;
   }
 
+  get currentGroup(): Group {
+    return this.currentGroupSubject.value;
+  }
+
   addGroup(group: Group): void{
     this.groupListSubject.next([
       ...this.groups,
@@ -45,8 +48,16 @@ export class GroupService implements OnDestroy{
 
   selectGroup(group: Group): void {
     this.currentGroupSubject.next(group);
-    const nonSelectedGroups = this.groups.filter(groups => groups.id !== group.id);
-    this.nonSelectedGroupsSubject.next(nonSelectedGroups);
+    this.generateNonSelectedGroups();
+  }
+
+  generateNonSelectedGroups(): void {
+    if (this.groups != null && this.currentGroup != null) {
+      const nonSelectedGroups = this.groups.filter(groups => groups.id !== this.currentGroup.id);
+      this.nonSelectedGroupsSubject.next(nonSelectedGroups);
+    } else {
+      this.nonSelectedGroupsSubject.next(this.groups);
+    }
   }
 
   removeGroup(groupId: number): void {
@@ -59,7 +70,7 @@ export class GroupService implements OnDestroy{
     this.httpGroupService.loadGroupsByUserId(this.accountService.user.id).subscribe({
       next: groups => {
         this.groupListSubject.next(groups);
-        this.nonSelectedGroupsSubject.next(groups);
+        this.generateNonSelectedGroups();
       },
       error: error => {
         this.errorService.handleError(error);
