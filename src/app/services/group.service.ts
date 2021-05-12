@@ -14,16 +14,18 @@ export class GroupService implements OnDestroy{
 
   constructor(private httpGroupService: HttpGroupService, private accountService: AccountService, private errorService: ErrorService) { }
 
+  // todo autoRefresh in ngOnInit?
   private readonly autoRefreshSubscription =  interval(120000).pipe(startWith(0)).subscribe(() => {
     this.loadUserGroups();
   });
 
   private readonly groupListSubject = new BehaviorSubject<Group[]>([]);
-
   public readonly groupList$ = this.groupListSubject.asObservable();
 
-  private readonly currentGroupSubject = new BehaviorSubject<Group>(null);
+  private readonly nonSelectedGroupsSubject = new BehaviorSubject<Group[]>([]);
+  public readonly nonSelectedGroups$ = this.nonSelectedGroupsSubject.asObservable();
 
+  private readonly currentGroupSubject = new BehaviorSubject<Group>(null);
   public readonly currentGroup$ = this.currentGroupSubject.asObservable();
 
   get groups(): Group[] {
@@ -43,6 +45,8 @@ export class GroupService implements OnDestroy{
 
   selectGroup(group: Group): void {
     this.currentGroupSubject.next(group);
+    const nonSelectedGroups = this.groups.filter(groups => groups.id !== group.id);
+    this.nonSelectedGroupsSubject.next(nonSelectedGroups);
   }
 
   removeGroup(groupId: number): void {
@@ -55,6 +59,7 @@ export class GroupService implements OnDestroy{
     this.httpGroupService.loadGroupsByUserId(this.accountService.user.id).subscribe({
       next: groups => {
         this.groupListSubject.next(groups);
+        this.nonSelectedGroupsSubject.next(groups);
       },
       error: error => {
         this.errorService.handleError(error);

@@ -21,7 +21,7 @@ export class DataService {
     private httpGroupService: HttpGroupService,
     private httpMembershipService: HttpMembershipService,
     private popupHelperService: PopupHelperService) {
-    this.loadUserGroups();
+    // this.loadUserGroups();
   }
 
 

@@ -3,6 +3,7 @@ import {DataService} from '../services/data.service';
 import {ActivatedRoute, NavigationStart, Params, Router, UrlSegment} from '@angular/router';
 import {GroupService} from '../services/group.service';
 import {ErrorService} from '../services/error.service';
+import {Group} from "../entities/group.model";
 
 @Component({
   selector: 'app-hubpage',
@@ -16,50 +17,37 @@ export class HubpageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.router.events.subscribe( this.parseEvent );
-    this.parseCurrentRoute();
+    this.subscription = this.route.params.subscribe(
+      (params: Params) => {
+        if (params.id != null) {
+          this.doGroupRouting(this.parseCurrentParams(+params.id));
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  parseEvent(event): void {
-    if (event instanceof NavigationStart) {
-     this.parseCurrentRoute();
-    }
-  }
-
-  private parseCurrentRoute(): void {
-    const url = this.route.snapshot.url;
-    const id = this.parseCurrentParams();
-    this.doRouting(url, id);
-  }
-
-  private doRouting(url: UrlSegment[], id: number): void{
-      // todo -1
-      const group = this.groupService.getGroup(id);
-      if (group == null){
-        this.router.navigate(['/error'], { queryParams: { message: 'There is no group with groupId ' + id} });
-      } else {
-        console.log(group);
-        this.groupService.selectGroup(group);
-      }
-  }
-
-  private parseCurrentParams(): number {
-    console.log(this.route.snapshot);
-    const id = this.route.snapshot.params.id;
-    console.log("the id is: " + id);
-    if (id == null){
+  private parseCurrentParams(id: number): number {
+    if (id == null) {
       return -1;
     }
-    if (!Number.isInteger(id)){
-      this.router.navigate(['/error'], { queryParams: { message: id + ' is not a groupId'} });
+    if (!Number.isInteger(id)) {
+      this.router.navigate(['/error'], {queryParams: {message: id + ' is not a groupId'}});
     }
     return id;
   }
 
+  private doGroupRouting(id: number): void {
+    const group = this.groupService.getGroup(id);
+    if (group == null) {
+      this.router.navigate(['/error'], {queryParams: {message: 'There is no group with groupId ' + id}});
+    } else {
+      this.groupService.selectGroup(group);
+    }
+  }
 
 
 }

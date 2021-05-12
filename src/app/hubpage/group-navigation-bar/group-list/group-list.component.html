@@ -7,6 +7,6 @@
   </div>
 
   <div *ngIf="(groupService.currentGroup$ | async) != null">Switch hubpage to</div>
-  <app-group-item *ngFor="let group of (groupService.groupList$ | async)" [groupName]="group.name"
+  <app-group-item *ngFor="let group of (groupService.nonSelectedGroups$ | async)" [groupName]="group.name"
                   (click)="this.changeSelectedGroup(group)"></app-group-item>
 </div>
