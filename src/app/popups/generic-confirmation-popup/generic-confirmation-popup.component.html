@@ -10,10 +10,10 @@
         {{confirmationMessage}}
       </div>
       <div class="confirmation-buttons">
-        <div class="confirmation-button btn btn-create">
+        <div class="confirmation-button btn btn-create"(click)="confirm()">
           <button name="confirm" (click)="confirm()">Confirm </button>
         </div>
-        <div class="confirmation-button btn btn-cancel">
+        <div class="confirmation-button btn btn-cancel" (click)="cancel()">
           <button name="cancel" (click)="cancel()">Cancel</button>
         </div>
       </div>
