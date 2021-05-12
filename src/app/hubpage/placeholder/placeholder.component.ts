@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../services/data.service';
 import {PopupService} from '../../popups/popup.service';
+import {GroupService} from "../../services/group.service";
 
 @Component({
   selector: 'app-placeholder',
@@ -9,7 +10,7 @@ import {PopupService} from '../../popups/popup.service';
 })
 export class PlaceholderComponent implements OnInit {
 
-  constructor(public dataService: DataService) { }
+  constructor(public groupService: GroupService) { }
 
   ngOnInit(): void {
   }
