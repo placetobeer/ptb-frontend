@@ -1,4 +1,4 @@
-<app-base-popup [id]="id" [buttonMap]="buttonMap" (buttonClicked)="onButtonClick($event)">
+<app-base-popup [id]="id" (buttonClicked)="onButtonClick($event)">
   <form #groupForm="ngForm" (ngSubmit)="onSubmit()" class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
 
     <span *ngIf="isUserOwner">
