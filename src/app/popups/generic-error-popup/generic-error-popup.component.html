@@ -1,4 +1,4 @@
-<app-base-popup [id]="id" [buttonMap]="buttonMap" (buttonClicked)="onButtonClick($event)">
+<app-base-popup [id]="id">
   <form class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
     <div class="grid grid-cols-1 gap-4">
       <div name="title" class="text-2xl">
@@ -11,6 +11,9 @@
         </div>
         <div name="error-message" class="text-lg">
           {{errorMessage}}
+        </div>
+        <div class="ok-button btn btn-cancel">
+          <button name="ok" (click)="cancel()">OK</button>
         </div>
       </div>
 

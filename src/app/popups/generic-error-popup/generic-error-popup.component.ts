@@ -8,11 +8,6 @@ import {PopupHelperService} from '../popup-helper.service';
   styleUrls: ['./generic-error-popup.component.css']
 })
 export class GenericErrorPopupComponent implements OnInit {
-
-  buttonMap: Map<string, string> = new Map<string, string>([
-    ['Ok', 'ok']
-  ]);
-
   id = 'generic-error-popup';
   errorMessage: string;
   constructor(private popupService: PopupService, private popuphelperService: PopupHelperService) {
@@ -23,11 +18,7 @@ export class GenericErrorPopupComponent implements OnInit {
       next: message =>  {this.errorMessage = message; }
     });
   }
-  onButtonClick(buttonName: string): void {
-    switch (buttonName){
-      case 'ok':
-        this.popupService.close(this.id);
-        break;
-    }
+  cancel(): void {
+    this.popupService.close(this.id);
   }
 }

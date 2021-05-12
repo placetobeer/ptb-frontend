@@ -15,10 +15,6 @@ import {PopupHelperService} from '../popup-helper.service';
 export class GenericConfirmationPopupComponent implements OnInit {
 
   id = 'generic-confirmation-popup';
-
-  buttonMap: Map<string, string> = new Map<string, string>([
-    ['Ok', 'ok']
-  ]);
   confirmationMessage: string;
   constructor(private popupService: PopupService, private popuphelperService: PopupHelperService) {
   }
@@ -27,14 +23,6 @@ export class GenericConfirmationPopupComponent implements OnInit {
     this.popuphelperService.confirmationMessageSubject.subscribe({
       next: message => {this.confirmationMessage = message; }
     });
-  }
-
-  onButtonClick(buttonName: string): void {
-    switch (buttonName){
-      case 'ok':
-        this.popupService.close(this.id);
-        break;
-    }
   }
   confirm(): void {
     this.popuphelperService.onConfirm(true);

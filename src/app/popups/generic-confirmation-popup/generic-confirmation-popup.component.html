@@ -1,4 +1,4 @@
-<app-base-popup [id]="id" [buttonMap]="buttonMap" (buttonClicked)="onButtonClick($event)">
+<app-base-popup [id]="id">
   <form class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
     <div class="grid grid-cols-1 gap-4">
       <div class="icon">
@@ -10,10 +10,10 @@
         {{confirmationMessage}}
       </div>
       <div class="confirmation-buttons">
-        <div class="confirmation-button btn-create">
+        <div class="confirmation-button btn btn-create">
           <button name="confirm" (click)="confirm()">Confirm </button>
         </div>
-        <div class="confirmation-button btn-cancel">
+        <div class="confirmation-button btn btn-cancel">
           <button name="cancel" (click)="cancel()">Cancel</button>
         </div>
       </div>
