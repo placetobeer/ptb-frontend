@@ -82,8 +82,6 @@ export class GroupEditPopupComponent implements OnInit {
   }
 
   onDeleteGroup(): void {
-    // todo confirmation popup
-    // this.dataService.deleteGroup(this.group);
     this.popuphelperService.openConfirmation('');
     this.popuphelperService.confirmationSubject.subscribe({
       next: confirmation => {
