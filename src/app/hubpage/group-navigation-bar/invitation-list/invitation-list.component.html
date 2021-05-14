@@ -1,14 +1,18 @@
 <div class="flex flex-col">
-  <div *ngIf="userInvitationService.pendingInvitations == null || userInvitationService.pendingInvitations.length == 0">
+  <div *ngIf="userInvitationService.pendingInvitations == null || userInvitationService.pendingInvitations.length==0">
     No pending invitation
   </div>
 
-  <span *ngIf="userInvitationService.pendingInvitations.length >= 1">Remaining Invitations</span>
+  <div *ngIf="userInvitationService.pendingInvitations != null && userInvitationService.pendingInvitations.length>=1"
+      class="flex space-y-2 flex-col py-4">
+    <span>Remaining Invitations</span>
 
-  <app-invitation-item *ngFor="let invitationResponse of userInvitationService.pendingInvitations"
-                       [invitationResponse]="invitationResponse"
-                       [emitter]="invitationResponse.emitter.name"
-                       [groupName]="invitationResponse.group.name"
-                       [role]="invitationResponse.role"
-                  ></app-invitation-item>
+    <app-invitation-item class=""
+      *ngFor="let invitationResponse of userInvitationService.pendingInvitations"
+      [invitationResponse]="invitationResponse"
+      [emitter]="invitationResponse.emitter.name"
+      [groupName]="invitationResponse.group.name"
+      [role]="invitationResponse.role"
+    ></app-invitation-item>
+  </div>
 </div>
