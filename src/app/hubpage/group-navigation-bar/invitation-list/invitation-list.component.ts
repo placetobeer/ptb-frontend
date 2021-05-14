@@ -14,15 +14,6 @@ export class InvitationListComponent implements OnInit {
   private currentUserId = this.dataService.userId;
   constructor(public dataService: DataService, public userInvitationService: UserInvitationService) { }
 
-  ngOnInit(): void {
-      /*this.httpInvitationService.loadInvitationsByUserId(this.dataService.userId).subscribe({
-        next: invitations => {
-          this.pendingInvitations = invitations;
-        },
-        error: error => {
-          this.dataService.handleError(error);
-        }
-      });*/
-  }
+  ngOnInit(): void {}
 
 }
