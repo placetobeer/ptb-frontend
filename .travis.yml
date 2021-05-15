@@ -1,0 +1,6 @@
+language: node_js
+node_js:
+  - 14
+
+env:
+  CODACY_PROJECT_TOKEN=b0e6295b20c74a22a90f393448e48104
