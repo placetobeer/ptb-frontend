@@ -1,24 +1,33 @@
-<div *ngIf="emitter" class="flex-row ptb-list-item">
-  <div class="invitation icon">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-    </svg>
-  </div>
-  <div class="invitation title">
+<div *ngIf="emitter" class="ptb-list-item flex flex-col cursor-default">
+  <div class="flex flex-row">
+    <div class="invitation icon">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 m-4 fill-current text-ptb-dark-blue-600" fill="none"
+           viewBox="0 0 20 20" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+      </svg>
+    </div>
+    <div class="invitation title">
     <span>Invited by <b>{{emitter}}</b> <br>
       to join <b>{{groupName}} </b> as  <i>{{role}}</i></span>
+    </div>
   </div>
-
-  <div class="invitation accept">
-    <svg (click)="acceptInvitation()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
+  <div class="flex flex-row">
+    <div class="invitation accept fill-current text-ptb-sand-700">
+      <svg (click)="acceptInvitation()" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 cursor-pointer" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+    </div>
+    <div class="invitation decline fill-current text-ptb-orange-600">
+      <svg (click)="declineInvitation()" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 cursor-pointer" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+    </div>
   </div>
-  <div class="invitation decline">
-    <svg (click)="declineInvitation()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-  </div>
-
-
 </div>
+
+

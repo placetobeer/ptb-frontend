@@ -33,3 +33,20 @@ export class GenericConfirmationPopupComponent implements OnInit {
     this.popupService.close(this.id);
   }
 }
+
+/* How to implement GenericConfirmationPopup in method
+onClick():void {
+  method-functionality;}
+-->
+onClick(): void {
+    this.popuphelperService.openConfirmation('your confirmation text');
+    this.popuphelperService.confirmationSubject.subscribe({
+      next: confirmation => {
+        if (confirmation){
+          method-functionality;
+        }
+      }
+    });
+  }
+
+ */
