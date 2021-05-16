@@ -23,26 +23,9 @@ export class DataService {
     // this.loadUserGroups();
   }
 
-  selectGroup(group: Group): void {
-    this.selectedGroup = group;
-    this.nonSelectedGroups = this.userGroups.filter(obj => obj !== this.selectedGroup);
-  }
-
   handleError(error: HttpErrorResponse): void {
     this.popupHelperService.openError(error.message + '\n' + '\n' + error.error);
     console.error('There was an error!', error);
-  }
-
-  setActiveGroupName(group: Group, newGroupName: string): void {
-    this.httpGroupService.setGroupNameByGroupId(group.id, newGroupName)
-      .subscribe({
-        next: response => {
-          group.name = newGroupName;
-        },
-        error: error => {
-          this.handleError(error);
-        }
-      });
   }
 
   getUsersMembershipOfSelectedGroup(): GroupsMembership {

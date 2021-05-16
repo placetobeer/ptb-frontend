@@ -45,7 +45,19 @@ export class GroupEditPopupComponent implements OnInit {
     if (groupNameInput.untouched || !groupNameInput.valid){
       return;
     }
-    this.dataService.setActiveGroupName(this.group, groupNameInput.value);
+    this.setActiveGroupName(this.group, groupNameInput.value);
+  }
+
+  setActiveGroupName(group: Group, newGroupName: string): void {
+    this.httpGroupService.setGroupNameByGroupId(group.id, newGroupName)
+      .subscribe({
+        next: response => {
+          this.groupService.setCurrentGroupName(newGroupName);
+        },
+        error: error => {
+          this.errorService.handleError(error);
+        }
+      });
   }
 
   private closePopup(): void {
