@@ -3,9 +3,9 @@ import {async, ComponentFixture, TestBed, waitForAsync} from '@angular/core/test
 import { CreateGroupPopupComponent } from './create-group-popup.component';
 import {PopupService} from '../../../popups/popup.service';
 import {HttpClient, HttpHandler} from '@angular/common/http';
-import {DataService} from '../../../services/data.service';
 import {By} from '@angular/platform-browser';
 import any = jasmine.any;
+import {GroupService} from "../../../services/group.service";
 
 describe('CreateGroupPopupComponent', () => {
   let component: CreateGroupPopupComponent;
@@ -23,7 +23,7 @@ describe('CreateGroupPopupComponent', () => {
             close = jasmine.createSpy('close');
           }
         },
-        {provide: DataService,
+        {provide: GroupService,
           useClass: class  {
             createGroup = jasmine.createSpy('createGroup');
           }

@@ -62,9 +62,15 @@ export class GroupService implements OnDestroy{
     return this.groups.find(group => group.id === groupId);
   }
 
+  getCurrentGroupFromLocalStorage(): Group {
+    return JSON.parse(localStorage.getItem('currentGroup'));
+  }
+
   selectGroup(group: Group): void {
     this.currentGroupSubject.next(group);
     this.loadUserGroups();
+    // Save currentGroup in Browser storage, so it survives refresh and popups
+    localStorage.setItem('currentGroup', JSON.stringify(group));
     if (this.currentGroup !== null) {
       this.membershipService.checkForMembershipFetch(group);
     }

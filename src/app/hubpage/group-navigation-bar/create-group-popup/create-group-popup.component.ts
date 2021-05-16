@@ -6,6 +6,7 @@ import {AccountService} from "../../../services/account.service";
 import {GroupService} from "../../../services/group.service";
 import {HttpGroupService} from "../../../services/httpServices/http-group.service";
 import {ErrorService} from "../../../services/error.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-group-popup',
@@ -18,10 +19,10 @@ export class CreateGroupPopupComponent implements OnInit {
   ownerId = this.accountService.user.id;
 
   constructor(private popupService: PopupService, private groupService: GroupService, public invitationService: InvitationService,
-              private accountService: AccountService, private httpGroupService: HttpGroupService, private errorService: ErrorService) { }
+              private accountService: AccountService, private httpGroupService: HttpGroupService, private errorService: ErrorService,
+              private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit(): void {
     this.createGroup(this.ownerId, this.form.value.groupName);
@@ -29,12 +30,13 @@ export class CreateGroupPopupComponent implements OnInit {
     this.popupService.close(this.id);
   }
 
-  createGroup(currentUserId: number, groupName: string): void{
+  createGroup(currentUserId: number, groupName: string): void {
     this.httpGroupService.createGroupByUserIdAndGroupName(currentUserId, groupName)
       .subscribe({
         next: group => {
           this.groupService.addGroup(group);
           this.groupService.selectGroup(group);
+          this.router.navigate(['/hubpage/' + group.id]);
         },
         error: error => {
           this.errorService.handleError(error);
@@ -45,6 +47,6 @@ export class CreateGroupPopupComponent implements OnInit {
   onCancel(): void {
     this.form.reset();
     this.popupService.close(this.id);
+    this.router.navigate(['/hubpage/' + this.groupService.getCurrentGroupFromLocalStorage().id]);
   }
-
 }

@@ -16,8 +16,10 @@ export class HubpageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe(
       (params: Params) => {
-        if (params.id != null) {
-          this.doGroupRouting(this.parseCurrentParams(+params.id));
+        if (params.id != null && Number.isInteger(+params.id)) {
+          this.doGroupRouting(+params.id);
+        } else {
+          this.checkParamsError(params.id);
         }
       }
     );
@@ -27,14 +29,10 @@ export class HubpageComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private parseCurrentParams(id: number): number {
-    if (id == null) {
-      return -1;
-    }
-    if (!Number.isInteger(id)) {
+  private checkParamsError(id: number): void {
+    if (id != null && !Number.isInteger(id)) {
       this.router.navigate(['/error'], {queryParams: {message: id + ' is not a groupId'}});
     }
-    return id;
   }
 
   private doGroupRouting(id: number): void {
