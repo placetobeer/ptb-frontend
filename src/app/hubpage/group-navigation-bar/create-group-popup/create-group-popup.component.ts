@@ -4,6 +4,10 @@ import {DataService} from '../../../services/data.service';
 import {NgForm} from '@angular/forms';
 import {InvitationRequest} from '../../../requests/invitation-request.model';
 import {InvitationService} from '../../../services/invitation.service';
+import {AccountService} from "../../../services/account.service";
+import {GroupService} from "../../../services/group.service";
+import {HttpGroupService} from "../../../services/httpServices/http-group.service";
+import {ErrorService} from "../../../services/error.service";
 
 @Component({
   selector: 'app-create-group-popup',
@@ -13,18 +17,31 @@ import {InvitationService} from '../../../services/invitation.service';
 export class CreateGroupPopupComponent implements OnInit {
   @ViewChild('f', {static: false}) form: NgForm;
   id = 'create-group';
-  // TODO: replace Mock
-  ownerId = this.dataService.userId;
+  ownerId = this.accountService.user.id;
 
-  constructor(private popupService: PopupService, private dataService: DataService, public invitationService: InvitationService) { }
+  constructor(private popupService: PopupService, private groupService: GroupService, public invitationService: InvitationService,
+              private accountService: AccountService, private httpGroupService: HttpGroupService, private errorService: ErrorService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    this.dataService.createGroup(this.ownerId, this.form.value.groupName);
+    this.createGroup(this.ownerId, this.form.value.groupName);
     this.form.reset();
     this.popupService.close(this.id);
+  }
+
+  createGroup(currentUserId: number, groupName: string): void{
+    this.httpGroupService.createGroupByUserIdAndGroupName(currentUserId, groupName)
+      .subscribe({
+        next: group => {
+          this.groupService.addGroup(group);
+          this.groupService.selectGroup(group);
+        },
+        error: error => {
+          this.errorService.handleError(error);
+        }
+      });
   }
 
   onCancel(): void {

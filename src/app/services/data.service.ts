@@ -33,19 +33,6 @@ export class DataService {
     console.error('There was an error!', error);
   }
 
-  createGroup(currentUserId: number, groupName: string): void{
-    this.httpGroupService.createGroupByUserIdAndGroupName(currentUserId, groupName)
-      .subscribe({
-        next: group => {
-          this.userGroups.push(group);
-          this.selectGroup(group);
-        },
-        error: error => {
-          this.handleError(error);
-        }
-      });
-  }
-
   setActiveGroupName(group: Group, newGroupName: string): void {
     this.httpGroupService.setGroupNameByGroupId(group.id, newGroupName)
       .subscribe({

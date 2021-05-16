@@ -45,7 +45,6 @@ export class GroupService implements OnDestroy{
     return -1;
   }
 
-
   addGroup(group: Group): void{
     this.groupListSubject.next([
       ...this.groups,
