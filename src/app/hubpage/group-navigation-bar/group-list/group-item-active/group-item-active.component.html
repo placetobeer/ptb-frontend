@@ -14,8 +14,8 @@
   </div>
 
   <div class="mx-5">
-    <div *ngIf="dataService.userMembershipMap.has(group.id)">
-      <app-group-item-active-user-item *ngFor="let userMembership of dataService.userMembershipMap.get(group.id)" [userMembership]="userMembership"></app-group-item-active-user-item>
+    <div *ngIf="membershipService.userMembershipMap.has(group.id)">
+      <app-group-item-active-user-item *ngFor="let userMembership of membershipService.userMembershipMap.get(group.id)" [userMembership]="userMembership"></app-group-item-active-user-item>
     </div>
   </div>
 </div>

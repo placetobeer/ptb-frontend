@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Group} from '../../../../entities/group.model';
 import {DataService} from '../../../../services/data.service';
 import {PopupService} from '../../../../popups/popup.service';
+import {MembershipService} from "../../../../services/membership.service";
 
 @Component({
   selector: 'app-group-item-active',
@@ -11,7 +12,7 @@ import {PopupService} from '../../../../popups/popup.service';
 export class GroupItemActiveComponent implements OnInit {
   @Input() group: Group;
 
-  constructor(public dataService: DataService, private popupService: PopupService) { }
+  constructor(public membershipService: MembershipService, private popupService: PopupService) { }
 
   ngOnInit(): void {
   }

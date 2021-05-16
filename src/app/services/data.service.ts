@@ -14,7 +14,6 @@ export class DataService {
   userGroups: Group[];
   nonSelectedGroups: Group[];
   selectedGroup: Group;
-  userMembershipMap: Map<number, GroupsMembership[]> = new Map();
   userId = 4;
 
   constructor(
@@ -24,31 +23,9 @@ export class DataService {
     // this.loadUserGroups();
   }
 
-
   selectGroup(group: Group): void {
     this.selectedGroup = group;
     this.nonSelectedGroups = this.userGroups.filter(obj => obj !== this.selectedGroup);
-    if (this.selectedGroup !== null) {
-      this.checkForMembershipFetch(group);
-    }
-  }
-
-  checkForMembershipFetch(group: Group): void {
-    if (!this.userMembershipMap.has(group.id)) {
-      this.fetchMemberships(group);
-    }
-  }
-
-  fetchMemberships(group: Group): void {
-    this.httpMembershipService.loadUserMembershipsByGroupId(group.id)
-      .subscribe({
-        next: userMemberships => {
-          this.userMembershipMap.set(group.id, userMemberships);
-        },
-        error: error => {
-          this.handleError(error);
-        }
-      });
   }
 
   handleError(error: HttpErrorResponse): void {

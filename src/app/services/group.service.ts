@@ -7,13 +7,15 @@ import {AccountService} from './account.service';
 import {HttpParams} from '@angular/common/http';
 import {ErrorService} from './error.service';
 import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
+import {MembershipService} from "./membership.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupService implements OnDestroy{
 
-  constructor(private httpGroupService: HttpGroupService, private accountService: AccountService, private errorService: ErrorService) { }
+  constructor(private httpGroupService: HttpGroupService, private accountService: AccountService, private errorService: ErrorService,
+              private membershipService: MembershipService) { }
 
   private readonly autoRefreshSubscription =  interval(120000).pipe(startWith(0)).subscribe(() => {
     this.loadUserGroups();
@@ -58,6 +60,9 @@ export class GroupService implements OnDestroy{
   selectGroup(group: Group): void {
     this.currentGroupSubject.next(group);
     this.loadUserGroups();
+    if (this.currentGroup !== null) {
+      this.membershipService.checkForMembershipFetch(group);
+    }
   }
 
   deleteGroup(toDeleteGroup: Group): void {
