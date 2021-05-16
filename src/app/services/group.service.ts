@@ -45,6 +45,12 @@ export class GroupService implements OnDestroy{
     return -1;
   }
 
+  setCurrentGroupName(newGroupName: string): void {
+    if (this.currentGroup !== null) {
+      this.currentGroup.name = newGroupName;
+    }
+  }
+
   addGroup(group: Group): void{
     this.groupListSubject.next([
       ...this.groups,
