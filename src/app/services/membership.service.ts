@@ -3,6 +3,7 @@ import {Group} from "../entities/group.model";
 import {HttpMembershipService} from "./httpServices/http-membership.service";
 import {ErrorService} from "./error.service";
 import {GroupsMembership} from "../entities/groupsMembership.model";
+import {GroupRole} from "../entities/groupRole.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,10 @@ export class MembershipService {
           this.errorService.handleError(error);
         }
       });
+  }
+
+  getUsersMembershipOfSelectedGroup(): GroupsMembership {
+    // todo this is a mock
+    return new GroupsMembership(null, GroupRole.OWNER);
   }
 }

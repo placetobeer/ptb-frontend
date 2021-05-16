@@ -1,6 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {DataService} from 'src/app/services/data.service';
 import {Group} from '../../../../../entities/group.model';
 import {PopupService} from '../../../../../popups/popup.service';
 import {GroupRole} from '../../../../../entities/groupRole.enum';
@@ -8,6 +7,7 @@ import {PopupHelperService} from '../../../../../popups/popup-helper.service';
 import {GroupService} from "../../../../../services/group.service";
 import {HttpGroupService} from "../../../../../services/httpServices/http-group.service";
 import {ErrorService} from "../../../../../services/error.service";
+import {MembershipService} from "../../../../../services/membership.service";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -22,7 +22,7 @@ export class GroupEditPopupComponent implements OnInit {
   isUserOwner;
   initialValues;
 
-  constructor(private popupService: PopupService, private groupService: GroupService, private dataService: DataService,
+  constructor(private popupService: PopupService, private groupService: GroupService, private membershipService: MembershipService,
               private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
               private errorService: ErrorService) { }
 
@@ -30,7 +30,7 @@ export class GroupEditPopupComponent implements OnInit {
     this.initialValues = {
       groupName : this.groupService.currentGroup.name
     };
-    this.isUserOwner = this.dataService.getUsersMembershipOfSelectedGroup().role === GroupRole.OWNER;
+    this.isUserOwner = this.membershipService.getUsersMembershipOfSelectedGroup().role === GroupRole.OWNER;
   }
 
   private applyGroupChanges(): void {

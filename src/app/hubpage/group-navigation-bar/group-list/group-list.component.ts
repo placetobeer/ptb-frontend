@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from '../../../services/data.service';
 import {Group} from '../../../entities/group.model';
 import {GroupService} from '../../../services/group.service';
 import {Router} from '@angular/router';

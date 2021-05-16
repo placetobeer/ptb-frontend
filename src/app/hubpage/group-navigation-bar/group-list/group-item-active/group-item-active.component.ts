@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Group} from '../../../../entities/group.model';
-import {DataService} from '../../../../services/data.service';
 import {PopupService} from '../../../../popups/popup.service';
 import {MembershipService} from "../../../../services/membership.service";
 

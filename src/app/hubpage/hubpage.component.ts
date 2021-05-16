@@ -1,9 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DataService} from '../services/data.service';
-import {ActivatedRoute, NavigationStart, Params, Router, UrlSegment} from '@angular/router';
+import {ActivatedRoute, Params, Router, UrlSegment} from '@angular/router';
 import {GroupService} from '../services/group.service';
-import {ErrorService} from '../services/error.service';
-import {Group} from "../entities/group.model";
 
 @Component({
   selector: 'app-hubpage',

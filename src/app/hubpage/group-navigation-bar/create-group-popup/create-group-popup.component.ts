@@ -1,8 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PopupService} from '../../../popups/popup.service';
-import {DataService} from '../../../services/data.service';
 import {NgForm} from '@angular/forms';
-import {InvitationRequest} from '../../../requests/invitation-request.model';
 import {InvitationService} from '../../../services/invitation.service';
 import {AccountService} from "../../../services/account.service";
 import {GroupService} from "../../../services/group.service";
