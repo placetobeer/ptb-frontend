@@ -27,7 +27,6 @@ export class GroupEditPopupComponent implements OnInit {
     this.initialValues = {
       groupName : this.groupService.currentGroup.name
     };
-
     this.isUserOwner = this.dataService.getUsersMembershipOfSelectedGroup().role === GroupRole.OWNER;
   }
 
@@ -70,7 +69,7 @@ export class GroupEditPopupComponent implements OnInit {
     this.popuphelperService.confirmationSubject.subscribe({
       next: confirmation => {
         if (confirmation){
-          this.dataService.deleteGroup(this.group);
+          this.groupService.deleteGroup(this.group);
         }
       }
     });

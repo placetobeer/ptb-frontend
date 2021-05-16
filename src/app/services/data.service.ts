@@ -81,19 +81,6 @@ export class DataService {
       });
   }
 
-  deleteGroup(toDeleteGroup: Group): void {
-    this.httpGroupService.deleteGroupByGroupId(toDeleteGroup.id)
-      .subscribe({
-        next: response => {
-            this.userGroups = this.userGroups.filter(group => group !== toDeleteGroup);
-            this.selectGroup(null);
-        },
-        error: error => {
-          this.handleError(error);
-        }
-      });
-  }
-
   getUsersMembershipOfSelectedGroup(): GroupsMembership {
     // todo this is a mock
     return new GroupsMembership(null, GroupRole.OWNER);
