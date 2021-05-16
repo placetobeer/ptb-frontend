@@ -6,6 +6,8 @@ import {PopupService} from '../../../../../popups/popup.service';
 import {GroupRole} from '../../../../../entities/groupRole.enum';
 import {PopupHelperService} from '../../../../../popups/popup-helper.service';
 import {GroupService} from "../../../../../services/group.service";
+import {HttpGroupService} from "../../../../../services/httpServices/http-group.service";
+import {ErrorService} from "../../../../../services/error.service";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -21,7 +23,8 @@ export class GroupEditPopupComponent implements OnInit {
   initialValues;
 
   constructor(private popupService: PopupService, private groupService: GroupService, private dataService: DataService,
-              private popuphelperService: PopupHelperService) { }
+              private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
+              private errorService: ErrorService) { }
 
   ngOnInit(): void {
     this.initialValues = {
@@ -69,9 +72,22 @@ export class GroupEditPopupComponent implements OnInit {
     this.popuphelperService.confirmationSubject.subscribe({
       next: confirmation => {
         if (confirmation){
-          this.groupService.deleteGroup(this.group);
+          this.deleteGroup(this.group);
         }
       }
     });
+  }
+
+  deleteGroup(toDeleteGroup: Group): void {
+    this.httpGroupService.deleteGroupByGroupId(toDeleteGroup.id)
+      .subscribe({
+        next: response => {
+          this.groupService.removeGroupFromList(toDeleteGroup);
+          this.groupService.selectGroup(null);
+        },
+        error: error => {
+          this.errorService.handleError(error);
+        }
+      });
   }
 }

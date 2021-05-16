@@ -64,19 +64,6 @@ export class GroupService implements OnDestroy{
     }
   }
 
-  deleteGroup(toDeleteGroup: Group): void {
-      this.httpGroupService.deleteGroupByGroupId(toDeleteGroup.id)
-        .subscribe({
-          next: response => {
-              this.removeGroupFromList(toDeleteGroup);
-              this.selectGroup(null);
-          },
-          error: error => {
-            this.errorService.handleError(error);
-          }
-        });
-  }
-
   removeGroupFromList(toDeleteGroup: Group): void {
     const newGroups = this.groups.filter(groups => groups.id !== toDeleteGroup.id);
     this.groupListSubject.next(newGroups);
