@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Group} from '../../../../entities/group.model';
 import {PopupService} from '../../../../popups/popup.service';
 import {MembershipService} from "../../../../services/membership.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-group-item-active',
@@ -11,12 +12,12 @@ import {MembershipService} from "../../../../services/membership.service";
 export class GroupItemActiveComponent implements OnInit {
   @Input() group: Group;
 
-  constructor(public membershipService: MembershipService, private popupService: PopupService) { }
+  constructor(public membershipService: MembershipService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
   onEditGroup(): void {
-    this.popupService.open('group-edit');
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 }

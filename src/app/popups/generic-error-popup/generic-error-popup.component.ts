@@ -18,7 +18,8 @@ export class GenericErrorPopupComponent implements OnInit {
       next: message =>  {this.errorMessage = message; }
     });
   }
-  cancel(): void {
+
+  onCancel(): void {
     this.popupService.close(this.id);
   }
 }

@@ -16,7 +16,7 @@ import {MembershipService} from "../../../../../services/membership.service";
 })
 export class GroupEditPopupComponent implements OnInit {
   @ViewChild('groupForm') form: NgForm;
-  @Input() group: Group;
+  group: Group;
 
   id = 'group-edit';
   isUserOwner;
@@ -27,6 +27,7 @@ export class GroupEditPopupComponent implements OnInit {
               private errorService: ErrorService) { }
 
   ngOnInit(): void {
+    this.group = this.groupService.getCurrentGroupFromLocalStorage();
     this.initialValues = {
       groupName : this.groupService.currentGroup.name
     };

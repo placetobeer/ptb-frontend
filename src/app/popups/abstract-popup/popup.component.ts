@@ -10,7 +10,8 @@ import {GroupService} from "../../services/group.service";
   encapsulation: ViewEncapsulation.None
 })
 export class PopupComponent implements OnInit, OnDestroy {
-  id;
+  @Input() id;
+  idOfUrl;
   private readonly element;
   subscription;
 
@@ -22,7 +23,10 @@ export class PopupComponent implements OnInit, OnDestroy {
     this.subscription = this.route.url.subscribe(
         url => {
           if (url.toString() === 'new') {
-            this.id = 'create-group';
+            this.idOfUrl = 'create-group';
+            this.openPopup();
+          } else if (url.toString() === 'edit') {
+            this.idOfUrl = 'group-edit';
             this.openPopup();
           }
           console.log(url.toString());
@@ -46,7 +50,7 @@ export class PopupComponent implements OnInit, OnDestroy {
 
   openPopup(): void {
     this.popupService.add(this);
-    this.popupService.open(this.id);
+    this.popupService.open(this.idOfUrl);
   }
 
   open(): void{
