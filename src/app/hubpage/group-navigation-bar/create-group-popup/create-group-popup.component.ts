@@ -47,6 +47,6 @@ export class CreateGroupPopupComponent implements OnInit {
   onCancel(): void {
     this.form.reset();
     this.popupService.close(this.id);
-    this.router.navigate(['/hubpage/' + this.groupService.getCurrentGroupFromLocalStorage().id]);
+    this.router.navigate(['/hubpage/' + this.groupService.getCurrentGroupId()]);
   }
 }

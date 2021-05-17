@@ -27,7 +27,7 @@ export class GroupEditPopupComponent implements OnInit {
               private errorService: ErrorService) { }
 
   ngOnInit(): void {
-    this.group = this.groupService.getCurrentGroupFromLocalStorage();
+    this.group = this.groupService.currentGroup;
     this.initialValues = {
       groupName : this.groupService.currentGroup.name
     };
