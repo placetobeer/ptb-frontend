@@ -15,7 +15,10 @@ import {MembershipService} from "./membership.service";
 export class GroupService implements OnDestroy{
 
   constructor(private httpGroupService: HttpGroupService, private accountService: AccountService, private errorService: ErrorService,
-              private membershipService: MembershipService) { }
+              private membershipService: MembershipService)
+  {
+    this.loadUserGroups();
+  }
 
   private readonly autoRefreshSubscription =  interval(120000).pipe(startWith(0)).subscribe(() => {
     this.loadUserGroups();

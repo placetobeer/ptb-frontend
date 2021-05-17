@@ -10,8 +10,7 @@ import {GroupService} from '../services/group.service';
 export class HubpageComponent implements OnInit, OnDestroy {
   private subscription;
 
-  constructor(public groupService: GroupService, private route: ActivatedRoute, private router: Router) {
-  }
+  constructor(public groupService: GroupService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe(

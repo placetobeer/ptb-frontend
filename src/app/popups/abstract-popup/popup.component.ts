@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {PopupService} from '../popup.service';
-import {ActivatedRoute, Params, UrlSegment} from "@angular/router";
+import {ActivatedRoute, Params, Router, UrlSegment} from "@angular/router";
 import {GroupService} from "../../services/group.service";
 
 @Component({
@@ -15,7 +15,8 @@ export class PopupComponent implements OnInit, OnDestroy {
   private readonly element;
   subscription;
 
-  constructor(private popupService: PopupService, private elementReference: ElementRef, private route: ActivatedRoute) {
+  constructor(private popupService: PopupService, private elementReference: ElementRef, private route: ActivatedRoute,
+              private groupService: GroupService, private router: Router) {
     this.element = elementReference.nativeElement;
   }
 
@@ -29,7 +30,6 @@ export class PopupComponent implements OnInit, OnDestroy {
             this.idOfUrl = 'group-edit';
             this.openPopup();
           }
-          console.log(url.toString());
         }
       );
 
@@ -61,6 +61,11 @@ export class PopupComponent implements OnInit, OnDestroy {
   close(): void{
     this.element.style.display = 'none';
     document.body.classList.remove('abstract-popup-open');
+    if (this.groupService.currentGroup != null) {
+      this.router.navigate(['/hubpage/' + this.groupService.currentGroup.id]);
+    } else {
+      this.router.navigate(['/hubpage']);
+    }
   }
 
   private movePopupToBottomOfPage(): any{

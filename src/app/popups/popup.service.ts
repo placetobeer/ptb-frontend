@@ -31,6 +31,5 @@ export class PopupService {
   close(id: string): void {
     const popup = this.popupList.find(item => item.id === id);
     popup.close();
-    this.router.navigate(['/hubpage/' + JSON.parse(localStorage.getItem('currentGroup')).id]);
   }
 }
