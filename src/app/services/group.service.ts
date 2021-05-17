@@ -3,11 +3,10 @@ import {Group} from '../entities/group.model';
 import {BehaviorSubject, defer, iif, interval, merge, Observable, of, Subject} from 'rxjs';
 import {defaultIfEmpty, exhaustMap, filter, find, map, mapTo, startWith, switchMap} from 'rxjs/operators';
 import {HttpGroupService} from './httpServices/http-group.service';
-import {AccountService} from './account.service';
-import {HttpParams} from '@angular/common/http';
-import {ErrorService} from './error.service';
 import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
-import {MembershipService} from "./membership.service";
+import {AccountService} from './account.service';
+import {ErrorService} from './error.service';
+import {MembershipService} from './membership.service';
 
 @Injectable({
   providedIn: 'root'

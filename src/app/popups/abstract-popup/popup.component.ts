@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {PopupService} from '../popup.service';
-import {ActivatedRoute, Params, Router, UrlSegment} from "@angular/router";
-import {GroupService} from "../../services/group.service";
+import {ActivatedRoute, Params, Router, UrlSegment} from '@angular/router';
+import {GroupService} from '../../services/group.service';
 
 @Component({
   selector: 'app-popup',
