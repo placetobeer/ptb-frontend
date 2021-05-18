@@ -7,6 +7,9 @@ import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
 import {AccountService} from './account.service';
 import {ErrorService} from './error.service';
 import {MembershipService} from './membership.service';
+import {CurrentGroupSelector} from "../state-management/currentGroupSelector.context";
+import {CurrentGroupEmpty} from "../state-management/currentGroupEmpty.state";
+import {CurrentGroupSelected} from "../state-management/currentGroupSelected.state";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +17,7 @@ import {MembershipService} from './membership.service';
 export class GroupService implements OnDestroy{
 
   constructor(private httpGroupService: HttpGroupService, private accountService: AccountService, private errorService: ErrorService,
-              private membershipService: MembershipService)
+              private membershipService: MembershipService, private currentGroupSelector: CurrentGroupSelector)
   {
     this.loadUserGroups();
   }
@@ -50,6 +53,16 @@ export class GroupService implements OnDestroy{
   setCurrentGroupName(newGroupName: string): void {
     if (this.currentGroup !== null) {
       this.currentGroup.name = newGroupName;
+    }
+  }
+
+  setCurrentGroupState(): void {
+    if (this.currentGroup !== null) {
+      const stateSelected = new CurrentGroupSelected(this.currentGroupSelector);
+      stateSelected.setSelectorState();
+    } else {
+      const stateEmpty = new CurrentGroupEmpty(this.currentGroupSelector);
+      stateEmpty.setSelectorState();
     }
   }
 

@@ -3,11 +3,9 @@ import {CurrentGroupSelector} from "./currentGroupSelector.context";
 
 
 export class CurrentGroupEmpty implements CurrentGroupState {
-  groupSelected: boolean;
+  constructor(private wrapper: CurrentGroupSelector) {}
 
-  selectGroup(wrapper: CurrentGroupSelector): void {
-    wrapper.setState(false);
+  setSelectorState(): void {
+    this.wrapper.setState(false);
   }
-
-
 }

@@ -2,9 +2,9 @@ import {CurrentGroupSelector} from "./currentGroupSelector.context";
 import {CurrentGroupState} from "./currentGroupState.interface";
 
 export class CurrentGroupSelected implements CurrentGroupState {
-  groupSelected: boolean;
+  constructor(private wrapper: CurrentGroupSelector) {}
 
-  selectGroup(wrapper: CurrentGroupSelector): void {
-    wrapper.setState(true);
+  setSelectorState(): void {
+    this.wrapper.setState(true);
   }
 }
