@@ -1,28 +1,62 @@
 import { Injectable } from '@angular/core';
 import {InvitationRequest} from '../requests/invitation-request.model';
 import {Invitation} from '../entities/invitation.model';
-import {DataService} from './data.service';
 import {User} from '../entities/user.model';
 import {HttpInvitationService} from './httpServices/http-invitation.service';
+import {AccountService} from "./account.service";
+import {GroupService} from "./group.service";
+import {BehaviorSubject} from "rxjs";
+import {Group} from "../entities/group.model";
+import {ErrorService} from "./error.service";
+import {distinctUntilChanged} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvitationService {
-  invitations: Invitation[] = [];
-  pendingInvitations: Invitation[] = [];
-  // TODO replace Mock
-  owner = new User(22, 'Hugo Boss');
-  selectedGroupId = 44;
 
-  constructor(private dataService: DataService, private httpInvitationService: HttpInvitationService) { }
+  constructor(private httpInvitationService: HttpInvitationService, private accountService: AccountService,
+              private groupService: GroupService, private errorService: ErrorService) { }
 
-  addInvitation(newInvitation: Invitation): void {
-    this.invitations.push(newInvitation);
+  private readonly invitationsSubject = new BehaviorSubject<Invitation[]>(null);
+  public readonly invitations$ = this.invitationsSubject.asObservable();
+
+  private readonly pendingInvitationsSubject = new BehaviorSubject<Invitation[]>(null);
+  public readonly pendingInvitations$ = this.pendingInvitationsSubject.asObservable();
+
+  owner = this.accountService.user;
+
+  get invitations(): Invitation[] {
+    return this.invitationsSubject.value;
   }
 
-  sendInvitationRequest(): void {
-    const invitationRequest = new InvitationRequest(this.selectedGroupId, this.owner, this.invitations);
+  get pendingInvitations(): Invitation[] {
+    return this.pendingInvitationsSubject.value;
+  }
+
+  addInvitation(newInvitation: Invitation): void {
+    this.invitationsSubject.next([
+      newInvitation
+    ]);
+    // todo think about adding here duplication check
+    // let message = '';
+    // this.invitations$.pipe(distinctUntilChanged(this.invitations, newInvitation)).subscribe({
+    //   next: invitations => {
+    //     this.invitationsSubject.next([newInvitation]);
+    //   },
+    //   error: err => {
+    //     message = 'hohh';
+    //   },
+    // });
+  }
+
+  removeInvitation(toDeleteInvitation: Invitation): void {
+    const newInvitations = this.invitations.filter(element => element !== toDeleteInvitation);
+    this.invitationsSubject.next(newInvitations);
+  }
+
+  sendInvitationRequest(groupId: number): void {
+    const invitationRequest = new InvitationRequest(groupId, this.owner, this.invitations);
     this.httpInvitationService.sendInvitations(invitationRequest)
       .subscribe({
         next: invitations => {
@@ -32,7 +66,7 @@ export class InvitationService {
           }
         },
         error: error => {
-          this.dataService.handleError(error);
+          this.errorService.handleError(error);
         }
       });
   }

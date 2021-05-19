@@ -3,6 +3,8 @@ import {User} from '../../../entities/user.model';
 import {InvitationService} from '../../../services/invitation.service';
 import {Invitation} from '../../../entities/invitation.model';
 import {NgForm} from '@angular/forms';
+import {AccountService} from "../../../services/account.service";
+import {InvitationItemComponent} from "../invitation-list/invitation-item/invitation-item.component";
 
 @Component({
   selector: 'app-add-member-bar',
@@ -12,16 +14,21 @@ import {NgForm} from '@angular/forms';
 export class AddMemberBarComponent implements OnInit {
   @ViewChild('subForm', {static: false}) subForm: NgForm;
   errorMessage = 'No valid email address';
-  // TODO: replace Mock
-  owner = new User(22, 'Hugo Boss');
-  constructor(private invitationService: InvitationService) { }
+  invitationDuplicate;
+  owner = this.accountService.user;
+  constructor(private invitationService: InvitationService, private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
 
   onAddMember(): void {
     const newInvitation = new Invitation(this.subForm.value.email, this.subForm.value.grantAdminRole);
-    if (this.validateAlreadyAdded()) {
+    if (this.invitationService.invitations !== null) {
+      // todo find solution to only add an invitation if it is unique -> RXJS function for that?
+      this.invitationDuplicate = this.invitationService.invitations.filter(invitation => this.subForm.value.email === invitation.email);
+      console.log(this.invitationDuplicate);
+    }
+    if (this.invitationDuplicate == null) {
       this.invitationService.addInvitation(newInvitation);
       this.subForm.resetForm();
     } else {
@@ -29,14 +36,5 @@ export class AddMemberBarComponent implements OnInit {
       this.subForm.resetForm();
       this.subForm.controls.email.markAllAsTouched();
     }
-  }
-
-  private validateAlreadyAdded(): boolean {
-    for (const invitation of this.invitationService.invitations) {
-      if (this.subForm.value.email === invitation.email) {
-        return false;
-      }
-    }
-    return true;
   }
 }
