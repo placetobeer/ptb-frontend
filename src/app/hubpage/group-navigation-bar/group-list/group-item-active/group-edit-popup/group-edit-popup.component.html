@@ -1,4 +1,4 @@
-<app-base-popup [id]="id" [buttonMap]="buttonMap" (buttonClicked)="onButtonClick($event)">
+<app-base-popup [id]="id">
   <form #groupForm="ngForm" (ngSubmit)="onSubmit()" class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
 
     <span *ngIf="isUserOwner">
@@ -18,6 +18,5 @@
       <button type="submit" class="btn btn-create" [disabled]="!groupForm.valid">Apply</button>
       <button type="button" (click)="onCancel()" class="btn btn-cancel">Cancel</button>
     </div>
-
   </form>
 </app-base-popup>

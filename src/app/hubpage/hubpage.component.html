@@ -1,4 +1,4 @@
-<app-header [groupName]="dataService.selectedGroup == null ? 'Place to Beer' : dataService.selectedGroup.name"></app-header>
+<app-header [groupName]="(groupService.currentGroup$ | async) == null ? 'Place to Beer' : (groupService.currentGroup$ | async).name"></app-header>
 
 <div class="grid grid-cols-4 divide-x-2 divide-ptb-gray-500 h-full">
   <div class="col-span-3">
@@ -6,7 +6,6 @@
   </div>
   <div class="bg-ptb-gray-100">
     <app-group-navigation-bar></app-group-navigation-bar>
+    <router-outlet></router-outlet>
   </div>
 </div>
-
-

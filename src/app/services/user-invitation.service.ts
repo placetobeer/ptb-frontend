@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpInvitationService} from './httpServices/http-invitation.service';
-import {DataService} from './data.service';
 import {InvitationResponse} from '../entities/invitationResponse.model';
+import {ErrorService} from "./error.service";
+import {AccountService} from "./account.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,22 +10,24 @@ import {InvitationResponse} from '../entities/invitationResponse.model';
 export class UserInvitationService {
 
   pendingInvitations: InvitationResponse[];
-  constructor(
-    private httpInvitationService: HttpInvitationService,
-    private dataService: DataService)
+
+  constructor(private httpInvitationService: HttpInvitationService, private errorService: ErrorService,
+              private accountService: AccountService)
    {
     this.loadInvitations();
   }
+
   loadInvitations(): void{
-    this.httpInvitationService.loadInvitationsByUserId(this.dataService.userId).subscribe({
+    this.httpInvitationService.loadInvitationsByUserId(this.accountService.user.id).subscribe({
       next: invitations => {
         this.pendingInvitations =  invitations;
       },
       error: error => {
-        this.dataService.handleError(error);
+        this.errorService.handleError(error);
       }
     });
   }
+
   acceptInvitationClick(toAcceptInvitationResponse: InvitationResponse): void {
     this.httpInvitationService.answerInvitationByInvitationId(toAcceptInvitationResponse.id, true)
       .subscribe({
@@ -32,10 +35,11 @@ export class UserInvitationService {
         this.pendingInvitations = this.pendingInvitations.filter(invitationResponse => invitationResponse !== toAcceptInvitationResponse);
       },
       error: error => {
-        this.dataService.handleError(error);
+        this.errorService.handleError(error);
       }
     });
   }
+
   declineInvitationClick(toDeclineInvitationResponse: InvitationResponse): void {
     this.httpInvitationService.answerInvitationByInvitationId(toDeclineInvitationResponse.id, false)
       .subscribe({
@@ -43,7 +47,7 @@ export class UserInvitationService {
         this.pendingInvitations = this.pendingInvitations.filter(invitationResponse => invitationResponse !== toDeclineInvitationResponse);
       },
       error: error => {
-        this.dataService.handleError(error);
+        this.errorService.handleError(error);
       }
     });
   }

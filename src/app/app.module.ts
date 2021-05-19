@@ -15,16 +15,20 @@ import { GroupItemActiveUserItemComponent } from './hubpage/group-navigation-bar
 import { PopupComponent } from './popups/abstract-popup/popup.component';
 import { BasePopupComponent } from './popups/base-popup/base-popup.component';
 import { BasePopupHeaderComponent } from './popups/base-popup/base-popup-header/base-popup-header.component';
-import { BasePopupButtonBarComponent } from './popups/base-popup/base-popup-button-bar/base-popup-button-bar.component';
 import { GroupEditPopupComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-edit-popup.component';
 import { CreateGroupPopupComponent } from './hubpage/group-navigation-bar/create-group-popup/create-group-popup.component';
 import {FormsModule} from '@angular/forms';
 import { GenericErrorPopupComponent } from './popups/generic-error-popup/generic-error-popup.component';
+// @ts-ignore
 import {InvitationListComponent} from './hubpage/group-navigation-bar/invitation-list/invitation-list.component';
+// @ts-ignore
 import {InvitationItemComponent} from './hubpage/group-navigation-bar/invitation-list/invitation-item/invitation-item.component';
 import { MemberItemComponent } from './hubpage/group-navigation-bar/member-list/member-item/member-item.component';
 import { MemberListComponent } from './hubpage/group-navigation-bar/member-list/member-list.component';
 import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member-bar/add-member-bar.component';
+import { ErrorPageComponent } from './error/error-page/error-page.component';
+import {AppRoutingModule} from './app-routing.module';
+import {GenericConfirmationPopupComponent} from './popups/generic-confirmation-popup/generic-confirmation-popup.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,6 @@ import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member
     PopupComponent,
     BasePopupComponent,
     BasePopupHeaderComponent,
-    BasePopupButtonBarComponent,
     GroupEditPopupComponent,
     CreateGroupPopupComponent,
     GenericErrorPopupComponent,
@@ -48,9 +51,12 @@ import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member
     InvitationItemComponent,
     MemberItemComponent,
     MemberListComponent,
-    AddMemberBarComponent
+    AddMemberBarComponent,
+    ErrorPageComponent,
+    GenericConfirmationPopupComponent
   ],
     imports: [
+        AppRoutingModule,
         BrowserModule,
         HttpClientModule,
         CommonModule,

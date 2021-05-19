@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Group} from '../../entities/group.model';
 import {Observable} from 'rxjs';
+import {InvitationRequest} from "../../requests/invitation-request.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,14 @@ export class HttpGroupService{
   }
 
   createGroupByUserIdAndGroupName(userId: number, groupName: string): Observable<Group> {
-    return this.http.post<Group>('http://localhost:8080/groups', null,
-      {params: new HttpParams().set('userId', String(userId)).set('groupName', String(groupName))});
+    return this.http.post<Group>('http://localhost:8080/groups', groupName,
+      { params: new HttpParams().set('userId', String(userId)), headers: new HttpHeaders({
+          'Content-Type': 'application/json;charset=UTF-8',
+        })});
   }
 
   setGroupNameByGroupId(groupId: number, groupName: string): Observable<any> {
-    return this.http.put('http://localhost:8080/groups/' + groupId + '/name', '"' + groupName + '"', { headers: new HttpHeaders({
+    return this.http.put('http://localhost:8080/groups/' + groupId + '/name', groupName, { headers: new HttpHeaders({
         'Content-Type': 'application/json;charset=UTF-8',
       })});
   }

@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import {PopupComponent} from './abstract-popup/popup.component';
+import {BehaviorSubject} from "rxjs";
+import {Group} from "../entities/group.model";
+import {BasePopupComponent} from "./base-popup/base-popup.component";
+import {Route, Router} from "@angular/router";
+import {GroupService} from "../services/group.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +13,7 @@ export class PopupService {
 
   private popupList: PopupComponent[] = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   add(popup: PopupComponent): void {
     this.popupList.push(popup);

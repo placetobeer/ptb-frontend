@@ -1,9 +1,13 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {DataService} from 'src/app/services/data.service';
 import {Group} from '../../../../../entities/group.model';
 import {PopupService} from '../../../../../popups/popup.service';
 import {GroupRole} from '../../../../../entities/groupRole.enum';
+import {PopupHelperService} from '../../../../../popups/popup-helper.service';
+import {GroupService} from "../../../../../services/group.service";
+import {HttpGroupService} from "../../../../../services/httpServices/http-group.service";
+import {ErrorService} from "../../../../../services/error.service";
+import {MembershipService} from "../../../../../services/membership.service";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -12,38 +16,22 @@ import {GroupRole} from '../../../../../entities/groupRole.enum';
 })
 export class GroupEditPopupComponent implements OnInit {
   @ViewChild('groupForm') form: NgForm;
-  @Input() group: Group;
+  group: Group;
 
   id = 'group-edit';
   isUserOwner;
   initialValues;
 
-  buttonMap: Map<string, string> = new Map<string, string>([
-    ['Cancel', 'cancel'],
-    ['Apply', 'apply']
-  ]);
-
-  constructor(private popupService: PopupService, private dataService: DataService) { }
+  constructor(private popupService: PopupService, private groupService: GroupService, private membershipService: MembershipService,
+              private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
+              private errorService: ErrorService) { }
 
   ngOnInit(): void {
+    this.group = this.groupService.currentGroup;
     this.initialValues = {
-      groupName : this.dataService.selectedGroup.name
+      groupName : this.groupService.currentGroup.name
     };
-
-    this.isUserOwner = this.dataService.getUsersMembershipOfSelectedGroup().role === GroupRole.OWNER;
-  }
-
-  onButtonClick(buttonName: string): void {
-    console.log(buttonName);
-    switch (buttonName){
-      case 'cancel':
-        this.closePopup();
-        break;
-      case 'apply':
-        this.applyGroupChanges();
-        this.closePopup();
-        break;
-    }
+    this.isUserOwner = this.membershipService.getUsersMembershipOfSelectedGroup().role === GroupRole.OWNER;
   }
 
   private applyGroupChanges(): void {
@@ -58,7 +46,19 @@ export class GroupEditPopupComponent implements OnInit {
     if (groupNameInput.untouched || !groupNameInput.valid){
       return;
     }
-    this.dataService.setActiveGroupName(this.group, groupNameInput.value);
+    this.setActiveGroupName(this.group, groupNameInput.value);
+  }
+
+  setActiveGroupName(group: Group, newGroupName: string): void {
+    this.httpGroupService.setGroupNameByGroupId(group.id, newGroupName)
+      .subscribe({
+        next: response => {
+          this.groupService.setCurrentGroupName(newGroupName);
+        },
+        error: error => {
+          this.errorService.handleError(error);
+        }
+      });
   }
 
   private closePopup(): void {
@@ -81,7 +81,26 @@ export class GroupEditPopupComponent implements OnInit {
   }
 
   onDeleteGroup(): void {
-    // todo confirmation popup
-    this.dataService.deleteGroup(this.group);
+    this.popuphelperService.openConfirmation('');
+    this.popuphelperService.confirmationSubject.subscribe({
+      next: confirmation => {
+        if (confirmation){
+          this.deleteGroup(this.group);
+        }
+      }
+    });
+  }
+
+  deleteGroup(toDeleteGroup: Group): void {
+    this.httpGroupService.deleteGroupByGroupId(toDeleteGroup.id)
+      .subscribe({
+        next: response => {
+          this.groupService.removeGroupFromList(toDeleteGroup);
+          this.groupService.selectGroup(null);
+        },
+        error: error => {
+          this.errorService.handleError(error);
+        }
+      });
   }
 }
