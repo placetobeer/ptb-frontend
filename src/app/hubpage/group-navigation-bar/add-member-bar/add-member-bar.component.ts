@@ -14,7 +14,6 @@ import {InvitationItemComponent} from "../invitation-list/invitation-item/invita
 export class AddMemberBarComponent implements OnInit {
   @ViewChild('subForm', {static: false}) subForm: NgForm;
   errorMessage = 'No valid email address';
-  invitationDuplicate;
   owner = this.accountService.user;
   constructor(private invitationService: InvitationService, private accountService: AccountService) { }
 
@@ -23,12 +22,8 @@ export class AddMemberBarComponent implements OnInit {
 
   onAddMember(): void {
     const newInvitation = new Invitation(this.subForm.value.email, this.subForm.value.grantAdminRole);
-    if (this.invitationService.invitations !== null) {
-      // todo find solution to only add an invitation if it is unique -> RXJS function for that?
-      this.invitationDuplicate = this.invitationService.invitations.filter(invitation => this.subForm.value.email === invitation.email);
-      console.log(this.invitationDuplicate);
-    }
-    if (this.invitationDuplicate == null) {
+    const invitationDuplicate = this.invitationService.invitations.find(invitation => this.subForm.value.email === invitation.email);
+    if (!invitationDuplicate) {
       this.invitationService.addInvitation(newInvitation);
       this.subForm.resetForm();
     } else {

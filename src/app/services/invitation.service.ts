@@ -18,7 +18,7 @@ export class InvitationService {
   constructor(private httpInvitationService: HttpInvitationService, private accountService: AccountService,
               private groupService: GroupService, private errorService: ErrorService) { }
 
-  private readonly invitationsSubject = new BehaviorSubject<Invitation[]>(null);
+  private readonly invitationsSubject = new BehaviorSubject<Invitation[]>([]);
   public readonly invitations$ = this.invitationsSubject.asObservable();
 
   private readonly pendingInvitationsSubject = new BehaviorSubject<Invitation[]>(null);
@@ -36,18 +36,9 @@ export class InvitationService {
 
   addInvitation(newInvitation: Invitation): void {
     this.invitationsSubject.next([
+      ...this.invitations,
       newInvitation
     ]);
-    // todo think about adding here duplication check
-    // let message = '';
-    // this.invitations$.pipe(distinctUntilChanged(this.invitations, newInvitation)).subscribe({
-    //   next: invitations => {
-    //     this.invitationsSubject.next([newInvitation]);
-    //   },
-    //   error: err => {
-    //     message = 'hohh';
-    //   },
-    // });
   }
 
   removeInvitation(toDeleteInvitation: Invitation): void {
