@@ -71,4 +71,8 @@ export class PopupComponent implements OnInit, OnDestroy {
   private movePopupToBottomOfPage(): any{
     document.body.appendChild(this.element);
   }
+  private movePopupToFirstLayer(): any{
+    const hook = document.getElementById("hook");
+    document.insertBefore(this.element, hook.nextSibling);
+  }
 }
