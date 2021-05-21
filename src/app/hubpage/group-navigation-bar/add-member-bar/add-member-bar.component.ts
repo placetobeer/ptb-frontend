@@ -17,8 +17,7 @@ export class AddMemberBarComponent implements OnInit {
   owner = this.accountService.user;
   constructor(private invitationService: InvitationService, private accountService: AccountService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onAddMember(): void {
     const newInvitation = new Invitation(this.subForm.value.email, this.subForm.value.grantAdminRole);

@@ -8,7 +8,8 @@ import {GroupService} from "./group.service";
 import {BehaviorSubject} from "rxjs";
 import {Group} from "../entities/group.model";
 import {ErrorService} from "./error.service";
-import {distinctUntilChanged} from "rxjs/operators";
+import {distinctUntilChanged, filter, map} from "rxjs/operators";
+import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
 
 @Injectable({
   providedIn: 'root'
@@ -51,10 +52,7 @@ export class InvitationService {
     this.httpInvitationService.sendInvitations(invitationRequest)
       .subscribe({
         next: invitations => {
-          for (const invitation of invitations) {
-            this.pendingInvitations.push(invitation);
-            console.log(invitation);
-          }
+          this.pendingInvitationsSubject.next(invitations);
         },
         error: error => {
           this.errorService.handleError(error);
