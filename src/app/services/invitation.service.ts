@@ -22,17 +22,10 @@ export class InvitationService {
   private readonly invitationsSubject = new BehaviorSubject<Invitation[]>([]);
   public readonly invitations$ = this.invitationsSubject.asObservable();
 
-  private readonly pendingInvitationsSubject = new BehaviorSubject<Invitation[]>(null);
-  public readonly pendingInvitations$ = this.pendingInvitationsSubject.asObservable();
-
   owner = this.accountService.user;
 
   get invitations(): Invitation[] {
     return this.invitationsSubject.value;
-  }
-
-  get pendingInvitations(): Invitation[] {
-    return this.pendingInvitationsSubject.value;
   }
 
   addInvitation(newInvitation: Invitation): void {
@@ -52,7 +45,7 @@ export class InvitationService {
     this.httpInvitationService.sendInvitations(invitationRequest)
       .subscribe({
         next: invitations => {
-          this.pendingInvitationsSubject.next(invitations);
+          // todo add to pending invitations in user-invitation service?
         },
         error: error => {
           this.errorService.handleError(error);
