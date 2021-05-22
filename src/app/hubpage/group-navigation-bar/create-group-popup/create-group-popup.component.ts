@@ -47,10 +47,12 @@ export class CreateGroupPopupComponent implements OnInit {
 
   sendInvitationList(groupId: number): void {
     this.invitationService.sendInvitationRequest(groupId);
+    this.invitationService.removeAllInvitations();
   }
 
   onCancel(): void {
     this.form.reset();
+    this.invitationService.removeAllInvitations();
     this.popupService.close(this.id);
     if (this.groupService.currentGroup != null) {
       this.router.navigate(['/hubpage/' + this.groupService.currentGroup.id]);

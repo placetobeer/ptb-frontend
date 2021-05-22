@@ -40,6 +40,11 @@ export class InvitationService {
     this.invitationsSubject.next(newInvitations);
   }
 
+  removeAllInvitations(): void {
+    const initEmptyValue = [];
+    this.invitationsSubject.next(initEmptyValue);
+  }
+
   sendInvitationRequest(groupId: number): void {
     const invitationRequest = new InvitationRequest(groupId, this.owner, this.invitations);
     this.httpInvitationService.sendInvitations(invitationRequest)
