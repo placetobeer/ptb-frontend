@@ -5,8 +5,10 @@ import {HubpageComponent} from './hubpage/hubpage.component';
 import {CreateGroupPopupComponent} from "./hubpage/group-navigation-bar/create-group-popup/create-group-popup.component";
 import {PopupComponent} from "./popups/abstract-popup/popup.component";
 import {GroupEditPopupComponent} from "./hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-edit-popup.component";
+import {AuthComponent} from "./auth/auth.component";
 
 const routes: Routes = [
+  {path: 'login', component: AuthComponent},
   {path: 'hubpage', component: HubpageComponent, children: [
       {path: 'new', component: CreateGroupPopupComponent}
     ]},
