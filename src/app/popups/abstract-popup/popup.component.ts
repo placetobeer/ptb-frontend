@@ -23,6 +23,7 @@ export class PopupComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.route.url.subscribe(
         url => {
+          console.log(url);
           if (url.toString() === 'new') {
             this.idOfUrl = 'create-group';
             this.openPopup();
@@ -54,6 +55,7 @@ export class PopupComponent implements OnInit, OnDestroy {
   }
 
   open(): void{
+    // this.movePopupToFirstLayer();
     this.element.style.display = 'block';
     document.body.classList.add('abstract-popup-open');
   }
