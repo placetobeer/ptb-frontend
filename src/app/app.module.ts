@@ -30,6 +30,7 @@ import { ErrorPageComponent } from './error/error-page/error-page.component';
 import {AppRoutingModule} from './app-routing.module';
 import {GenericConfirmationPopupComponent} from './popups/generic-confirmation-popup/generic-confirmation-popup.component';
 import { AuthComponent } from './auth/auth.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AuthComponent } from './auth/auth.component';
     AddMemberBarComponent,
     ErrorPageComponent,
     GenericConfirmationPopupComponent,
-    AuthComponent
+    AuthComponent,
+    RegisterComponent
   ],
     imports: [
         AppRoutingModule,

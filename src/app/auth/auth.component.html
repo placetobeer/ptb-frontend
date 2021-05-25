@@ -1,33 +1,41 @@
 <div>
-  <h1> Welcome to PlaceToBeer!</h1>
-  <div class="flex flex-col div-input-field"
-       [ngClass]="{'border-red-700': emailControl.touched && emailControl.invalid}">
-    <label class="label-input-field" [ngClass]="{'border-red-700': emailControl.touched && emailControl.invalid}"
-           for="email">
-      email </label>
-    <input id="email" name="email" class="input-field"
-           type="text" placeholder="email" ngModel pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
-           #emailControl="ngModel"/>
-  </div >
-  <div class="flex flex-col div-input-field"
-    [ngClass]="{'border-red-700': pwControl.invalid}">
-    <label class="label-input-field" [ngClass]="{'border-red-700': pwControl.invalid}"
-    for="pw"
-    >Password </label>
-    <input class="input-field" id="pw"
-           type="password" placeholder="" ngModel minlength="8" required #pwControl="ngModel"/>
-  </div>
-  <div *ngIf="pwControl.errors?.minlength" class="text-red-700">
-    Password must be at least 8 characters long
-  </div>
-  <div class="btn flex flex-row">
-    <div class="btn btn-create cursor-pointer" (click)="$event">
-      Login
-    </div>
-    <div class="btn btn-cancel cursor-pointer" (click)="$event">
-      Cancel
-    </div>
-  </div>
+  <h1> Login to PlaceToBeer!</h1>
+  <form (ngSubmit)="onLogin()" #subForm="ngForm">
 
+
+    <div class="flex flex-col div-input-field"
+         [ngClass]="{'border-red-700': emailControl.touched && emailControl.invalid}">
+      <label class="label-input-field" [ngClass]="{'border-red-700': emailControl.touched && emailControl.invalid}"
+             for="email">
+        email </label>
+      <input id="email" name="email" class="input-field"
+             type="text" placeholder="email" ngModel pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
+             #emailControl="ngModel"/>
+    </div>
+    <div class="flex flex-col div-input-field"
+         [ngClass]="{'border-red-700': pwControl.invalid}">
+      <label class="label-input-field" [ngClass]="{'border-red-700': pwControl.invalid}"
+             for="pw"
+      >Password </label>
+      <input class="input-field" id="pw"
+             type="password" placeholder="" ngModel minlength="8" required #pwControl="ngModel"/>
+    </div>
+    <div *ngIf="pwControl.errors?.minlength" class="text-red-700">
+      Password must be at least 8 characters long
+    </div>
+
+    <div class="btn flex flex-row">
+      <button class="btn btn-create cursor-pointer"
+              type="submit" [disabled]="pwControl.invalid||emailControl.invalid">
+        Login
+      </button>
+      <div class="btn btn-cancel cursor-pointer" (click)="onCancel()">
+        Cancel
+      </div>
+    </div>
+    <div class="btn bg-ptb-blue-600 cursor-pointer" (click)="onRegister()">
+      No Account yet? Register Here!
+    </div>
+  </form>
 </div>
 
