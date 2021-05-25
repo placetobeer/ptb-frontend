@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -9,7 +10,7 @@ import {NgForm} from "@angular/forms";
 export class AuthComponent implements OnInit {
   @ViewChild('subForm', {static: false}) subForm: NgForm;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +25,7 @@ export class AuthComponent implements OnInit {
   }
 
   onRegister(): void {
+    this.router.navigate(['/register']);
     // TODO: route to /register - register.component
   }
 }
