@@ -29,7 +29,7 @@ import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member
 import { ErrorPageComponent } from './error/error-page/error-page.component';
 import {AppRoutingModule} from './app-routing.module';
 import {GenericConfirmationPopupComponent} from './popups/generic-confirmation-popup/generic-confirmation-popup.component';
-import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
@@ -56,7 +56,7 @@ import { RegisterComponent } from './auth/register/register.component';
     AddMemberBarComponent,
     ErrorPageComponent,
     GenericConfirmationPopupComponent,
-    AuthComponent,
+    LoginComponent,
     RegisterComponent
   ],
     imports: [

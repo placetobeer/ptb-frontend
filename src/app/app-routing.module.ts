@@ -5,11 +5,11 @@ import {HubpageComponent} from './hubpage/hubpage.component';
 import {CreateGroupPopupComponent} from "./hubpage/group-navigation-bar/create-group-popup/create-group-popup.component";
 import {PopupComponent} from "./popups/abstract-popup/popup.component";
 import {GroupEditPopupComponent} from "./hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-edit-popup.component";
-import {AuthComponent} from "./auth/auth.component";
+import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
 
 const routes: Routes = [
-  {path: 'login', component: AuthComponent, children: [
+  {path: 'login', component: LoginComponent, children: [
       {path: 'register', component: RegisterComponent}
     ]},
   {path: 'hubpage', component: HubpageComponent, children: [
