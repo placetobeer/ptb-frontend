@@ -29,6 +29,7 @@ import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member
 import { ErrorPageComponent } from './error/error-page/error-page.component';
 import {AppRoutingModule} from './app-routing.module';
 import {GenericConfirmationPopupComponent} from './popups/generic-confirmation-popup/generic-confirmation-popup.component';
+import { RoutingPopupComponent } from './popups/routing-popup/routing-popup.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {GenericConfirmationPopupComponent} from './popups/generic-confirmation-p
     MemberListComponent,
     AddMemberBarComponent,
     ErrorPageComponent,
-    GenericConfirmationPopupComponent
+    GenericConfirmationPopupComponent,
+    RoutingPopupComponent
   ],
     imports: [
         AppRoutingModule,
