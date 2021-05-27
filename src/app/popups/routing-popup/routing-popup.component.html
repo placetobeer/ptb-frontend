@@ -1,1 +1,8 @@
-<p>routing-popup works!</p>
+<div class="popup">
+  <div class="popup-body">
+    <app-base-popup-header (xPressed)="close()"></app-base-popup-header>
+    <ng-content></ng-content>
+  </div>
+</div>
+<div class="popup-background"></div>
+

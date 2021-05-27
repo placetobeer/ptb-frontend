@@ -1,4 +1,4 @@
-<app-base-popup [id]="id">
+<app-routing-popup>
   <form #groupForm="ngForm" (ngSubmit)="onSubmit()" class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
 
     <span *ngIf="isUserOwner">
@@ -19,4 +19,4 @@
       <button type="button" (click)="onCancel()" class="btn btn-cancel">Cancel</button>
     </div>
   </form>
-</app-base-popup>
+</app-routing-popup>

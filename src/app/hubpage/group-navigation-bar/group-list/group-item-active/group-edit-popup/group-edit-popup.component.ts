@@ -18,7 +18,6 @@ export class GroupEditPopupComponent implements OnInit {
   @ViewChild('groupForm') form: NgForm;
   group: Group;
 
-  id = 'group-edit';
   isUserOwner;
   initialValues;
 
@@ -63,7 +62,6 @@ export class GroupEditPopupComponent implements OnInit {
 
   private closePopup(): void {
     this.resetValues();
-    this.popupService.close(this.id);
   }
 
   private resetValues(): void {

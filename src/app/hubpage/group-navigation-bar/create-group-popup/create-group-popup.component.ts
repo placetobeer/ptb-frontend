@@ -15,7 +15,6 @@ import {Router} from "@angular/router";
 })
 export class CreateGroupPopupComponent implements OnInit {
   @ViewChild('f', {static: false}) form: NgForm;
-  id = 'create-group';
   ownerId = this.accountService.user.id;
 
   constructor(private popupService: PopupService, private groupService: GroupService, public invitationService: InvitationService,
@@ -27,7 +26,6 @@ export class CreateGroupPopupComponent implements OnInit {
   onSubmit(): void {
     this.createGroup(this.ownerId, this.form.value.groupName);
     this.form.reset();
-    this.popupService.close(this.id);
   }
 
   createGroup(currentUserId: number, groupName: string): void {
@@ -46,7 +44,6 @@ export class CreateGroupPopupComponent implements OnInit {
 
   onCancel(): void {
     this.form.reset();
-    this.popupService.close(this.id);
     if (this.groupService.currentGroup != null) {
       this.router.navigate(['/hubpage/' + this.groupService.currentGroup.id]);
     } else {
