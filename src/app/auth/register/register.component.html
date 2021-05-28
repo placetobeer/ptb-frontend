@@ -1,4 +1,4 @@
-<div>
+<form (ngSubmit)="onRegister()" #subForm="ngForm">
   <h1> Welcome to PlaceToBeer!</h1>
   <h3> Nice to meet you</h3>
   <div class="flex flex-col div-input-field"
@@ -24,14 +24,14 @@
   <div class="btn flex flex-row">
     <button class="btn btn-create cursor-pointer"
             type="Submit" [disabled]="pwControl.invalid||emailControl.invalid"
-            (click)="$event">
+            >
       Login
     </button>
-    <button class="btn btn-cancel cursor-pointer" type="button" (click)="$event">
+    <button class="btn btn-cancel cursor-pointer" type="button" (click)="onCancel()">
       Cancel
     </button>
   </div>
 
-</div>
+</form>
 
 

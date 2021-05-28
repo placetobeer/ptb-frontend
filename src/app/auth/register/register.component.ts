@@ -12,4 +12,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onRegister(): void{
+    // TODO: implement register functionality
+  }
+  onCancel(): void{
+    // TODO: implement cancel functionality
+  }
 }
