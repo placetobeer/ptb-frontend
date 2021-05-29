@@ -1,22 +1,35 @@
 <app-routing-popup>
   <form #groupForm="ngForm" (ngSubmit)="onSubmit()" class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
 
-    <span *ngIf="isUserOwner">
-        <svg (click)="onDeleteGroup()" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 m-4 text-ptb-dark-blue-500 hover:text-ptb-dark-blue-700 object-right right-0" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-      </svg>
-    </span>
+    <div class="grid grid-cols-1 gap-4">
+      <div class="flex">
+        <div id="input-field" class="div-input-field" [ngClass]="{'border-red-700':groupName.touched && groupName.invalid}">
+          <input id="groupName" class="input-field" name="groupName" [ngModel]="group.name" maxlength="255" minlength="3" required #groupName="ngModel">
+          <label for="groupName" class="label-input-field" [ngClass]="{'text-red-700':groupName.touched && groupName.invalid}">Group name</label>
+        </div>
 
-    <div id="input-field" class="div-input-field">
-      <label>
-        Groupname: <input  class="input-field" name="groupName" [ngModel]="group.name" maxlength="255" minlength="3" required>
-      </label>
+        <div class="ml-auto" *ngIf="isUserOwner">
+          <svg (click)="onDeleteGroup()" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 m-4 text-ptb-dark-blue-500 cursor-pointer hover:text-ptb-dark-blue-700 object-right right-0" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="max-w-md grid grid-cols-1 gap-4">
+        <div class="text-md italic">Group members</div>
+        <app-member-list></app-member-list>
+
+        <button type="button" class="btn btn-add ml-auto">Add member</button>
+      </div>
+
+      <div class="text-md italic">Pending invitations</div>
+      <p>Pending invitation list coming soon!</p>
+
+      <div class="flex flex-row justify-end space-x-4">
+        <button type="submit" class="btn btn-create" [disabled]="!groupForm.valid">Apply</button>
+        <button type="button" (click)="onCancel()" class="btn btn-cancel">Cancel</button>
+      </div>
     </div>
 
-
-    <div class="flex flex-row justify-end space-x-4">
-      <button type="submit" class="btn btn-create" [disabled]="!groupForm.valid">Apply</button>
-      <button type="button" (click)="onCancel()" class="btn btn-cancel">Cancel</button>
-    </div>
   </form>
 </app-routing-popup>

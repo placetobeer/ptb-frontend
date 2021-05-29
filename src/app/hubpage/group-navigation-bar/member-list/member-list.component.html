@@ -4,4 +4,6 @@
     <div class="text-md text-ptb-orange-600">{{ role.OWNER }}</div>
   </div>
   <app-member-item *ngFor="let invitation of invitationService.invitations" [invitation]="invitation"></app-member-item>
+<!--   TODO add member items for group settings popup-->
+<!--  <app-member-item *ngFor="let userMembership of membershipService.userMembershipMap.get(group.id)"></app-member-item>-->
 </div>
