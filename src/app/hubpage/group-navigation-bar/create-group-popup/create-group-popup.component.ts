@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {PopupService} from '../../../popups/popup.service';
 import {NgForm} from '@angular/forms';
 import {InvitationService} from '../../../services/invitation.service';
 import {AccountService} from "../../../services/account.service";
@@ -17,7 +16,7 @@ export class CreateGroupPopupComponent implements OnInit {
   @ViewChild('f', {static: false}) form: NgForm;
   ownerId = this.accountService.user.id;
 
-  constructor(private popupService: PopupService, private groupService: GroupService, public invitationService: InvitationService,
+  constructor(private groupService: GroupService, public invitationService: InvitationService,
               private accountService: AccountService, private httpGroupService: HttpGroupService, private errorService: ErrorService,
               private router: Router) { }
 

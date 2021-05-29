@@ -1,13 +1,13 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Group} from '../../../../../entities/group.model';
-import {PopupService} from '../../../../../popups/popup.service';
 import {GroupRole} from '../../../../../entities/groupRole.enum';
 import {PopupHelperService} from '../../../../../popups/popup-helper.service';
 import {GroupService} from "../../../../../services/group.service";
 import {HttpGroupService} from "../../../../../services/httpServices/http-group.service";
 import {ErrorService} from "../../../../../services/error.service";
 import {MembershipService} from "../../../../../services/membership.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -21,9 +21,9 @@ export class GroupEditPopupComponent implements OnInit {
   isUserOwner;
   initialValues;
 
-  constructor(private popupService: PopupService, private groupService: GroupService, private membershipService: MembershipService,
+  constructor(private groupService: GroupService, private membershipService: MembershipService,
               private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
-              private errorService: ErrorService) { }
+              private errorService: ErrorService, private router: Router) { }
 
   ngOnInit(): void {
     this.group = this.groupService.currentGroup;
@@ -62,6 +62,11 @@ export class GroupEditPopupComponent implements OnInit {
 
   private closePopup(): void {
     this.resetValues();
+    if (this.groupService.currentGroup != null) {
+      this.router.navigate(['/hubpage/' + this.groupService.currentGroup.id]);
+    } else {
+      this.router.navigate(['/hubpage']);
+    }
   }
 
   private resetValues(): void {
