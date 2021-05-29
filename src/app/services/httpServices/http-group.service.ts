@@ -31,5 +31,4 @@ export class HttpGroupService{
   deleteGroupByGroupId(groupId: number): Observable<any> {
     return this.http.delete('http://localhost:8080/groups/' + groupId);
   }
-
 }

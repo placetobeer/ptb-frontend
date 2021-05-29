@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {InvitationResponse} from '../../entities/invitationResponse.model';
-import {retry} from 'rxjs/operators';
+import {InvitationRequest} from '../../requests/invitation-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,12 @@ export class HttpInvitationService {
 
   answerInvitationByInvitationId(invitationId: number, decision: boolean): Observable<any>{
     return this.http.put('http://localhost:8080/invitations/' + invitationId + '/answer', decision, { headers: new HttpHeaders({
+        'Content-Type': 'application/json;charset=UTF-8',
+      })});
+  }
+
+  sendInvitations(invitationRequest: InvitationRequest): Observable<any> {
+    return this.http.post('http://localhost:8080/invitations', invitationRequest, { headers: new HttpHeaders({
         'Content-Type': 'application/json;charset=UTF-8',
       })});
   }

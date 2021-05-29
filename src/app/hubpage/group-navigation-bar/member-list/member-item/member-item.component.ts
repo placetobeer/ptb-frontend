@@ -20,6 +20,6 @@ export class MemberItemComponent implements OnInit {
   }
 
   onDeleteInvitation(): void {
-    this.invitationService.invitations = this.invitationService.invitations.filter(element => element !== this.invitation);
+    this.invitationService.removeInvitation(this.invitation);
   }
 }
