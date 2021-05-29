@@ -50,7 +50,6 @@ export class InvitationService {
     this.httpInvitationService.sendInvitations(invitationRequest)
       .subscribe({
         next: invitations => {
-          // todo add to pending invitations in user-invitation service?
         },
         error: error => {
           this.errorService.handleError(error);
