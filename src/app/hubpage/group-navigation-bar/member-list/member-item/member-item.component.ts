@@ -4,6 +4,7 @@ import {InvitationRequest} from '../../../../requests/invitation-request.model';
 import {InvitationService} from '../../../../services/invitation.service';
 import {GroupRole} from '../../../../entities/groupRole.enum';
 import {Invitation} from "../../../../entities/invitation.model";
+import {GroupsMembership} from "../../../../entities/groupsMembership.model";
 
 @Component({
   selector: 'app-member-item',
@@ -12,11 +13,15 @@ import {Invitation} from "../../../../entities/invitation.model";
 })
 export class MemberItemComponent implements OnInit {
   @Input() invitation: Invitation;
+  @Input() membership: GroupsMembership;
+  @Input() showInvitations;
   role = GroupRole;
 
-  constructor(private invitationService: InvitationService) { }
+  constructor(public invitationService: InvitationService) { }
 
   ngOnInit(): void {
+    console.log(this.invitation);
+    console.log(this.membership);
   }
 
   onDeleteInvitation(): void {

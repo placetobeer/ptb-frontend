@@ -9,10 +9,10 @@ import {RoutingPopupComponent} from "./popups/routing-popup/routing-popup.compon
 
 const routes: Routes = [
   {path: 'hubpage', component: HubpageComponent, children: [
-      {path: 'new', component: CreateGroupPopupComponent}
+      {path: 'new', component: CreateGroupPopupComponent, data : { showInvitations: true}}
     ]},
   {path: 'hubpage/:id', component: HubpageComponent, children: [
-      {path: 'edit', component: GroupEditPopupComponent}
+      {path: 'edit', component: GroupEditPopupComponent, data: { showInvitations: false }}
     ]},
   {path: 'error', component: ErrorPageComponent},
   {path: '', redirectTo: '/hubpage', pathMatch: 'full'},
