@@ -19,10 +19,7 @@ export class MemberItemComponent implements OnInit {
 
   constructor(public invitationService: InvitationService) { }
 
-  ngOnInit(): void {
-    console.log(this.invitation);
-    console.log(this.membership);
-  }
+  ngOnInit(): void {}
 
   onDeleteInvitation(): void {
     this.invitationService.removeInvitation(this.invitation);

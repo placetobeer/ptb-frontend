@@ -14,8 +14,7 @@ export class GroupItemActiveComponent implements OnInit {
 
   constructor(public membershipService: MembershipService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onEditGroup(): void {
     this.router.navigate(['edit'], {relativeTo: this.route});

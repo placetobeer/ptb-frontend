@@ -8,6 +8,7 @@ import {HttpGroupService} from "../../../../../services/httpServices/http-group.
 import {ErrorService} from "../../../../../services/error.service";
 import {MembershipService} from "../../../../../services/membership.service";
 import {Router} from "@angular/router";
+import {AccountService} from "../../../../../services/account.service";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -23,14 +24,18 @@ export class GroupEditPopupComponent implements OnInit {
 
   constructor(private groupService: GroupService, private membershipService: MembershipService,
               private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
-              private errorService: ErrorService, private router: Router) { }
+              private errorService: ErrorService, private router: Router, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.group = this.groupService.currentGroup;
     this.initialValues = {
       groupName : this.groupService.currentGroup.name
     };
-    this.isUserOwner = this.membershipService.getUsersMembershipOfSelectedGroup().role === GroupRole.OWNER;
+    this.checkIfUserIsOwner();
+  }
+
+  private checkIfUserIsOwner(): void {
+    this.isUserOwner = this.membershipService.userMembership.role === GroupRole.OWNER;
   }
 
   private applyGroupChanges(): void {

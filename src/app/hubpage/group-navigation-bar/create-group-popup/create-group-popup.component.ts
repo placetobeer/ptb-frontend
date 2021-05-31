@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {GroupService} from '../../../services/group.service';
 import {AccountService} from '../../../services/account.service';
 import {ErrorService} from '../../../services/error.service';
+import {MembershipService} from "../../../services/membership.service";
 
 @Component({
   selector: 'app-create-group-popup',
@@ -18,7 +19,7 @@ export class CreateGroupPopupComponent implements OnInit {
 
   constructor(private accountService: AccountService, private httpGroupService: HttpGroupService,
               private errorService: ErrorService, private groupService: GroupService,
-              private invitationService: InvitationService, private router: Router) {}
+              private invitationService: InvitationService, private router: Router, private membershipService: MembershipService) {}
 
   ngOnInit(): void {}
 
@@ -33,6 +34,7 @@ export class CreateGroupPopupComponent implements OnInit {
         next: group => {
           this.groupService.addGroup(group);
           this.groupService.selectGroup(group);
+          this.membershipService.loadGroupMemberships();
           this.router.navigate(['/hubpage/' + group.id]);
           this.sendInvitationList(group.id);
         },

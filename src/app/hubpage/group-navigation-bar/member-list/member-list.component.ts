@@ -25,6 +25,8 @@ export class MemberListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.showInvitations = data.showInvitations;
     });
+    this.getOwner();
   }
 
+  private getOwner(): void {}
 }

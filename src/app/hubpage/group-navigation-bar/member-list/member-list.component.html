@@ -10,7 +10,7 @@
   </div>
 
   <div *ngIf="showInvitations == false">
-    <app-member-item *ngFor="let userMembership of membershipService.userMembershipMap.get((groupService.currentGroup$ | async).id)"
+    <app-member-item *ngFor="let userMembership of membershipService.groupMemberships"
                      [membership]="userMembership" [showInvitations]="showInvitations"></app-member-item>
   </div>
 </div>
