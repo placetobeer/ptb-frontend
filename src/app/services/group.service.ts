@@ -17,7 +17,7 @@ import {CurrentGroupSelected} from "../state-management/currentGroupSelected.sta
 export class GroupService implements OnDestroy{
 
   constructor(private httpGroupService: HttpGroupService, private accountService: AccountService, private errorService: ErrorService,
-              private membershipService: MembershipService, private currentGroupSelector: CurrentGroupSelector)
+              private currentGroupSelector: CurrentGroupSelector)
   {
     this.loadUserGroups();
   }
@@ -80,9 +80,6 @@ export class GroupService implements OnDestroy{
   selectGroup(group: Group): void {
     this.currentGroupSubject.next(group);
     this.loadUserGroups();
-    if (this.currentGroup !== null) {
-      this.membershipService.checkForMembershipFetch(group);
-    }
   }
 
   removeGroupFromList(toDeleteGroup: Group): void {
