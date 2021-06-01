@@ -19,15 +19,8 @@ export class MembershipService implements OnDestroy {
   constructor(private httpMembershipService: HttpMembershipService, private errorService: ErrorService,
               private groupService: GroupService, private accountService: AccountService) { }
 
-  // TODO: no filtering -> list with owner?
   private readonly groupMembershipsSubject = new BehaviorSubject<GroupsMembership[]>([]);
-  public readonly groupMemberships$ = this.groupMembershipsSubject.asObservable().pipe(
-    filter(isNotNullOrUndefined),
-    map(groupMembers => groupMembers.filter(groupMember => groupMember.role !== GroupRole.OWNER))
-  );
-
-  private readonly ownerMembershipSubject = new BehaviorSubject<GroupsMembership>(null);
-  public readonly ownerMembership$ = this.ownerMembershipSubject.asObservable();
+  public readonly groupMemberships$ = this.groupMembershipsSubject.asObservable();
 
   private readonly userMembershipSubject = new BehaviorSubject<GroupsMembership>(null);
   public readonly userMembership$ = this.userMembershipSubject.asObservable();
@@ -40,17 +33,12 @@ export class MembershipService implements OnDestroy {
     return this.groupMembershipsSubject.value;
   }
 
-  get owner(): GroupsMembership {
-    return this.ownerMembershipSubject.value;
-  }
-
   get userMembership(): GroupsMembership {
     return this.userMembershipSubject.value;
   }
 
-  private setOwner(): void {
-    const owner = this.groupMemberships.find(groupMember => groupMember.role === GroupRole.OWNER);
-    this.ownerMembershipSubject.next(owner);
+  checkIfUserIsOwner(): boolean {
+    return this.userMembership.role === GroupRole.OWNER;
   }
 
   getCurrentGroupMemberships(): void {
@@ -69,7 +57,6 @@ export class MembershipService implements OnDestroy {
       .subscribe({
         next: groupMemberships => {
           this.groupMembershipsSubject.next(groupMemberships);
-          this.setOwner();
           this.setUserMembership();
         },
         error: error => {

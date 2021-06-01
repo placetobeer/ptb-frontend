@@ -1,15 +1,15 @@
 <div class="max-w-md">
-  <div class="border border-ptb-gray-700 py-3 px-6 bg-white flex items-center justify-between">
+  <div *ngIf="showInvitations" class="border border-ptb-gray-700 py-3 px-6 bg-white flex items-center justify-between">
     <div class="text-md">{{ owner.name }}</div>
     <div class="text-md text-ptb-orange-600">{{ role.OWNER }}</div>
   </div>
 
-  <div *ngIf="showInvitations == true">
+  <div *ngIf="showInvitations">
     <app-member-item *ngFor="let invitation of invitationService.invitations"
                      [invitation]="invitation" [showInvitations]="showInvitations"></app-member-item>
   </div>
 
-  <div *ngIf="showInvitations == false">
+  <div *ngIf="!showInvitations">
     <app-member-item *ngFor="let userMembership of membershipService.groupMemberships"
                      [membership]="userMembership" [showInvitations]="showInvitations"></app-member-item>
   </div>

@@ -5,6 +5,7 @@ import {InvitationService} from '../../../../services/invitation.service';
 import {GroupRole} from '../../../../entities/groupRole.enum';
 import {Invitation} from "../../../../entities/invitation.model";
 import {GroupsMembership} from "../../../../entities/groupsMembership.model";
+import {MembershipService} from "../../../../services/membership.service";
 
 @Component({
   selector: 'app-member-item',
@@ -16,10 +17,13 @@ export class MemberItemComponent implements OnInit {
   @Input() membership: GroupsMembership;
   @Input() showInvitations;
   role = GroupRole;
+  userNotOwner;
 
-  constructor(public invitationService: InvitationService) { }
+  constructor(public invitationService: InvitationService, public membershipService: MembershipService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userNotOwner = this.membership.role !== GroupRole.OWNER;
+  }
 
   onDeleteInvitation(): void {
     this.invitationService.removeInvitation(this.invitation);
