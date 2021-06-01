@@ -22,7 +22,7 @@ export class GroupEditPopupComponent implements OnInit {
   isUserOwner;
   initialValues;
 
-  constructor(private groupService: GroupService, private membershipService: MembershipService,
+  constructor(private groupService: GroupService, public membershipService: MembershipService,
               private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
               private errorService: ErrorService, private router: Router, private accountService: AccountService) { }
 
@@ -31,11 +31,6 @@ export class GroupEditPopupComponent implements OnInit {
     this.initialValues = {
       groupName : this.groupService.currentGroup.name
     };
-    this.checkIfUserIsOwner();
-  }
-
-  private checkIfUserIsOwner(): void {
-    this.isUserOwner = this.membershipService.userMembership.role === GroupRole.OWNER;
   }
 
   private applyGroupChanges(): void {
