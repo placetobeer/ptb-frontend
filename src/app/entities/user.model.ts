@@ -19,4 +19,7 @@ export class User {
     this.email = email;
     this.token = "";
   }*/
+  public getToken(): string{
+    return this.token;
+  }
 }
