@@ -8,6 +8,7 @@ import {GroupService} from "../../../../../services/group.service";
 import {HttpGroupService} from "../../../../../services/httpServices/http-group.service";
 import {ErrorService} from "../../../../../services/error.service";
 import {MembershipService} from "../../../../../services/membership.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -24,7 +25,7 @@ export class GroupEditPopupComponent implements OnInit {
 
   constructor(private popupService: PopupService, private groupService: GroupService, private membershipService: MembershipService,
               private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
-              private errorService: ErrorService) { }
+              private errorService: ErrorService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.group = this.groupService.currentGroup;
@@ -102,5 +103,8 @@ export class GroupEditPopupComponent implements OnInit {
           this.errorService.handleError(error);
         }
       });
+  }
+  onEditGroup(): void {
+    this.router.navigate(['add'], {relativeTo: this.route});
   }
 }

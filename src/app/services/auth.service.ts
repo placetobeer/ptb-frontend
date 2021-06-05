@@ -15,7 +15,7 @@ export class AuthService {
     const user =  new User(id, name, email, token, expirationDate);
     this.currentUser.next(user);
     this.router.navigate(['/hubpage']);
-    localStorage.setItem('P2BToken', user.token);
+    // localStorage.setItem('P2BToken', user.token);
     localStorage.setItem('P2BUserData', JSON.stringify(user));
   }
 
@@ -27,9 +27,9 @@ export class AuthService {
       _token: string;
       _tokenExpirationDate: string;
     } = JSON.parse(localStorage.getItem('P2BUserData'));
-    if (localStorage.getItem('P2BToken') != null) {
+    /*if (localStorage.getItem('P2BToken') != null) {
       const token = localStorage.getItem('P2BToken');
-    }
+    }*/
     if (!userData){
       return;
     }

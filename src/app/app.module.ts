@@ -31,6 +31,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {GenericConfirmationPopupComponent} from './popups/generic-confirmation-popup/generic-confirmation-popup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AddMemberComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/add-member/add-member.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { RegisterComponent } from './auth/register/register.component';
     ErrorPageComponent,
     GenericConfirmationPopupComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddMemberComponent
   ],
     imports: [
         AppRoutingModule,
