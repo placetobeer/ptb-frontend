@@ -31,6 +31,7 @@ import { RoutingPopupComponent } from './popups/routing-popup/routing-popup.comp
 import { PopoverComponent } from './popups/popover/popover.component';
 import {PopoverDirective} from "./popups/popover/popover.directive";
 import { OwnerPopoverComponent } from './popups/popover/owner-popover/owner-popover.component';
+import { AdminPopoverComponent } from './popups/popover/admin-popover/admin-popover.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { OwnerPopoverComponent } from './popups/popover/owner-popover/owner-popo
     RoutingPopupComponent,
     PopoverComponent,
     PopoverDirective,
-    OwnerPopoverComponent
+    OwnerPopoverComponent,
+    AdminPopoverComponent
   ],
     imports: [
         AppRoutingModule,

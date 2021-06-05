@@ -5,9 +5,12 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './owner-popover.component.html'
 })
 export class OwnerPopoverComponent implements OnInit {
-  isAdmin;
+  adminMessage;
 
   ngOnInit(): void {
     // check if user is admin -> pass member from memberlist to popup-component
+    this.adminMessage = "Grant admin role";
+    // if member is already admin
+    // this.adminMessage = "Revoke admin role";
   }
 }

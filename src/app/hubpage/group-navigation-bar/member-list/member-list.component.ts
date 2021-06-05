@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {InvitationRequest} from '../../../requests/invitation-request.model';
+import {Component, OnInit} from '@angular/core';
 import {GroupRole} from '../../../entities/groupRole.enum';
 import {User} from '../../../entities/user.model';
 import {InvitationService} from "../../../services/invitation.service";
@@ -9,6 +8,7 @@ import {GroupService} from "../../../services/group.service";
 import {ActivatedRoute} from "@angular/router";
 import {PopoverItem} from "../../../popups/popover/popover-item";
 import {OwnerPopoverComponent} from "../../../popups/popover/owner-popover/owner-popover.component";
+import {AdminPopoverComponent} from "../../../popups/popover/admin-popover/admin-popover.component";
 
 @Component({
   selector: 'app-member-list',
@@ -35,6 +35,8 @@ export class MemberListComponent implements OnInit {
     this.display = !this.display;
     if (this.membershipService.checkIfUserIsOwner()){
       this.popover = new PopoverItem(OwnerPopoverComponent);
+    } else {
+      this.popover = new PopoverItem(AdminPopoverComponent);
     }
   }
 }
