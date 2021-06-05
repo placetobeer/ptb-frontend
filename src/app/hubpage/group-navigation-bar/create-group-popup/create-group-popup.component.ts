@@ -2,11 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {PopupService} from '../../../popups/popup.service';
 import {NgForm} from '@angular/forms';
 import {InvitationService} from '../../../services/invitation.service';
-import {AccountService} from "../../../services/account.service";
-import {GroupService} from "../../../services/group.service";
 import {HttpGroupService} from "../../../services/httpServices/http-group.service";
-import {ErrorService} from "../../../services/error.service";
 import {Router} from "@angular/router";
+import {GroupService} from '../../../services/group.service';
+import {AccountService} from '../../../services/account.service';
+import {ErrorService} from '../../../services/error.service';
 
 @Component({
   selector: 'app-create-group-popup',
@@ -37,11 +37,16 @@ export class CreateGroupPopupComponent implements OnInit {
           this.groupService.addGroup(group);
           this.groupService.selectGroup(group);
           this.router.navigate(['/hubpage/' + group.id]);
+          this.sendInvitationList(group.id);
         },
         error: error => {
           this.errorService.handleError(error);
         }
       });
+  }
+
+  sendInvitationList(groupId: number): void {
+    this.invitationService.sendInvitationRequest(groupId);
   }
 
   onCancel(): void {
