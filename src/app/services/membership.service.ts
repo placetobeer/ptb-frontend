@@ -1,14 +1,11 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {Group} from "../entities/group.model";
 import {HttpMembershipService} from "./httpServices/http-membership.service";
 import {ErrorService} from "./error.service";
 import {GroupsMembership} from "../entities/groupsMembership.model";
 import {GroupRole} from "../entities/groupRole.enum";
 import {BehaviorSubject, interval} from "rxjs";
-import {filter, map, startWith} from "rxjs/operators";
-import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
+import {startWith} from "rxjs/operators";
 import {GroupService} from "./group.service";
-import {User} from "../entities/user.model";
 import {AccountService} from "./account.service";
 
 @Injectable({
@@ -39,6 +36,14 @@ export class MembershipService implements OnDestroy {
 
   checkIfUserIsOwner(): boolean {
     return this.userMembership.role === GroupRole.OWNER;
+  }
+
+  checkIfUserIsAdmin(): boolean {
+    return this.userMembership.role === GroupRole.ADMIN;
+  }
+
+  checkIfUserIsMember(): boolean {
+    return this.userMembership.role === GroupRole.MEMBER;
   }
 
   getCurrentGroupMemberships(): void {

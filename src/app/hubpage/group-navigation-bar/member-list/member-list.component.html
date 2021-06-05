@@ -4,17 +4,25 @@
     <div class="text-md text-ptb-orange-600">{{ role.OWNER }}</div>
   </div>
 
+<!--  invitation-member list-->
   <div *ngIf="showInvitations">
     <app-member-item *ngFor="let invitation of invitationService.invitations"
                      [invitation]="invitation" [showInvitations]="showInvitations"></app-member-item>
   </div>
 
-  <div *ngIf="!showInvitations">
+<!--  membership-list for admin & owner-->
+  <div *ngIf="!showInvitations && !this.membershipService.checkIfUserIsMember()">
     <app-member-item (click)="onClickItem()" *ngFor="let userMembership of membershipService.groupMemberships"
                      [membership]="userMembership" [showInvitations]="showInvitations"></app-member-item>
     <div *ngIf="display">
       <app-popover [popover]="popover"></app-popover>
     </div>
+  </div>
+
+<!--  membership-list for member-->
+  <div *ngIf="!showInvitations && this.membershipService.checkIfUserIsMember()">
+    <app-member-item (click)="onClickItem()" *ngFor="let userMembership of membershipService.groupMemberships"
+                     [membership]="userMembership" [showInvitations]="showInvitations"></app-member-item>
   </div>
 </div>
 
