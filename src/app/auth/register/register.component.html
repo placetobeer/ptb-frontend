@@ -11,19 +11,19 @@
            #emailControl="ngModel"/>
   </div>
   <div class="flex flex-col div-input-field"
-       [ngClass]="{'border-red-700': pwControl.invalid}">
+       [ngClass]="{'border-red-700': pwControl.touched && pwControl.invalid}">
     <label class="label-input-field" [ngClass]="{'border-red-700': pwControl.invalid}"
            for="pw"
     >Password </label>
-    <input class="input-field" id="pw"
-           type="password" placeholder="" ngModel minlength="8" required #pwControl="ngModel"/>
+    <input class="input-field" id="pw" name="pw"
+           type="password" placeholder="" ngModel minlength="8" #pwControl="ngModel"/>
   </div>
   <div *ngIf="pwControl.errors?.minlength" class="text-red-700">
     Password must be at least 8 characters long
   </div>
   <div class="btn flex flex-row">
     <button class="btn btn-create cursor-pointer"
-            type="Submit" [disabled]="pwControl.invalid||emailControl.invalid"
+            type="Submit" [disabled]="(pwControl.invalid||!pwControl.touched)||emailControl.invalid"
             >
       Login
     </button>
