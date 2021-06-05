@@ -9,6 +9,7 @@ import {ActivatedRoute} from "@angular/router";
 import {PopoverItem} from "../../../popups/popover/popover-item";
 import {OwnerPopoverComponent} from "../../../popups/popover/owner-popover/owner-popover.component";
 import {AdminPopoverComponent} from "../../../popups/popover/admin-popover/admin-popover.component";
+import {GroupsMembership} from "../../../entities/groupsMembership.model";
 
 @Component({
   selector: 'app-member-list',
@@ -16,25 +17,27 @@ import {AdminPopoverComponent} from "../../../popups/popover/admin-popover/admin
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  role = GroupRole;
   owner: User = this.accountService.user;
   @Input() showInvitations;
   display;
   popover: PopoverItem;
 
   constructor(public invitationService: InvitationService, public membershipService: MembershipService,
-              public groupService: GroupService, private accountService: AccountService, private route: ActivatedRoute) { }
+              public groupService: GroupService, private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
 
-  onClickItem(): void {
-    this.display = !this.display;
-    if (this.membershipService.checkIfUserIsOwner()){
-      this.popover = new PopoverItem(OwnerPopoverComponent);
+  onClickItem(userMembership: GroupsMembership): void {
+    const isMemberOwner = userMembership.role === GroupRole.OWNER;
+    if (!isMemberOwner) {
+      this.display = !this.display;
     }
-    if (this.membershipService.checkIfUserIsAdmin()) {
-      this.popover = new PopoverItem(AdminPopoverComponent);
+    if (this.membershipService.checkIfUserIsOwner() && !isMemberOwner){
+      this.popover = new PopoverItem(OwnerPopoverComponent, userMembership);
+    }
+    if (this.membershipService.checkIfUserIsAdmin() && !isMemberOwner) {
+      this.popover = new PopoverItem(AdminPopoverComponent, userMembership);
     }
   }
 }

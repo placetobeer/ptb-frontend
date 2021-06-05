@@ -12,7 +12,7 @@
 
 <!--  membership-list for admin & owner-->
   <div *ngIf="!showInvitations && !this.membershipService.checkIfUserIsMember()">
-    <app-member-item (click)="onClickItem()" *ngFor="let userMembership of membershipService.groupMemberships"
+    <app-member-item (click)="onClickItem(userMembership)" *ngFor="let userMembership of membershipService.groupMemberships"
                      [membership]="userMembership" [showInvitations]="showInvitations"></app-member-item>
     <div *ngIf="display">
       <app-popover [popover]="popover"></app-popover>
@@ -21,7 +21,7 @@
 
 <!--  membership-list for member-->
   <div *ngIf="!showInvitations && this.membershipService.checkIfUserIsMember()">
-    <app-member-item (click)="onClickItem()" *ngFor="let userMembership of membershipService.groupMemberships"
+    <app-member-item *ngFor="let userMembership of membershipService.groupMemberships"
                      [membership]="userMembership" [showInvitations]="showInvitations"></app-member-item>
   </div>
 </div>

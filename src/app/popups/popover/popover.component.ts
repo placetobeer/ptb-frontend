@@ -1,6 +1,7 @@
 import {Component, ComponentFactoryResolver, Input, OnInit, ViewChild} from '@angular/core';
 import {PopoverDirective} from "./popover.directive";
 import {PopoverItem} from "./popover-item";
+import {PopoverInterface} from "./popover.interface";
 
 @Component({
   selector: 'app-popover',
@@ -24,7 +25,8 @@ export class PopoverComponent implements OnInit{
     const viewContainerRef = this.popupHost.viewContainerRef;
     viewContainerRef.clear();
 
-    viewContainerRef.createComponent(componentFactory);
+    const componentRef = viewContainerRef.createComponent<PopoverInterface>(componentFactory);
+    componentRef.instance.data = this.popover.data;
   }
 
 }
