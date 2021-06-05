@@ -7,6 +7,8 @@ import {AccountService} from "../../../services/account.service";
 import {MembershipService} from "../../../services/membership.service";
 import {GroupService} from "../../../services/group.service";
 import {ActivatedRoute} from "@angular/router";
+import {PopoverItem} from "../../../popups/popover/popover-item";
+import {OwnerPopoverComponent} from "../../../popups/popover/owner-popover/owner-popover.component";
 
 @Component({
   selector: 'app-member-list',
@@ -17,6 +19,8 @@ export class MemberListComponent implements OnInit {
   role = GroupRole;
   owner: User = this.accountService.user;
   showInvitations;
+  display;
+  popover: PopoverItem;
 
   constructor(public invitationService: InvitationService, public membershipService: MembershipService,
               public groupService: GroupService, private accountService: AccountService, private route: ActivatedRoute) { }
@@ -25,8 +29,13 @@ export class MemberListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.showInvitations = data.showInvitations;
     });
-    this.getOwner();
   }
 
-  private getOwner(): void {}
+  onClickItem(): void {
+    this.display = !this.display;
+    console.log(this.membershipService.checkIfUserIsOwner());
+    if (this.membershipService.checkIfUserIsOwner()){
+      this.popover = new PopoverItem(OwnerPopoverComponent, {kickMember: 'Kick member', grantAdminRole: 'grant admin role'});
+    }
+  }
 }

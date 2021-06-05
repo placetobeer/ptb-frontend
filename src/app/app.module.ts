@@ -19,9 +19,7 @@ import { GroupEditPopupComponent } from './hubpage/group-navigation-bar/group-li
 import { CreateGroupPopupComponent } from './hubpage/group-navigation-bar/create-group-popup/create-group-popup.component';
 import {FormsModule} from '@angular/forms';
 import { GenericErrorPopupComponent } from './popups/generic-error-popup/generic-error-popup.component';
-// @ts-ignore
 import {InvitationListComponent} from './hubpage/group-navigation-bar/invitation-list/invitation-list.component';
-// @ts-ignore
 import {InvitationItemComponent} from './hubpage/group-navigation-bar/invitation-list/invitation-item/invitation-item.component';
 import { MemberItemComponent } from './hubpage/group-navigation-bar/member-list/member-item/member-item.component';
 import { MemberListComponent } from './hubpage/group-navigation-bar/member-list/member-list.component';
@@ -30,6 +28,9 @@ import { ErrorPageComponent } from './error/error-page/error-page.component';
 import {AppRoutingModule} from './app-routing.module';
 import {GenericConfirmationPopupComponent} from './popups/generic-confirmation-popup/generic-confirmation-popup.component';
 import { RoutingPopupComponent } from './popups/routing-popup/routing-popup.component';
+import { PopoverComponent } from './popups/popover/popover.component';
+import {PopoverDirective} from "./popups/popover/popover.directive";
+import { OwnerPopoverComponent } from './popups/popover/owner-popover/owner-popover.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,10 @@ import { RoutingPopupComponent } from './popups/routing-popup/routing-popup.comp
     AddMemberBarComponent,
     ErrorPageComponent,
     GenericConfirmationPopupComponent,
-    RoutingPopupComponent
+    RoutingPopupComponent,
+    PopoverComponent,
+    PopoverDirective,
+    OwnerPopoverComponent
   ],
     imports: [
         AppRoutingModule,

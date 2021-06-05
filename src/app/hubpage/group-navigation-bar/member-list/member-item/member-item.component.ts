@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Subject} from 'rxjs';
 import {InvitationRequest} from '../../../../requests/invitation-request.model';
 import {InvitationService} from '../../../../services/invitation.service';
@@ -16,13 +16,16 @@ export class MemberItemComponent implements OnInit {
   @Input() invitation: Invitation;
   @Input() membership: GroupsMembership;
   @Input() showInvitations;
+  display;
   role = GroupRole;
   userNotOwner;
 
   constructor(public invitationService: InvitationService, public membershipService: MembershipService) { }
 
   ngOnInit(): void {
-    this.userNotOwner = this.membership.role !== GroupRole.OWNER;
+    if (!this.membership === null){
+      this.userNotOwner = this.membership.role !== GroupRole.OWNER;
+    }
   }
 
   onDeleteInvitation(): void {
