@@ -16,12 +16,15 @@ import {MembershipService} from "../../../services/membership.service";
 export class CreateGroupPopupComponent implements OnInit {
   @ViewChild('f', {static: false}) form: NgForm;
   ownerId = this.accountService.user.id;
+  showInvitations;
 
   constructor(private accountService: AccountService, private httpGroupService: HttpGroupService,
               private errorService: ErrorService, private groupService: GroupService,
               private invitationService: InvitationService, private router: Router, private membershipService: MembershipService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.showInvitations = true;
+  }
 
   onSubmit(): void {
     this.createGroup(this.ownerId, this.form.value.groupName);

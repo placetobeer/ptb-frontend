@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {GroupRole} from '../../../entities/groupRole.enum';
 import {User} from '../../../entities/user.model';
 import {InvitationService} from "../../../services/invitation.service";
@@ -18,7 +18,7 @@ import {AdminPopoverComponent} from "../../../popups/popover/admin-popover/admin
 export class MemberListComponent implements OnInit {
   role = GroupRole;
   owner: User = this.accountService.user;
-  showInvitations;
+  @Input() showInvitations;
   display;
   popover: PopoverItem;
 
@@ -26,16 +26,14 @@ export class MemberListComponent implements OnInit {
               public groupService: GroupService, private accountService: AccountService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.data.subscribe(data => {
-      this.showInvitations = data.showInvitations;
-    });
   }
 
   onClickItem(): void {
     this.display = !this.display;
     if (this.membershipService.checkIfUserIsOwner()){
       this.popover = new PopoverItem(OwnerPopoverComponent);
-    } else {
+    }
+    if (this.membershipService.checkIfUserIsAdmin()) {
       this.popover = new PopoverItem(AdminPopoverComponent);
     }
   }

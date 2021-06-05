@@ -19,18 +19,19 @@ export class GroupEditPopupComponent implements OnInit {
   @ViewChild('groupForm') form: NgForm;
   group: Group;
 
-  isUserOwner;
   initialValues;
+  showInvitations;
 
   constructor(private groupService: GroupService, public membershipService: MembershipService,
               private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
-              private errorService: ErrorService, private router: Router, private accountService: AccountService) { }
+              private errorService: ErrorService, private router: Router) { }
 
   ngOnInit(): void {
     this.group = this.groupService.currentGroup;
     this.initialValues = {
       groupName : this.groupService.currentGroup.name
     };
+    this.showInvitations = false;
   }
 
   private applyGroupChanges(): void {
