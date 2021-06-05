@@ -33,9 +33,8 @@ export class MemberListComponent implements OnInit {
 
   onClickItem(): void {
     this.display = !this.display;
-    console.log(this.membershipService.checkIfUserIsOwner());
     if (this.membershipService.checkIfUserIsOwner()){
-      this.popover = new PopoverItem(OwnerPopoverComponent, {kickMember: 'Kick member', grantAdminRole: 'grant admin role'});
+      this.popover = new PopoverItem(OwnerPopoverComponent);
     }
   }
 }

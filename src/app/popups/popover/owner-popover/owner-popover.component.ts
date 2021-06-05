@@ -1,11 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PopoverInterface} from "../popover.interface";
-import {GroupRole} from "../../../entities/groupRole.enum";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-owner-popover',
   templateUrl: './owner-popover.component.html'
 })
-export class OwnerPopoverComponent implements PopoverInterface {
-  @Input() data: any;
+export class OwnerPopoverComponent implements OnInit {
+  isAdmin;
+
+  ngOnInit(): void {
+    // check if user is admin -> pass member from memberlist to popup-component
+  }
 }
