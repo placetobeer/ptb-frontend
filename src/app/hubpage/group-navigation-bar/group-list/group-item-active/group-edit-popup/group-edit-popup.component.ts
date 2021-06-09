@@ -7,6 +7,7 @@ import {HttpGroupService} from "../../../../../services/httpServices/http-group.
 import {ErrorService} from "../../../../../services/error.service";
 import {MembershipService} from "../../../../../services/membership.service";
 import {Router} from "@angular/router";
+import {RoutingService} from "../../../../../services/routing.service";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -22,7 +23,7 @@ export class GroupEditPopupComponent implements OnInit {
 
   constructor(private groupService: GroupService, public membershipService: MembershipService,
               private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
-              private errorService: ErrorService, private router: Router) { }
+              private errorService: ErrorService, private routingService: RoutingService) { }
 
   ngOnInit(): void {
     this.group = this.groupService.currentGroup;
@@ -61,11 +62,7 @@ export class GroupEditPopupComponent implements OnInit {
 
   private closePopup(): void {
     this.resetValues();
-    if (this.groupService.currentGroup != null) {
-      this.router.navigate(['/hubpage/' + this.groupService.currentGroup.id]);
-    } else {
-      this.router.navigate(['/hubpage']);
-    }
+    this.routingService.navigateToHubpage();
   }
 
   private resetValues(): void {

@@ -7,6 +7,7 @@ import {GroupService} from '../../../services/group.service';
 import {AccountService} from '../../../services/account.service';
 import {ErrorService} from '../../../services/error.service';
 import {MembershipService} from "../../../services/membership.service";
+import {RoutingService} from "../../../services/routing.service";
 
 @Component({
   selector: 'app-create-group-popup',
@@ -20,7 +21,8 @@ export class CreateGroupPopupComponent implements OnInit {
 
   constructor(private accountService: AccountService, private httpGroupService: HttpGroupService,
               private errorService: ErrorService, private groupService: GroupService,
-              private invitationService: InvitationService, private router: Router, private membershipService: MembershipService) {}
+              private invitationService: InvitationService, private router: Router, private membershipService: MembershipService,
+              private routingService: RoutingService) {}
 
   ngOnInit(): void {
     this.showInvitations = true;
@@ -55,10 +57,6 @@ export class CreateGroupPopupComponent implements OnInit {
   onCancel(): void {
     this.form.reset();
     this.invitationService.removeAllInvitations();
-    if (this.groupService.currentGroup != null) {
-      this.router.navigate(['/hubpage/' + this.groupService.currentGroup.id]);
-    } else {
-      this.router.navigate(['/hubpage']);
-    }
+    this.routingService.navigateToHubpage();
   }
 }
