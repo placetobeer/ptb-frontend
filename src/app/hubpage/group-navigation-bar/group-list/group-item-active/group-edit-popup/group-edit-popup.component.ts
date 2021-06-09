@@ -1,14 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Group} from '../../../../../entities/group.model';
-import {GroupRole} from '../../../../../entities/groupRole.enum';
 import {PopupHelperService} from '../../../../../popups/popup-helper.service';
 import {GroupService} from "../../../../../services/group.service";
 import {HttpGroupService} from "../../../../../services/httpServices/http-group.service";
 import {ErrorService} from "../../../../../services/error.service";
 import {MembershipService} from "../../../../../services/membership.service";
 import {Router} from "@angular/router";
-import {AccountService} from "../../../../../services/account.service";
 
 @Component({
   selector: 'app-group-edit-popup',
