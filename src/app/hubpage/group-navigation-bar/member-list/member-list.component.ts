@@ -30,9 +30,17 @@ export class MemberListComponent implements OnInit {
 
   onClickItem(userMembership: GroupsMembership): void {
     const isMemberOwner = userMembership.role === GroupRole.OWNER;
+    this.togglePopoverItem(isMemberOwner);
+    this.createPopoverItems(isMemberOwner, userMembership);
+  }
+
+  private togglePopoverItem(isMemberOwner: boolean): void {
     if (!isMemberOwner) {
       this.display = !this.display;
     }
+  }
+
+  private createPopoverItems(isMemberOwner: boolean, userMembership: GroupsMembership): void {
     if (this.membershipService.checkIfUserIsOwner() && !isMemberOwner){
       this.popover = new PopoverItem(OwnerPopoverComponent, userMembership);
     }
