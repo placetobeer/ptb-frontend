@@ -5,7 +5,6 @@ import {InvitationService} from "../../../services/invitation.service";
 import {AccountService} from "../../../services/account.service";
 import {MembershipService} from "../../../services/membership.service";
 import {GroupService} from "../../../services/group.service";
-import {ActivatedRoute} from "@angular/router";
 import {PopoverItem} from "../../../popups/popover/popover-item";
 import {OwnerPopoverComponent} from "../../../popups/popover/owner-popover/owner-popover.component";
 import {AdminPopoverComponent} from "../../../popups/popover/admin-popover/admin-popover.component";
@@ -21,6 +20,7 @@ export class MemberListComponent implements OnInit {
   @Input() showInvitations;
   display;
   popover: PopoverItem;
+  userMembership;
 
   constructor(public invitationService: InvitationService, public membershipService: MembershipService,
               public groupService: GroupService, private accountService: AccountService) { }
@@ -29,23 +29,43 @@ export class MemberListComponent implements OnInit {
   }
 
   onClickItem(userMembership: GroupsMembership): void {
-    const isMemberOwner = userMembership.role === GroupRole.OWNER;
-    this.togglePopoverItem(isMemberOwner);
-    this.createPopoverItems(isMemberOwner, userMembership);
+    this.userMembership = userMembership;
+    if (!this.checkIfListItemShowsOwner()){
+      this.togglePopoverItem();
+      this.createPopoverItem();
+    }
   }
 
-  private togglePopoverItem(isMemberOwner: boolean): void {
-    if (!isMemberOwner) {
+  private togglePopoverItem(): void {
       this.display = !this.display;
+  }
+
+  private checkGroupRole(): GroupRole {
+    if (this.membershipService.checkIfUserIsOwner()) {
+      return GroupRole.OWNER;
+    }
+    if (this.membershipService.checkIfUserIsAdmin()) {
+      return GroupRole.ADMIN;
     }
   }
 
-  private createPopoverItems(isMemberOwner: boolean, userMembership: GroupsMembership): void {
-    if (this.membershipService.checkIfUserIsOwner() && !isMemberOwner){
-      this.popover = new PopoverItem(OwnerPopoverComponent, userMembership);
-    }
-    if (this.membershipService.checkIfUserIsAdmin() && !isMemberOwner) {
-      this.popover = new PopoverItem(AdminPopoverComponent, userMembership);
+  private checkIfListItemShowsOwner(): boolean {
+    return this.userMembership.role === GroupRole.OWNER;
+  }
+
+  private createPopoverItem(): void {
+    switch (this.checkGroupRole()) {
+      case GroupRole.OWNER: {
+        this.popover = new PopoverItem(OwnerPopoverComponent, this.userMembership);
+        break;
+      }
+      case GroupRole.ADMIN: {
+        this.popover = new PopoverItem(AdminPopoverComponent, this.userMembership);
+        break;
+      }
+      default: {
+        break;
+      }
     }
   }
 }
