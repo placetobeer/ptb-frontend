@@ -30,7 +30,7 @@ export class MemberListComponent implements OnInit {
 
   onClickItem(userMembership: GroupsMembership): void {
     this.userMembership = userMembership;
-    if (!this.checkIfListItemShowsOwner()){
+    if (!this.checkIfListItemShowsOwner() && !this.checkIfListItemShowsLoggedInUser()){
       this.togglePopoverItem();
       this.createPopoverItem();
     }
@@ -51,6 +51,10 @@ export class MemberListComponent implements OnInit {
 
   private checkIfListItemShowsOwner(): boolean {
     return this.userMembership.role === GroupRole.OWNER;
+  }
+
+  private checkIfListItemShowsLoggedInUser(): boolean {
+    return JSON.stringify(this.userMembership) === JSON.stringify(this.membershipService.userMembership);
   }
 
   private createPopoverItem(): void {
