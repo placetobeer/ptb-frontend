@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {GroupRole} from '../../../entities/groupRole.enum';
 import {User} from '../../../entities/user.model';
 import {InvitationService} from "../../../services/invitation.service";
@@ -9,6 +9,7 @@ import {PopoverItem} from "../../../popups/popover/popover-item";
 import {OwnerPopoverComponent} from "../../../popups/popover/owner-popover/owner-popover.component";
 import {AdminPopoverComponent} from "../../../popups/popover/admin-popover/admin-popover.component";
 import {GroupsMembership} from "../../../entities/groupsMembership.model";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-member-list',
@@ -16,6 +17,7 @@ import {GroupsMembership} from "../../../entities/groupsMembership.model";
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
+  @ViewChild('f', {static: false}) form: NgForm;
   owner: User = this.accountService.user;
   @Input() showInvitations;
   display;
@@ -49,11 +51,11 @@ export class MemberListComponent implements OnInit {
     }
   }
 
-  private checkIfListItemShowsOwner(): boolean {
+  checkIfListItemShowsOwner(): boolean {
     return this.userMembership.role === GroupRole.OWNER;
   }
 
-  private checkIfListItemShowsLoggedInUser(): boolean {
+  checkIfListItemShowsLoggedInUser(): boolean {
     return JSON.stringify(this.userMembership) === JSON.stringify(this.membershipService.userMembership);
   }
 

@@ -7,7 +7,9 @@
       </div>
 
       <div class="text-md italic">Already in group</div>
-      <app-member-list [showInvitations]="showInvitations"></app-member-list>
+      <div class="max-w-md">
+        <app-member-list [showInvitations]="showInvitations"></app-member-list>
+      </div>
 
       <div class="text-md italic">Add member</div>
       <app-add-member-bar></app-add-member-bar>

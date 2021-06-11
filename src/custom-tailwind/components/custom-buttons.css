@@ -13,3 +13,7 @@
 .btn-add {
   @apply bg-ptb-orange-500 text-white
 }
+
+.btn-popover {
+  @apply px-2 text-gray-700 text-sm font-medium border border-gray-700 bg-white
+}
