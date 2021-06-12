@@ -7,6 +7,7 @@ import {BehaviorSubject, interval} from "rxjs";
 import {startWith} from "rxjs/operators";
 import {GroupService} from "./group.service";
 import {AccountService} from "./account.service";
+import {Group} from "../entities/group.model";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class MembershipService implements OnDestroy {
   private readonly userMembershipSubject = new BehaviorSubject<GroupsMembership>(null);
   public readonly userMembership$ = this.userMembershipSubject.asObservable();
 
-  private readonly autoRefreshSubscription =  interval(120000).pipe(startWith(0)).subscribe(() => {
+  private readonly autoRefreshSubscription =  interval(30000).pipe(startWith(0)).subscribe(() => {
     this.getCurrentGroupMemberships();
   });
 
@@ -54,6 +55,12 @@ export class MembershipService implements OnDestroy {
 
   setUserMembership(): void {
     this.loadUserMembership(this.accountService.user.id, this.groupService.currentGroup.id);
+  }
+
+  removeMembershipFromList(toDeleteMembership: GroupsMembership): void {
+    const newGroupMemberships = this.groupMemberships.filter(
+      groupMemberships => groupMemberships.membershipId !== toDeleteMembership.membershipId);
+    this.groupMembershipsSubject.next(newGroupMemberships);
   }
 
   loadGroupMemberships(): void {

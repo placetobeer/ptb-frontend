@@ -1,5 +1,6 @@
-import {GroupRole} from "../../entities/groupRole.enum";
+import {PopoverComponent} from "./popover.component";
 
 export interface PopoverInterface {
-  data: any;
+  userMembership: any;
+  popoverComponentRef: PopoverComponent;
 }

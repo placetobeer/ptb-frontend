@@ -62,11 +62,11 @@ export class MemberListComponent implements OnInit {
   private createPopoverItem(): void {
     switch (this.checkGroupRole()) {
       case GroupRole.OWNER: {
-        this.popover = new PopoverItem(OwnerPopoverComponent, this.userMembership);
+        this.popover = new PopoverItem(1, OwnerPopoverComponent, this.userMembership);
         break;
       }
       case GroupRole.ADMIN: {
-        this.popover = new PopoverItem(AdminPopoverComponent, this.userMembership);
+        this.popover = new PopoverItem(2, AdminPopoverComponent, this.userMembership);
         break;
       }
       default: {

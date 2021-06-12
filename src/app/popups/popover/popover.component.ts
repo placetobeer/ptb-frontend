@@ -26,7 +26,21 @@ export class PopoverComponent implements OnInit{
     viewContainerRef.clear();
 
     const componentRef = viewContainerRef.createComponent<PopoverInterface>(componentFactory);
-    componentRef.instance.data = this.popover.data;
+    componentRef.instance.userMembership = this.popover.data;
+
+    const component = componentRef.instance;
+    component.popoverComponentRef = this;
+  }
+
+  removeComponent(): void {
+    const viewContainerRef = this.popupHost.viewContainerRef;
+    if (viewContainerRef.length < 1) {return; }
+
+    const componentRef = this.popover;
+
+    const vcrIndex: number = viewContainerRef.indexOf(componentRef as any);
+
+    this.popupHost.viewContainerRef.remove(0);
   }
 
 }

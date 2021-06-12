@@ -22,4 +22,8 @@ export class HttpMembershipService {
     return this.http.get<GroupsMembership>('http://localhost:8080/memberships/' + userId,
       {params: new HttpParams().set('groupId', String(groupId))});
   }
+
+  deleteMembershipById(membershipId): Observable<any> {
+    return this.http.delete('http://localhost:8080/memberships/' + membershipId);
+  }
 }

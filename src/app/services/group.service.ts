@@ -22,7 +22,7 @@ export class GroupService implements OnDestroy{
     this.loadUserGroups();
   }
 
-  private readonly autoRefreshSubscription =  interval(120000).pipe(startWith(0)).subscribe(() => {
+  private readonly autoRefreshSubscription =  interval(30000).pipe(startWith(0)).subscribe(() => {
     this.loadUserGroups();
   });
 
