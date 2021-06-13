@@ -2,6 +2,11 @@ import {Component, ComponentFactoryResolver, ComponentRef, Input, OnChanges, OnI
 import {PopoverDirective} from "./popover.directive";
 import {PopoverItem} from "./popover-item";
 import {PopoverInterface} from "./popover.interface";
+import {GroupsMembership} from "../../entities/groupsMembership.model";
+import {PopupHelperService} from "../popup-helper.service";
+import {HttpMembershipService} from "../../services/httpServices/http-membership.service";
+import {MembershipService} from "../../services/membership.service";
+import {ErrorService} from "../../services/error.service";
 
 @Component({
   selector: 'app-popover',
@@ -12,13 +17,11 @@ export class PopoverComponent implements OnInit, OnChanges{
   @ViewChild(PopoverDirective, {static: true}) popupHost!: PopoverDirective;
   componentRef: ComponentRef<PopoverInterface>;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private popupHelperService: PopupHelperService,
+              private membershipService: MembershipService, private httpMembershipService: HttpMembershipService,
+              private errorService: ErrorService) { }
 
-  ngOnInit(): void {
-    if (this.popover !== undefined) {
-      this.loadComponent();
-    }
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(): void {
     if (this.popover !== undefined) {
@@ -44,6 +47,35 @@ export class PopoverComponent implements OnInit, OnChanges{
     if (viewContainerRef.length < 1) {return; }
 
     viewContainerRef.remove();
+  }
+
+  kickMember(userMembership: GroupsMembership): void{
+    this.popupHelperService.openConfirmation('Do you really want to kick the member?');
+    this.popupHelperService.confirmationSubject.subscribe({
+      next: confirmation => {
+        if (confirmation){
+          console.log(userMembership);
+          this.deleteMembership(userMembership);
+        }
+      }
+    });
+  }
+
+  deleteMembership(userMembership: GroupsMembership): void {
+    console.log(userMembership.membershipId);
+    this.httpMembershipService.deleteMembershipById(userMembership.membershipId)
+      .subscribe(
+        {
+          next: response => {
+            this.membershipService.removeMembershipFromList(userMembership);
+            this.removeComponent();
+          },
+          error: error => {
+            this.errorService.handleError(error);
+            this.removeComponent();
+          }
+        }
+      );
   }
 
 }

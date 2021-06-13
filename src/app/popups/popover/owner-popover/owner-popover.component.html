@@ -1,6 +1,9 @@
-<div class="flex flex-col space-y-2">
-  <button type="button" class="btn btn-popover">Kick member</button>
-  <button type="button" class="btn btn-popover">{{adminMessage}}</button>
+<div class="bg-ptb-gray-800 p-4">
+  <div class="flex flex-col space-y-2">
+    <button type="button" class="btn btn-popover" (click)="onKickMember()">Kick member</button>
+    <button type="button" class="btn btn-popover" (click)="onChangeAdminRole()">{{adminMessage}}</button>
+  </div>
 </div>
+
 
 
