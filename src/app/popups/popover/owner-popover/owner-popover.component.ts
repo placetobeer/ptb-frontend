@@ -10,7 +10,7 @@ import {PopoverComponent} from "../popover.component";
   templateUrl: './owner-popover.component.html'
 })
 export class OwnerPopoverComponent implements OnInit, PopoverInterface {
-  @Input() userMembership: any;
+  @Input() userMembership: GroupsMembership;
   @Input() popoverComponentRef: PopoverComponent;
   adminMessage;
 

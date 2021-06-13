@@ -5,7 +5,7 @@
 
 <!--  invitation-member list-->
 <div *ngIf="showInvitations">
-  <app-member-item *ngFor="let invitation of invitationService.invitations"
+  <app-member-item *ngFor="let invitation of (invitationService.invitations$ | async)"
                    [invitation]="invitation" [showInvitations]="showInvitations"></app-member-item>
 </div>
 
@@ -13,7 +13,7 @@
 <div *ngIf="!showInvitations && !this.membershipService.checkIfUserIsMember()" class="grid grid-cols-2 gap-2">
   <div>
     <app-member-item (click)="onClickItem(userMembership)"
-                     *ngFor="let userMembership of membershipService.groupMemberships"
+                     *ngFor="let userMembership of (membershipService.groupMemberships$ | async)"
                      [membership]="userMembership" [showInvitations]="showInvitations">
     </app-member-item>
   </div>
@@ -25,7 +25,7 @@
 
 <!--  membership-list for member-->
 <div *ngIf="!showInvitations && this.membershipService.checkIfUserIsMember()">
-  <app-member-item *ngFor="let userMembership of membershipService.groupMemberships"
+  <app-member-item *ngFor="let userMembership of (membershipService.groupMemberships$ | async)"
                    [membership]="userMembership" [showInvitations]="showInvitations"></app-member-item>
 </div>
 

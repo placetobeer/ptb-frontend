@@ -22,7 +22,7 @@ export class MemberListComponent implements OnInit {
   @Input() showInvitations;
   display;
   popover: PopoverItem;
-  userMembership;
+  userMembership: GroupsMembership;
 
   constructor(public invitationService: InvitationService, public membershipService: MembershipService,
               public groupService: GroupService, private accountService: AccountService) { }
@@ -33,13 +33,9 @@ export class MemberListComponent implements OnInit {
   onClickItem(userMembership: GroupsMembership): void {
     this.userMembership = userMembership;
     if (!this.checkIfListItemShowsOwner() && !this.checkIfListItemShowsLoggedInUser()){
-      this.togglePopoverItem();
+      this.display = true;
       this.createPopoverItem();
     }
-  }
-
-  private togglePopoverItem(): void {
-      this.display = !this.display;
   }
 
   private checkGroupRole(): GroupRole {
@@ -62,14 +58,17 @@ export class MemberListComponent implements OnInit {
   private createPopoverItem(): void {
     switch (this.checkGroupRole()) {
       case GroupRole.OWNER: {
-        this.popover = new PopoverItem(1, OwnerPopoverComponent, this.userMembership);
+        this.popover = new PopoverItem(OwnerPopoverComponent, this.userMembership);
         break;
       }
       case GroupRole.ADMIN: {
-        this.popover = new PopoverItem(2, AdminPopoverComponent, this.userMembership);
+        this.popover = new PopoverItem(AdminPopoverComponent, this.userMembership);
+        console.log('Im creating an admin popover... with ');
+        console.log(this.userMembership);
         break;
       }
       default: {
+        this.display = false;
         break;
       }
     }

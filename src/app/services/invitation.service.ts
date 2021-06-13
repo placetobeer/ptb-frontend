@@ -5,10 +5,10 @@ import {User} from '../entities/user.model';
 import {HttpInvitationService} from './httpServices/http-invitation.service';
 import {AccountService} from "./account.service";
 import {GroupService} from "./group.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, interval} from "rxjs";
 import {Group} from "../entities/group.model";
 import {ErrorService} from "./error.service";
-import {distinctUntilChanged, filter, map} from "rxjs/operators";
+import {distinctUntilChanged, filter, map, startWith} from "rxjs/operators";
 import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
 
 @Injectable({
@@ -23,6 +23,10 @@ export class InvitationService {
   public readonly invitations$ = this.invitationsSubject.asObservable();
 
   owner = this.accountService.user;
+
+  private readonly autoRefreshSubscription =  interval(30000).pipe(startWith(0)).subscribe(() => {
+    // this.loadInvitations();
+  });
 
   get invitations(): Invitation[] {
     return this.invitationsSubject.value;

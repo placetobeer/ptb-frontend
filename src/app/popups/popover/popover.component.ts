@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, ComponentRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {PopoverDirective} from "./popover.directive";
 import {PopoverItem} from "./popover-item";
 import {PopoverInterface} from "./popover.interface";
@@ -7,13 +7,20 @@ import {PopoverInterface} from "./popover.interface";
   selector: 'app-popover',
   templateUrl: './popover.component.html',
 })
-export class PopoverComponent implements OnInit{
+export class PopoverComponent implements OnInit, OnChanges{
   @Input() popover: PopoverItem;
   @ViewChild(PopoverDirective, {static: true}) popupHost!: PopoverDirective;
+  componentRef: ComponentRef<PopoverInterface>;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit(): void {
+    if (this.popover !== undefined) {
+      this.loadComponent();
+    }
+  }
+
+  ngOnChanges(): void {
     if (this.popover !== undefined) {
       this.loadComponent();
     }
@@ -25,10 +32,10 @@ export class PopoverComponent implements OnInit{
     const viewContainerRef = this.popupHost.viewContainerRef;
     viewContainerRef.clear();
 
-    const componentRef = viewContainerRef.createComponent<PopoverInterface>(componentFactory);
-    componentRef.instance.userMembership = this.popover.data;
+    this.componentRef = viewContainerRef.createComponent<PopoverInterface>(componentFactory);
+    this.componentRef.instance.userMembership = this.popover.userMembership;
 
-    const component = componentRef.instance;
+    const component = this.componentRef.instance;
     component.popoverComponentRef = this;
   }
 
@@ -36,11 +43,7 @@ export class PopoverComponent implements OnInit{
     const viewContainerRef = this.popupHost.viewContainerRef;
     if (viewContainerRef.length < 1) {return; }
 
-    const componentRef = this.popover;
-
-    const vcrIndex: number = viewContainerRef.indexOf(componentRef as any);
-
-    this.popupHost.viewContainerRef.remove(0);
+    viewContainerRef.remove();
   }
 
 }

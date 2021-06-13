@@ -1,6 +1,7 @@
 import {PopoverComponent} from "./popover.component";
+import {GroupsMembership} from "../../entities/groupsMembership.model";
 
 export interface PopoverInterface {
-  userMembership: any;
+  userMembership: GroupsMembership;
   popoverComponentRef: PopoverComponent;
 }

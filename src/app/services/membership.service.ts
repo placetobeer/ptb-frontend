@@ -20,8 +20,8 @@ export class MembershipService implements OnDestroy {
   private readonly groupMembershipsSubject = new BehaviorSubject<GroupsMembership[]>([]);
   public readonly groupMemberships$ = this.groupMembershipsSubject.asObservable();
 
-  private readonly userMembershipSubject = new BehaviorSubject<GroupsMembership>(null);
-  public readonly userMembership$ = this.userMembershipSubject.asObservable();
+  private readonly currentUserMembershipSubject = new BehaviorSubject<GroupsMembership>(null);
+  public readonly currentUserMembership$ = this.currentUserMembershipSubject.asObservable();
 
   private readonly autoRefreshSubscription =  interval(30000).pipe(startWith(0)).subscribe(() => {
     this.getCurrentGroupMemberships();
@@ -32,7 +32,7 @@ export class MembershipService implements OnDestroy {
   }
 
   get userMembership(): GroupsMembership {
-    return this.userMembershipSubject.value;
+    return this.currentUserMembershipSubject.value;
   }
 
   checkIfUserIsOwner(): boolean {
@@ -81,7 +81,7 @@ export class MembershipService implements OnDestroy {
     this.httpMembershipService.loadUserMembershipByUserIdAndGroupId(userId, groupId)
       .subscribe({
         next: userMembership => {
-          this.userMembershipSubject.next(userMembership);
+          this.currentUserMembershipSubject.next(userMembership);
         },
         error: error => {
           this.errorService.handleError(error);
