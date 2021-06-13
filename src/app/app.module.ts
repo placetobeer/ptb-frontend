@@ -60,7 +60,7 @@ import { AdminPopoverComponent } from './popups/popover/admin-popover/admin-popo
     ErrorPageComponent,
     GenericConfirmationPopupComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
     RoutingPopupComponent,
     PopoverComponent,
     PopoverDirective,
