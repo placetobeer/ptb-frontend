@@ -1,13 +1,13 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Group} from '../../../../../entities/group.model';
-import {PopupService} from '../../../../../popups/popup.service';
-import {GroupRole} from '../../../../../entities/groupRole.enum';
 import {PopupHelperService} from '../../../../../popups/popup-helper.service';
 import {GroupService} from "../../../../../services/group.service";
 import {HttpGroupService} from "../../../../../services/httpServices/http-group.service";
 import {ErrorService} from "../../../../../services/error.service";
 import {MembershipService} from "../../../../../services/membership.service";
+import {Router} from "@angular/router";
+import {RoutingService} from "../../../../../services/routing.service";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -18,20 +18,19 @@ export class GroupEditPopupComponent implements OnInit {
   @ViewChild('groupForm') form: NgForm;
   group: Group;
 
-  id = 'group-edit';
-  isUserOwner;
   initialValues;
+  showInvitations;
 
-  constructor(private popupService: PopupService, private groupService: GroupService, private membershipService: MembershipService,
+  constructor(private groupService: GroupService, public membershipService: MembershipService,
               private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
-              private errorService: ErrorService) { }
+              private errorService: ErrorService, private routingService: RoutingService) { }
 
   ngOnInit(): void {
     this.group = this.groupService.currentGroup;
     this.initialValues = {
       groupName : this.groupService.currentGroup.name
     };
-    this.isUserOwner = this.membershipService.getUsersMembershipOfSelectedGroup().role === GroupRole.OWNER;
+    this.showInvitations = false;
   }
 
   private applyGroupChanges(): void {
@@ -63,7 +62,7 @@ export class GroupEditPopupComponent implements OnInit {
 
   private closePopup(): void {
     this.resetValues();
-    this.popupService.close(this.id);
+    this.routingService.navigateToHubpage();
   }
 
   private resetValues(): void {
