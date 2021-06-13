@@ -33,6 +33,7 @@ import {PopoverDirective} from "./popups/popover/popover.directive";
 import { OwnerPopoverComponent } from './popups/popover/owner-popover/owner-popover.component';
 import { AdminPopoverComponent } from './popups/popover/admin-popover/admin-popover.component';
 import { StartpageComponent } from './startpage/startpage.component';
+import { InfoPopupComponent } from './popups/info-popup/info-popup.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { StartpageComponent } from './startpage/startpage.component';
     PopoverDirective,
     OwnerPopoverComponent,
     AdminPopoverComponent,
-    StartpageComponent
+    StartpageComponent,
+    InfoPopupComponent
   ],
     imports: [
         AppRoutingModule,

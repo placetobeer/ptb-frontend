@@ -10,6 +10,8 @@ import {RoutingService} from "../../services/routing.service";
   styleUrls: ['./routing-popup.component.css']
 })
 export class RoutingPopupComponent implements OnInit {
+  @Input() navigateToStartpage: boolean;
+
   constructor(private groupService: GroupService, private invitationService: InvitationService,
               private routingService: RoutingService) {}
 
@@ -17,6 +19,10 @@ export class RoutingPopupComponent implements OnInit {
 
   close(): void{
     this.invitationService.removeAllInvitations();
-    this.routingService.navigateToHubpage();
+    if (this.navigateToStartpage){
+      this.routingService.navigateToStartpage();
+    } else {
+      this.routingService.navigateToHubpage();
+    }
   }
 }

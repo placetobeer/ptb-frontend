@@ -7,6 +7,7 @@ import {PopupComponent} from "./popups/abstract-popup/popup.component";
 import {GroupEditPopupComponent} from "./hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-edit-popup.component";
 import {RoutingPopupComponent} from "./popups/routing-popup/routing-popup.component";
 import {StartpageComponent} from "./startpage/startpage.component";
+import {InfoPopupComponent} from "./popups/info-popup/info-popup.component";
 
 const routes: Routes = [
   {path: 'hubpage', component: HubpageComponent, children: [
@@ -16,7 +17,9 @@ const routes: Routes = [
       {path: 'edit', component: GroupEditPopupComponent}
     ]},
   {path: 'error', component: ErrorPageComponent},
-  {path: 'startpage', component: StartpageComponent},
+  {path: 'startpage', component: StartpageComponent, children: [
+      {path: 'info', component: InfoPopupComponent}
+    ]},
   {path: '', redirectTo: '/startpage', pathMatch: 'full'},
   {path: '**', redirectTo: '/error?message=Page+not+found'}
 ];
