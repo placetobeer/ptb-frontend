@@ -35,6 +35,9 @@ import {PopoverDirective} from "./popups/popover/popover.directive";
 import { OwnerPopoverComponent } from './popups/popover/owner-popover/owner-popover.component';
 import { AdminPopoverComponent } from './popups/popover/admin-popover/admin-popover.component';
 import { ProposalAreaComponent } from './hubpage/proposal-area/proposal-area.component';
+import { ProposalListComponent } from './hubpage/proposal-area/proposal-list/proposal-list.component';
+import { ProposalItemComponent } from './hubpage/proposal-area/proposal-item/proposal-item.component';
+import { AddProposalPopupComponent } from './hubpage/proposal-area/add-proposal-popup/add-proposal-popup.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,10 @@ import { ProposalAreaComponent } from './hubpage/proposal-area/proposal-area.com
     PopoverDirective,
     OwnerPopoverComponent,
     AdminPopoverComponent,
-    ProposalAreaComponent
+    ProposalAreaComponent,
+    ProposalListComponent,
+    ProposalItemComponent,
+    AddProposalPopupComponent
   ],
     imports: [
         AppRoutingModule,
