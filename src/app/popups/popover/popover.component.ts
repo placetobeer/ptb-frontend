@@ -48,34 +48,4 @@ export class PopoverComponent implements OnInit, OnChanges{
 
     viewContainerRef.remove();
   }
-
-  kickMember(userMembership: GroupsMembership): void{
-    this.popupHelperService.openConfirmation('Do you really want to kick the member?');
-    this.popupHelperService.confirmationSubject.subscribe({
-      next: confirmation => {
-        if (confirmation){
-          console.log(userMembership);
-          this.deleteMembership(userMembership);
-        }
-      }
-    });
-  }
-
-  deleteMembership(userMembership: GroupsMembership): void {
-    console.log(userMembership.membershipId);
-    this.httpMembershipService.deleteMembershipById(userMembership.membershipId)
-      .subscribe(
-        {
-          next: response => {
-            this.membershipService.removeMembershipFromList(userMembership);
-            this.removeComponent();
-          },
-          error: error => {
-            this.errorService.handleError(error);
-            this.removeComponent();
-          }
-        }
-      );
-  }
-
 }

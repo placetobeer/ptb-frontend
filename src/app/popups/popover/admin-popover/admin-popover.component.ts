@@ -6,22 +6,59 @@ import {MembershipService} from "../../../services/membership.service";
 import {ErrorService} from "../../../services/error.service";
 import {PopoverComponent} from "../popover.component";
 import {GroupsMembership} from "../../../entities/groupsMembership.model";
+import {Subscription} from "rxjs";
+import {List} from "postcss/lib/list";
 
 @Component({
   selector: 'app-admin-popover',
   templateUrl: './admin-popover.component.html'
 })
-export class AdminPopoverComponent implements OnInit, PopoverInterface {
+export class AdminPopoverComponent implements OnInit, PopoverInterface, OnDestroy {
   @Input() userMembership: GroupsMembership;
   @Input() popoverComponentRef: PopoverComponent;
+  private subscriptions: Subscription[] = [];
 
-  constructor(private httpMembershipService: HttpMembershipService, private popuphelperService: PopupHelperService,
+  constructor(private httpMembershipService: HttpMembershipService, private popupHelperService: PopupHelperService,
               private membershipService: MembershipService, private errorService: ErrorService) { }
 
   ngOnInit(): void {
   }
 
   onKickMember(): void {
-    this.popoverComponentRef.kickMember(this.userMembership);
+    this.kickMember(this.userMembership);
+  }
+
+  kickMember(userMembership: GroupsMembership): void{
+    this.popupHelperService.openConfirmation('Do you really want to kick the member?');
+    this.subscriptions.push(this.popupHelperService.confirmationSubject.subscribe({
+      next: confirmation => {
+        if (confirmation){
+          console.log(userMembership);
+          this.deleteMembership(userMembership);
+        }
+      }
+    }));
+  }
+
+  deleteMembership(userMembership: GroupsMembership): void {
+    console.log(userMembership.membershipId);
+    const subscription = this.httpMembershipService.deleteMembershipById(userMembership.membershipId)
+      .subscribe(
+        {
+          next: response => {
+            this.membershipService.removeMembershipFromList(userMembership);
+            this.popoverComponentRef.removeComponent();
+          },
+          error: error => {
+            this.errorService.handleError(error);
+            this.popoverComponentRef.removeComponent();
+          }
+        }
+      );
+    this.subscriptions.push(subscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }
