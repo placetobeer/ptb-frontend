@@ -38,6 +38,8 @@ import { ProposalAreaComponent } from './hubpage/proposal-area/proposal-area.com
 import { ProposalListComponent } from './hubpage/proposal-area/proposal-list/proposal-list.component';
 import { ProposalItemComponent } from './hubpage/proposal-area/proposal-item/proposal-item.component';
 import { AddProposalPopupComponent } from './hubpage/proposal-area/add-proposal-popup/add-proposal-popup.component';
+import { StartpageComponent } from './startpage/startpage.component';
+import { InfoPopupComponent } from './popups/info-popup/info-popup.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { AddProposalPopupComponent } from './hubpage/proposal-area/add-proposal-
     ProposalAreaComponent,
     ProposalListComponent,
     ProposalItemComponent,
-    AddProposalPopupComponent
+    AddProposalPopupComponent,
+    StartpageComponent,
+    InfoPopupComponent
   ],
     imports: [
         AppRoutingModule,
