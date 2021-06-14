@@ -5,6 +5,7 @@ import {ErrorService} from "./error.service";
 import {AccountService} from "./account.service";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {Invitation} from "../entities/invitation.model";
+import {GroupService} from "./group.service";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class UserInvitationService implements OnDestroy {
   public readonly pendingInvitations$ = this.pendingInvitationsSubject.asObservable();
 
   constructor(private httpInvitationService: HttpInvitationService, private errorService: ErrorService,
-              private accountService: AccountService)
+              private accountService: AccountService,
+              private groupService: GroupService)
    {
     this.loadInvitations();
   }
@@ -58,6 +60,7 @@ export class UserInvitationService implements OnDestroy {
         // filteredInvitations.forEach(invitation => this.addPendingInvitation(invitation));
         this.clearPendingInvitations();
         this.loadInvitations();
+        this.groupService.loadUserGroups();
       },
       error: error => {
         this.errorService.handleError(error);
@@ -75,6 +78,7 @@ export class UserInvitationService implements OnDestroy {
         // filteredInvitations.forEach(invitation => this.addPendingInvitation(invitation));
         this.clearPendingInvitations();
         this.loadInvitations();
+        this.groupService.loadUserGroups();
       },
       error: error => {
         this.errorService.handleError(error);
