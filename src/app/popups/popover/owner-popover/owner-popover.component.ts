@@ -92,4 +92,8 @@ export class OwnerPopoverComponent implements OnInit, PopoverInterface, OnDestro
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
+
+  onCancel(): void {
+    this.popoverComponentRef.removeComponent();
+  }
 }
