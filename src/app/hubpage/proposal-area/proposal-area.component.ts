@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-proposal-area',
@@ -6,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProposalAreaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
+  onAddProposal(): void {
+    this.router.navigate(['addProposal'], {relativeTo: this.route});
+  }
 }

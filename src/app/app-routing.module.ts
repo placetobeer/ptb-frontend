@@ -10,6 +10,7 @@ import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import {StartpageComponent} from "./startpage/startpage.component";
 import {InfoPopupComponent} from "./popups/info-popup/info-popup.component";
+import {AddProposalPopupComponent} from "./hubpage/proposal-area/add-proposal-popup/add-proposal-popup.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
       {path: 'new', component: CreateGroupPopupComponent}
     ]},
   {path: 'hubpage/:id', component: HubpageComponent, children: [
-      {path: 'edit', component: GroupEditPopupComponent}
+      {path: 'edit', component: GroupEditPopupComponent},
+      {path: 'addProposal', component: AddProposalPopupComponent}
     ]},
   {path: 'error', component: ErrorPageComponent},
   {path: 'startpage', component: StartpageComponent, children: [

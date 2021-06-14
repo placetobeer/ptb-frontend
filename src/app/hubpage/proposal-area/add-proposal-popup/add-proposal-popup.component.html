@@ -1,25 +1,36 @@
 <app-routing-popup [navigateToStartpage]="navigateToStartpage">
 
-  <div class="flex flex-col space-y-4">
-    <div class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill flex flex-col space-y-4">
-      <div style="background-image: url(assets/img/bierkrug.svg)" class="object-contain h-40 opacity-75"></div>
-      <div class="text-3xl text-ptb-gray-900 text-center font-semibold my-auto">What is <span class="4xl text-ptb-orange-600">PlaceToBeer</span>  for a crazy thing?</div>
-
-    </div>
-
-    <div class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill">
-      <div class="text-gray-900 text-md">
-        <p>When deciding where to go in a friends group there are always discussions about which place to visit. This is
-          an avoidable waste of time.
-          To reduce this nonsense and create new memories PlaceToBeer will help you with that decision.</p>
-        <p>PlaceToBeer is a webbased platform to propose and rate places and events in your friend group.
-          The idea is to individually rate bars, pubs, clubs, restaurants or wherever you can have fun together located
-          in
-          Karlsruhe.</p>
-        <p>To use our service you will need to register. Afterwards you can start creating a new group and your first
-          proposals.</p>
+  <form (ngSubmit)="onSubmit()" class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill" #f="ngForm">
+    <div class="grid grid-cols-1 gap-4">
+      <div class="div-input-field" [ngClass]="{'border-red-700':proposalName.touched && proposalName.invalid}">
+        <input id="proposalName" name="proposalName" class="input-field" type="text" ngModel required #proposalName="ngModel"/>
+        <label class="label-input-field" [ngClass]="{'text-red-700':proposalName.touched && proposalName.invalid}" for="proposalName">
+          Proposal name
+        </label>
       </div>
+
+      <!-- dropdown -->
+      <div class="text-md italic">Choose an activity type</div>
+      <div class="relative inline-flex">
+        <select class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+          <option>Bar</option>
+          <option>Restaurant</option>
+          <option>Sport</option>
+          <option>Games</option>
+          <option>Swimming Area</option>
+          <option>Club</option>
+          <option>Parc</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="flex flex-row justify-end space-x-4">
+        <button type="submit" class="btn btn-create" [disabled]="!f.valid">Create</button>
+        <button type="button" (click)="onCancel()" class="btn btn-cancel">Cancel</button>
+      </div>
+
     </div>
-  </div>
+
+  </form>
 
 </app-routing-popup>
