@@ -6,7 +6,7 @@ import {User} from '../entities/user.model';
 })
 export class AccountService {
 
-  user: User = new User(4, 'Patrick', 'patrick.mail@gmail.com');
+  user: User = new User(4, 'Patrick', 'patrick.mail@gmail.com', "", new Date());
 
   constructor() { }
 }

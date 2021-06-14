@@ -33,6 +33,10 @@ export class UserInvitationService implements OnDestroy {
     ]);
   }
 
+  clearPendingInvitations(): void{
+    this.pendingInvitationsSubject.next([]);
+  }
+
   loadInvitations(): void{
     const subscription = this.httpInvitationService.loadInvitationsByUserId(this.accountService.user.id).subscribe({
       next: invitations => {
@@ -49,8 +53,11 @@ export class UserInvitationService implements OnDestroy {
     const subscription = this.httpInvitationService.answerInvitationByInvitationId(toAcceptInvitationResponse.id, true)
       .subscribe({
       next: response => {
-        const filteredInvitations = this.pendingInvitations.filter(invitationResponse => invitationResponse !== toAcceptInvitationResponse);
-        filteredInvitations.forEach(invitation => this.addPendingInvitation(invitation));
+        // const filteredInvitations = this.pendingInvitations.filter(
+        // invitationResponse => invitationResponse !== toAcceptInvitationResponse);
+        // filteredInvitations.forEach(invitation => this.addPendingInvitation(invitation));
+        this.clearPendingInvitations();
+        this.loadInvitations();
       },
       error: error => {
         this.errorService.handleError(error);
@@ -63,9 +70,11 @@ export class UserInvitationService implements OnDestroy {
     const subscription = this.httpInvitationService.answerInvitationByInvitationId(toDeclineInvitationResponse.id, false)
       .subscribe({
       next: response => {
-        const filteredInvitations = this.pendingInvitations
-          .filter(invitationResponse => invitationResponse !== toDeclineInvitationResponse);
-        filteredInvitations.forEach(invitation => this.addPendingInvitation(invitation));
+        // const filteredInvitations = this.pendingInvitations
+        //  .filter(invitationResponse => invitationResponse !== toDeclineInvitationResponse);
+        // filteredInvitations.forEach(invitation => this.addPendingInvitation(invitation));
+        this.clearPendingInvitations();
+        this.loadInvitations();
       },
       error: error => {
         this.errorService.handleError(error);

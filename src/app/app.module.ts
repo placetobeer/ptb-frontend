@@ -27,6 +27,8 @@ import { AddMemberBarComponent } from './hubpage/group-navigation-bar/add-member
 import { ErrorPageComponent } from './error/error-page/error-page.component';
 import {AppRoutingModule} from './app-routing.module';
 import {GenericConfirmationPopupComponent} from './popups/generic-confirmation-popup/generic-confirmation-popup.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { RoutingPopupComponent } from './popups/routing-popup/routing-popup.component';
 import { PopoverComponent } from './popups/popover/popover.component';
 import {PopoverDirective} from "./popups/popover/popover.directive";
@@ -57,6 +59,8 @@ import { AdminPopoverComponent } from './popups/popover/admin-popover/admin-popo
     AddMemberBarComponent,
     ErrorPageComponent,
     GenericConfirmationPopupComponent,
+    LoginComponent,
+    RegisterComponent,
     RoutingPopupComponent,
     PopoverComponent,
     PopoverDirective,
