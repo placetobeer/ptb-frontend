@@ -3,8 +3,7 @@ import {HttpInvitationService} from './httpServices/http-invitation.service';
 import {InvitationResponse} from '../entities/invitationResponse.model';
 import {ErrorService} from "./error.service";
 import {AccountService} from "./account.service";
-import {BehaviorSubject, EMPTY} from "rxjs";
-import {Invitation} from "../entities/invitation.model";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
