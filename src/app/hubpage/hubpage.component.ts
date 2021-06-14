@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router, UrlSegment} from '@angular/router';
 import {GroupService} from '../services/group.service';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-hubpage',
@@ -8,7 +9,7 @@ import {GroupService} from '../services/group.service';
   styleUrls: ['./hubpage.component.css']
 })
 export class HubpageComponent implements OnInit, OnDestroy {
-  private subscription;
+  private subscription: Subscription;
 
   constructor(public groupService: GroupService, private route: ActivatedRoute, private router: Router) {}
 

@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpInvitationService} from './httpServices/http-invitation.service';
 import {InvitationResponse} from '../entities/invitationResponse.model';
 import {ErrorService} from "./error.service";
 import {AccountService} from "./account.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Subscription} from "rxjs";
 import {Invitation} from "../entities/invitation.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserInvitationService {
+export class UserInvitationService implements OnDestroy {
+
+  private subscriptions: Subscription[] = [];
 
   private readonly pendingInvitationsSubject = new BehaviorSubject<InvitationResponse[]>([]);
   public readonly pendingInvitations$ = this.pendingInvitationsSubject.asObservable();
@@ -32,7 +34,7 @@ export class UserInvitationService {
   }
 
   loadInvitations(): void{
-    this.httpInvitationService.loadInvitationsByUserId(this.accountService.user.id).subscribe({
+    const subscription = this.httpInvitationService.loadInvitationsByUserId(this.accountService.user.id).subscribe({
       next: invitations => {
         invitations.forEach(invitation => this.addPendingInvitation(invitation));
       },
@@ -40,10 +42,11 @@ export class UserInvitationService {
         this.errorService.handleError(error);
       }
     });
+    this.subscriptions.push(subscription);
   }
 
   acceptInvitationClick(toAcceptInvitationResponse: InvitationResponse): void {
-    this.httpInvitationService.answerInvitationByInvitationId(toAcceptInvitationResponse.id, true)
+    const subscription = this.httpInvitationService.answerInvitationByInvitationId(toAcceptInvitationResponse.id, true)
       .subscribe({
       next: response => {
         const filteredInvitations = this.pendingInvitations.filter(invitationResponse => invitationResponse !== toAcceptInvitationResponse);
@@ -53,10 +56,11 @@ export class UserInvitationService {
         this.errorService.handleError(error);
       }
     });
+    this.subscriptions.push(subscription);
   }
 
   declineInvitationClick(toDeclineInvitationResponse: InvitationResponse): void {
-    this.httpInvitationService.answerInvitationByInvitationId(toDeclineInvitationResponse.id, false)
+    const subscription = this.httpInvitationService.answerInvitationByInvitationId(toDeclineInvitationResponse.id, false)
       .subscribe({
       next: response => {
         const filteredInvitations = this.pendingInvitations
@@ -67,5 +71,10 @@ export class UserInvitationService {
         this.errorService.handleError(error);
       }
     });
+    this.subscriptions.push(subscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }

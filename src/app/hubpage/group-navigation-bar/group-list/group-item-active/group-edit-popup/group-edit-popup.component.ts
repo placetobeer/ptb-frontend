@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Group} from '../../../../../entities/group.model';
 import {PopupHelperService} from '../../../../../popups/popup-helper.service';
@@ -8,21 +8,22 @@ import {ErrorService} from "../../../../../services/error.service";
 import {MembershipService} from "../../../../../services/membership.service";
 import {Router} from "@angular/router";
 import {RoutingService} from "../../../../../services/routing.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-group-edit-popup',
   templateUrl: './group-edit-popup.component.html',
   styleUrls: ['./group-edit-popup.component.css']
 })
-export class GroupEditPopupComponent implements OnInit {
+export class GroupEditPopupComponent implements OnInit, OnDestroy {
   @ViewChild('groupForm') form: NgForm;
   group: Group;
-
+  private subscriptions: Subscription[] = [];
   initialValues;
   showInvitations;
 
   constructor(private groupService: GroupService, public membershipService: MembershipService,
-              private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
+              private popupHelperService: PopupHelperService, private httpGroupService: HttpGroupService,
               private errorService: ErrorService, private routingService: RoutingService) { }
 
   ngOnInit(): void {
@@ -49,7 +50,7 @@ export class GroupEditPopupComponent implements OnInit {
   }
 
   setActiveGroupName(group: Group, newGroupName: string): void {
-    this.httpGroupService.setGroupNameByGroupId(group.id, newGroupName)
+    const subscription = this.httpGroupService.setGroupNameByGroupId(group.id, newGroupName)
       .subscribe({
         next: response => {
           this.groupService.setCurrentGroupName(newGroupName);
@@ -58,6 +59,7 @@ export class GroupEditPopupComponent implements OnInit {
           this.errorService.handleError(error);
         }
       });
+    this.subscriptions.push(subscription);
   }
 
   private closePopup(): void {
@@ -80,18 +82,19 @@ export class GroupEditPopupComponent implements OnInit {
   }
 
   onDeleteGroup(): void {
-    this.popuphelperService.openConfirmation('');
-    this.popuphelperService.confirmationSubject.subscribe({
+    this.popupHelperService.openConfirmation('');
+    const subscription = this.popupHelperService.confirmationSubject.subscribe({
       next: confirmation => {
         if (confirmation){
           this.deleteGroup(this.group);
         }
       }
     });
+    this.subscriptions.push(subscription);
   }
 
   deleteGroup(toDeleteGroup: Group): void {
-    this.httpGroupService.deleteGroupByGroupId(toDeleteGroup.id)
+    const subscription = this.httpGroupService.deleteGroupByGroupId(toDeleteGroup.id)
       .subscribe({
         next: response => {
           this.groupService.removeGroupFromList(toDeleteGroup);
@@ -101,5 +104,10 @@ export class GroupEditPopupComponent implements OnInit {
           this.errorService.handleError(error);
         }
       });
+    this.subscriptions.push(subscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }

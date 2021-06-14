@@ -3,7 +3,7 @@ import {HttpMembershipService} from "./httpServices/http-membership.service";
 import {ErrorService} from "./error.service";
 import {GroupsMembership} from "../entities/groupsMembership.model";
 import {GroupRole} from "../entities/groupRole.enum";
-import {BehaviorSubject, interval} from "rxjs";
+import {BehaviorSubject, interval, Subscription} from "rxjs";
 import {startWith} from "rxjs/operators";
 import {GroupService} from "./group.service";
 import {AccountService} from "./account.service";
@@ -13,6 +13,8 @@ import {Group} from "../entities/group.model";
   providedIn: 'root'
 })
 export class MembershipService implements OnDestroy {
+
+  private subscriptions: Subscription[] = [];
 
   constructor(private httpMembershipService: HttpMembershipService, private errorService: ErrorService,
               private groupService: GroupService, private accountService: AccountService) { }
@@ -65,7 +67,7 @@ export class MembershipService implements OnDestroy {
 
   loadGroupMemberships(): void {
     const currentGroupId = this.groupService.currentGroup.id;
-    this.httpMembershipService.loadUserMembershipsByGroupId(currentGroupId)
+    const subscription = this.httpMembershipService.loadUserMembershipsByGroupId(currentGroupId)
       .subscribe({
         next: groupMemberships => {
           this.groupMembershipsSubject.next(groupMemberships);
@@ -75,10 +77,11 @@ export class MembershipService implements OnDestroy {
           this.errorService.handleError(error);
         }
       });
+    this.subscriptions.push(subscription);
   }
 
   loadUserMembership(userId: number, groupId: number): void {
-    this.httpMembershipService.loadUserMembershipByUserIdAndGroupId(userId, groupId)
+    const subscription = this.httpMembershipService.loadUserMembershipByUserIdAndGroupId(userId, groupId)
       .subscribe({
         next: userMembership => {
           this.currentUserMembershipSubject.next(userMembership);
@@ -87,9 +90,11 @@ export class MembershipService implements OnDestroy {
           this.errorService.handleError(error);
         }
       });
+    this.subscriptions.push(subscription);
   }
 
   ngOnDestroy(): void {
     this.autoRefreshSubscription.unsubscribe();
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }

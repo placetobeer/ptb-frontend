@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {InvitationRequest} from '../requests/invitation-request.model';
 import {Invitation} from '../entities/invitation.model';
 import {User} from '../entities/user.model';
 import {HttpInvitationService} from './httpServices/http-invitation.service';
 import {AccountService} from "./account.service";
 import {GroupService} from "./group.service";
-import {BehaviorSubject, interval} from "rxjs";
+import {BehaviorSubject, interval, Subscription} from "rxjs";
 import {Group} from "../entities/group.model";
 import {ErrorService} from "./error.service";
 import {distinctUntilChanged, filter, map, startWith} from "rxjs/operators";
@@ -14,7 +14,9 @@ import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
 @Injectable({
   providedIn: 'root'
 })
-export class InvitationService {
+export class InvitationService implements OnDestroy{
+
+  private subscriptions: Subscription[] = [];
 
   constructor(private httpInvitationService: HttpInvitationService, private accountService: AccountService,
               private groupService: GroupService, private errorService: ErrorService) { }
@@ -51,7 +53,7 @@ export class InvitationService {
 
   sendInvitationRequest(groupId: number): void {
     const invitationRequest = new InvitationRequest(groupId, this.owner, this.invitations);
-    this.httpInvitationService.sendInvitations(invitationRequest)
+    const subscription = this.httpInvitationService.sendInvitations(invitationRequest)
       .subscribe({
         next: invitations => {
         },
@@ -59,6 +61,12 @@ export class InvitationService {
           this.errorService.handleError(error);
         }
       });
+    this.subscriptions.push(subscription);
+  }
+
+  ngOnDestroy(): void {
+    // this.autoRefreshSubscription.unsubscribe();
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
 }

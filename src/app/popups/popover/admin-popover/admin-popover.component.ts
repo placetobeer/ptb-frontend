@@ -30,18 +30,18 @@ export class AdminPopoverComponent implements OnInit, PopoverInterface, OnDestro
 
   kickMember(userMembership: GroupsMembership): void{
     this.popupHelperService.openConfirmation('Do you really want to kick the member?');
-    this.subscriptions.push(this.popupHelperService.confirmationSubject.subscribe({
+    const subscription = this.popupHelperService.confirmationSubject.subscribe({
       next: confirmation => {
         if (confirmation){
           console.log(userMembership);
           this.deleteMembership(userMembership);
         }
       }
-    }));
+    });
+    this.subscriptions.push(subscription);
   }
 
   deleteMembership(userMembership: GroupsMembership): void {
-    console.log(userMembership.membershipId);
     const subscription = this.httpMembershipService.deleteMembershipById(userMembership.membershipId)
       .subscribe(
         {

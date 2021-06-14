@@ -63,8 +63,6 @@ export class MemberListComponent implements OnInit {
       }
       case GroupRole.ADMIN: {
         this.popover = new PopoverItem(AdminPopoverComponent, this.userMembership);
-        console.log('Im creating an admin popover... with ');
-        console.log(this.userMembership);
         break;
       }
       default: {
