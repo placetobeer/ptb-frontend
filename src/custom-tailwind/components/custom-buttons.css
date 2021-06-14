@@ -1,5 +1,5 @@
 .btn {
-  @apply bg-ptb-gray-500 rounded-lg py-1 px-7 shadow-sm font-semibold focus:outline-none
+  @apply bg-ptb-gray-500 rounded-lg py-1 px-7 shadow-sm font-semibold cursor-pointer focus:outline-none
 }
 
 .btn-create {
@@ -8,4 +8,12 @@
 
 .btn-cancel {
   @apply bg-ptb-gray-700
+}
+
+.btn-add {
+  @apply bg-ptb-orange-500 text-white
+}
+
+.btn-popover {
+  @apply px-2 text-gray-700 text-sm font-medium border border-gray-700 bg-white
 }

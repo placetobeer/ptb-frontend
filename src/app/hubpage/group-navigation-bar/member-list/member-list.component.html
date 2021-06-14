@@ -1,7 +1,35 @@
-<div class="max-w-md">
-  <div class="border border-ptb-gray-700 py-3 px-6 bg-white flex items-center justify-between">
-    <div class="text-md">{{ owner.name }}</div>
-    <div class="text-md text-ptb-orange-600">{{ role.OWNER }}</div>
-  </div>
-  <app-member-item *ngFor="let invitation of invitationService.invitations" [invitation]="invitation"></app-member-item>
+<div *ngIf="showInvitations" class="border border-ptb-gray-700 py-3 px-6 bg-white flex items-center justify-between">
+  <div class="text-md">{{ owner.name }}</div>
+  <div class="text-md text-ptb-orange-600">OWNER</div>
 </div>
+
+<!--  invitation-member list-->
+<div *ngIf="showInvitations">
+  <app-member-item *ngFor="let invitation of (invitationService.invitations$ | async)"
+                   [invitation]="invitation" [showInvitations]="showInvitations"></app-member-item>
+</div>
+
+<!--  membership-list for admin & owner-->
+<div *ngIf="!showInvitations && !this.membershipService.checkIfUserIsMember()" class="grid grid-cols-2 gap-2">
+  <div>
+    <app-member-item (click)="onClickItem(userMembership)"
+                     *ngFor="let userMembership of (membershipService.groupMemberships$ | async)"
+                     [membership]="userMembership" [showInvitations]="showInvitations">
+    </app-member-item>
+  </div>
+
+  <div *ngIf="display" class="w-2/5">
+    <app-popover [popover]="popover"></app-popover>
+  </div>
+</div>
+
+<!--  membership-list for member-->
+<div *ngIf="!showInvitations && this.membershipService.checkIfUserIsMember()">
+  <app-member-item *ngFor="let userMembership of (membershipService.groupMemberships$ | async)"
+                   [membership]="userMembership" [showInvitations]="showInvitations"></app-member-item>
+</div>
+
+
+
+
+

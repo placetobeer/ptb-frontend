@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {Group} from '../entities/group.model';
-import {BehaviorSubject, defer, iif, interval, merge, Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, defer, iif, interval, merge, Observable, of, Subject, Subscription} from 'rxjs';
 import {defaultIfEmpty, exhaustMap, filter, find, map, mapTo, startWith, switchMap} from 'rxjs/operators';
 import {HttpGroupService} from './httpServices/http-group.service';
 import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
@@ -16,13 +16,15 @@ import {CurrentGroupSelected} from "../state-management/currentGroupSelected.sta
 })
 export class GroupService implements OnDestroy{
 
+  private subscriptions: Subscription[] = [];
+
   constructor(private httpGroupService: HttpGroupService, private accountService: AccountService, private errorService: ErrorService,
-              private membershipService: MembershipService, private currentGroupSelector: CurrentGroupSelector)
+              private currentGroupSelector: CurrentGroupSelector)
   {
     this.loadUserGroups();
   }
 
-  private readonly autoRefreshSubscription =  interval(120000).pipe(startWith(0)).subscribe(() => {
+  private readonly autoRefreshSubscription =  interval(30000).pipe(startWith(0)).subscribe(() => {
     this.loadUserGroups();
   });
 
@@ -80,9 +82,6 @@ export class GroupService implements OnDestroy{
   selectGroup(group: Group): void {
     this.currentGroupSubject.next(group);
     this.loadUserGroups();
-    if (this.currentGroup !== null) {
-      this.membershipService.checkForMembershipFetch(group);
-    }
   }
 
   removeGroupFromList(toDeleteGroup: Group): void {
@@ -92,7 +91,7 @@ export class GroupService implements OnDestroy{
   }
 
   loadUserGroups(): void {
-    this.httpGroupService.loadGroupsByUserId(this.accountService.user.id).subscribe({
+    const subscription = this.httpGroupService.loadGroupsByUserId(this.accountService.user.id).subscribe({
       next: groups => {
         this.groupListSubject.next(groups);
       },
@@ -100,9 +99,11 @@ export class GroupService implements OnDestroy{
         this.errorService.handleError(error);
       }
     });
+    this.subscriptions.push(subscription);
   }
 
   ngOnDestroy(): void {
     this.autoRefreshSubscription.unsubscribe();
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }

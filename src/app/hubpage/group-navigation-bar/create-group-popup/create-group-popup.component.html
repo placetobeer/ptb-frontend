@@ -1,4 +1,4 @@
-<app-base-popup [id]="id">
+<app-routing-popup>
   <form (ngSubmit)="onSubmit()" class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill" #f="ngForm">
     <div class="grid grid-cols-1 gap-4">
       <div class="div-input-field" [ngClass]="{'border-red-700':groupName.touched && groupName.invalid}">
@@ -7,7 +7,9 @@
       </div>
 
       <div class="text-md italic">Already in group</div>
-      <app-member-list></app-member-list>
+      <div class="max-w-md">
+        <app-member-list [showInvitations]="showInvitations"></app-member-list>
+      </div>
 
       <div class="text-md italic">Add member</div>
       <app-add-member-bar></app-add-member-bar>
@@ -22,4 +24,4 @@
   </form>
   <br>
 
-</app-base-popup>
+</app-routing-popup>

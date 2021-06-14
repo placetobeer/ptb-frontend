@@ -1,38 +1,37 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Group} from '../../../../../entities/group.model';
-import {PopupService} from '../../../../../popups/popup.service';
-import {GroupRole} from '../../../../../entities/groupRole.enum';
 import {PopupHelperService} from '../../../../../popups/popup-helper.service';
 import {GroupService} from "../../../../../services/group.service";
 import {HttpGroupService} from "../../../../../services/httpServices/http-group.service";
 import {ErrorService} from "../../../../../services/error.service";
 import {MembershipService} from "../../../../../services/membership.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
+import {RoutingService} from "../../../../../services/routing.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-group-edit-popup',
   templateUrl: './group-edit-popup.component.html',
   styleUrls: ['./group-edit-popup.component.css']
 })
-export class GroupEditPopupComponent implements OnInit {
+export class GroupEditPopupComponent implements OnInit, OnDestroy {
   @ViewChild('groupForm') form: NgForm;
   group: Group;
-
-  id = 'group-edit';
-  isUserOwner;
+  private subscriptions: Subscription[] = [];
   initialValues;
+  showInvitations;
 
-  constructor(private popupService: PopupService, private groupService: GroupService, private membershipService: MembershipService,
-              private popuphelperService: PopupHelperService, private httpGroupService: HttpGroupService,
-              private errorService: ErrorService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private groupService: GroupService, public membershipService: MembershipService,
+              private popupHelperService: PopupHelperService, private httpGroupService: HttpGroupService,
+              private errorService: ErrorService, private routingService: RoutingService) { }
 
   ngOnInit(): void {
     this.group = this.groupService.currentGroup;
     this.initialValues = {
       groupName : this.groupService.currentGroup.name
     };
-    this.isUserOwner = this.membershipService.getUsersMembershipOfSelectedGroup().role === GroupRole.OWNER;
+    this.showInvitations = false;
   }
 
   private applyGroupChanges(): void {
@@ -51,7 +50,7 @@ export class GroupEditPopupComponent implements OnInit {
   }
 
   setActiveGroupName(group: Group, newGroupName: string): void {
-    this.httpGroupService.setGroupNameByGroupId(group.id, newGroupName)
+    const subscription = this.httpGroupService.setGroupNameByGroupId(group.id, newGroupName)
       .subscribe({
         next: response => {
           this.groupService.setCurrentGroupName(newGroupName);
@@ -60,11 +59,12 @@ export class GroupEditPopupComponent implements OnInit {
           this.errorService.handleError(error);
         }
       });
+    this.subscriptions.push(subscription);
   }
 
   private closePopup(): void {
     this.resetValues();
-    this.popupService.close(this.id);
+    this.routingService.navigateToHubpage();
   }
 
   private resetValues(): void {
@@ -82,18 +82,19 @@ export class GroupEditPopupComponent implements OnInit {
   }
 
   onDeleteGroup(): void {
-    this.popuphelperService.openConfirmation('');
-    this.popuphelperService.confirmationSubject.subscribe({
+    this.popupHelperService.openConfirmation('');
+    const subscription = this.popupHelperService.confirmationSubject.subscribe({
       next: confirmation => {
         if (confirmation){
           this.deleteGroup(this.group);
         }
       }
     });
+    this.subscriptions.push(subscription);
   }
 
   deleteGroup(toDeleteGroup: Group): void {
-    this.httpGroupService.deleteGroupByGroupId(toDeleteGroup.id)
+    const subscription = this.httpGroupService.deleteGroupByGroupId(toDeleteGroup.id)
       .subscribe({
         next: response => {
           this.groupService.removeGroupFromList(toDeleteGroup);
@@ -103,8 +104,10 @@ export class GroupEditPopupComponent implements OnInit {
           this.errorService.handleError(error);
         }
       });
+    this.subscriptions.push(subscription);
   }
-  onEditGroup(): void {
-    this.router.navigate(['add'], {relativeTo: this.route});
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {InvitationResponse} from '../../entities/invitationResponse.model';
-import {retry} from 'rxjs/operators';
 import {InvitationRequest} from '../../requests/invitation-request.model';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class HttpInvitationService {
   }
 
   loadInvitationsByUserId(userId: number): Observable<InvitationResponse[]>{
-    return this.http.get<InvitationResponse[]>('http://localhost:8080/invitations',
+    return this.http.get<InvitationResponse[]>('http://localhost:8080/invitations/byUser',
       {params: new HttpParams().set('userId', String(userId))});
   }
 
