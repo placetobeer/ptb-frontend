@@ -3,7 +3,7 @@ import {HttpInvitationService} from './httpServices/http-invitation.service';
 import {InvitationResponse} from '../entities/invitationResponse.model';
 import {ErrorService} from "./error.service";
 import {AccountService} from "./account.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, EMPTY} from "rxjs";
 import {Invitation} from "../entities/invitation.model";
 
 @Injectable({
@@ -31,6 +31,10 @@ export class UserInvitationService {
     ]);
   }
 
+  clearPendingInvitations(): void{
+    this.pendingInvitationsSubject.next([]);
+  }
+
   loadInvitations(): void{
     this.httpInvitationService.loadInvitationsByUserId(this.accountService.user.id).subscribe({
       next: invitations => {
@@ -46,8 +50,11 @@ export class UserInvitationService {
     this.httpInvitationService.answerInvitationByInvitationId(toAcceptInvitationResponse.id, true)
       .subscribe({
       next: response => {
-        const filteredInvitations = this.pendingInvitations.filter(invitationResponse => invitationResponse !== toAcceptInvitationResponse);
-        filteredInvitations.forEach(invitation => this.addPendingInvitation(invitation));
+        // const filteredInvitations = this.pendingInvitations.filter(
+        // invitationResponse => invitationResponse !== toAcceptInvitationResponse);
+        // filteredInvitations.forEach(invitation => this.addPendingInvitation(invitation));
+        this.clearPendingInvitations();
+        this.loadInvitations();
       },
       error: error => {
         this.errorService.handleError(error);
@@ -59,9 +66,11 @@ export class UserInvitationService {
     this.httpInvitationService.answerInvitationByInvitationId(toDeclineInvitationResponse.id, false)
       .subscribe({
       next: response => {
-        const filteredInvitations = this.pendingInvitations
-          .filter(invitationResponse => invitationResponse !== toDeclineInvitationResponse);
-        filteredInvitations.forEach(invitation => this.addPendingInvitation(invitation));
+        // const filteredInvitations = this.pendingInvitations
+        //  .filter(invitationResponse => invitationResponse !== toDeclineInvitationResponse);
+        // filteredInvitations.forEach(invitation => this.addPendingInvitation(invitation));
+        this.clearPendingInvitations();
+        this.loadInvitations();
       },
       error: error => {
         this.errorService.handleError(error);

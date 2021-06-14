@@ -13,7 +13,7 @@ export class HttpInvitationService {
   }
 
   loadInvitationsByUserId(userId: number): Observable<InvitationResponse[]>{
-    return this.http.get<InvitationResponse[]>('http://localhost:8080/invitations',
+    return this.http.get<InvitationResponse[]>('http://localhost:8080/invitations/byUser',
       {params: new HttpParams().set('userId', String(userId))});
   }
 
