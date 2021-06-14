@@ -31,39 +31,44 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { RoutingPopupComponent } from './popups/routing-popup/routing-popup.component';
 import { PopoverComponent } from './popups/popover/popover.component';
-import {PopoverDirective} from "./popups/popover/popover.directive";
+import { PopoverDirective } from './popups/popover/popover.directive';
 import { OwnerPopoverComponent } from './popups/popover/owner-popover/owner-popover.component';
 import { AdminPopoverComponent } from './popups/popover/admin-popover/admin-popover.component';
 import { AddMemberComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/add-member/add-member.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    HubpageComponent,
-    PlaceholderComponent,
-    GroupNavigationBarComponent,
-    GroupListComponent,
-    GroupItemComponent,
-    GroupItemActiveComponent,
-    GroupItemActiveUserItemComponent,
-    PopupComponent,
-    BasePopupComponent,
-    BasePopupHeaderComponent,
-    GroupEditPopupComponent,
-    CreateGroupPopupComponent,
-    GenericErrorPopupComponent,
-    InvitationListComponent,
-    InvitationItemComponent,
-    MemberItemComponent,
-    MemberListComponent,
-    AddMemberBarComponent,
-    ErrorPageComponent,
-    GenericConfirmationPopupComponent,
-    LoginComponent,
-    RegisterComponent,
-    AddMemberComponent
-  ],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        HubpageComponent,
+        PlaceholderComponent,
+        GroupNavigationBarComponent,
+        GroupListComponent,
+        GroupItemComponent,
+        GroupItemActiveComponent,
+        GroupItemActiveUserItemComponent,
+        PopupComponent,
+        BasePopupComponent,
+        BasePopupHeaderComponent,
+        GroupEditPopupComponent,
+        CreateGroupPopupComponent,
+        GenericErrorPopupComponent,
+        InvitationListComponent,
+        InvitationItemComponent,
+        MemberItemComponent,
+        MemberListComponent,
+        AddMemberBarComponent,
+        ErrorPageComponent,
+        GenericConfirmationPopupComponent,
+        LoginComponent,
+        RegisterComponent,
+        AddMemberComponent,
+        PopoverComponent,
+        RoutingPopupComponent,
+        PopoverDirective,
+        OwnerPopoverComponent,
+        AdminPopoverComponent
+    ],
     imports: [
         AppRoutingModule,
         BrowserModule,
