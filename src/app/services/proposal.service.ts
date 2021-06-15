@@ -5,6 +5,7 @@ import {Proposal} from "../entities/proposal.model";
 import {ErrorService} from "./error.service";
 import {AccountService} from "./account.service";
 import {HttpProposalService} from "./httpServices/http-proposal.service";
+import {Group} from "../entities/group.model";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,13 @@ export class ProposalService implements OnDestroy {
 
   get proposals(): Proposal[] {
     return this.proposalListSubject.value;
+  }
+
+  addProposal(proposal: Proposal): void{
+    this.proposalListSubject.next([
+      ...this.proposals,
+      proposal
+    ]);
   }
 
   private loadProposals(): void {
