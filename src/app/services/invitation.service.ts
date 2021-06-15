@@ -25,11 +25,11 @@ export class InvitationService implements OnDestroy{
   private readonly invitationsSubject = new BehaviorSubject<Invitation[]>([]);
   public readonly invitations$ = this.invitationsSubject.asObservable();
 
-  private readonly groupInvitationsSubject = new BehaviorSubject<Invitation[]>([]);
+  private readonly groupInvitationsSubject = new BehaviorSubject<GroupInvitation[]>([]);
   public readonly groupInvitations$ = this.groupInvitationsSubject.asObservable();
 
-  private readonly groupInvitationsIdSubject = new BehaviorSubject<number[]>([]);
-  public readonly groupInvitationsId$ = this.groupInvitationsIdSubject.asObservable();
+  // private readonly groupInvitationsIdSubject = new BehaviorSubject<number[]>([]);
+  // public readonly groupInvitationsId$ = this.groupInvitationsIdSubject.asObservable();
 
   owner = this.accountService.user;
 
@@ -76,11 +76,11 @@ export class InvitationService implements OnDestroy{
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  get groupInvitations(): Invitation[] {
+  get groupInvitations(): GroupInvitation[] {
     return this.groupInvitationsSubject.value;
   }
 
-  addGroupInvitations(newGroupInvitation: Invitation): void {
+  addGroupInvitations(newGroupInvitation: GroupInvitation): void {
     this.groupInvitationsSubject.next([
       ...this.groupInvitations,
       newGroupInvitation
@@ -91,7 +91,7 @@ export class InvitationService implements OnDestroy{
     this.groupInvitationsSubject.next([]);
   }
 
-  get groupInvitationsId(): number[] {
+  /*get groupInvitationsId(): number[] {
     return this.groupInvitationsIdSubject.value;
   }
 
@@ -109,14 +109,13 @@ export class InvitationService implements OnDestroy{
   addFusionGroupInvitations(groupInvitation: GroupInvitation): void{
     this.addGroupInvitationsId(groupInvitation.id);
     this.addGroupInvitations(new Invitation(groupInvitation.mail, groupInvitation.grantAdmin));
-  }
+  }*/
 
   loadGroupInvitations(groupId: number): void {
     this.clearGroupInvitations();
-    this.clearGroupInvitationsId();
     const subscription = this.httpInvitationService.loadInvitationsByGroupId(groupId).subscribe({
       next: groupInvitations => {
-        groupInvitations.forEach(groupInvitation => this.addFusionGroupInvitations(groupInvitation));
+        groupInvitations.forEach(groupInvitation => this.addGroupInvitations(groupInvitation));
       },
       error: error => {
         this.errorService.handleError(error);
