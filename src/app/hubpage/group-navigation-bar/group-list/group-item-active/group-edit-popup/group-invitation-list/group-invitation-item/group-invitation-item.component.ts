@@ -15,19 +15,12 @@ import {GroupInvitation} from "../../../../../../../entities/groupInvitation.mod
 export class GroupInvitationItemComponent implements OnInit {
 
   @Input() groupInvitation: GroupInvitation;
-  @Input() membership: GroupsMembership;
-  @Input() showInvitations;
   @Input() invitationId: number;
-  @Input() pendInv;
   role = GroupRole;
-  userNotOwner;
 
   constructor(public invitationService: InvitationService, public membershipService: MembershipService) { }
 
   ngOnInit(): void {
-    if (!this.membership === null){
-      this.userNotOwner = this.membership.role !== GroupRole.OWNER;
-    }
   }
 
 }
