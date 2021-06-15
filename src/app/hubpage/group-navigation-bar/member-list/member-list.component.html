@@ -4,9 +4,17 @@
 </div>
 
 <!--  invitation-member list-->
-<div *ngIf="showInvitations">
-  <app-member-item *ngFor="let invitation of (invitationService.groupInvitations$ | async)"
-                   [invitation]="invitation" [showInvitations]="true"></app-member-item>
+<div *ngIf="showInvitations && !pendInv">
+  <app-member-item *ngFor="let invitation of (invitationService.invitations$ | async)"
+    [invitation]="invitation" [showInvitations]="true"
+  ></app-member-item>
+</div>
+
+<!--  pending-groupInvitation list-->
+<div *ngIf="showInvitations && pendInv">
+  <app-member-item *ngFor="let invitation of (invitationService.groupInvitations$ | async); let i = index"
+                   [invitation]="invitation" [showInvitations]="true"
+                   [invitationId]="invitationService.groupInvitationsId[i]"></app-member-item>
 </div>
 
 <!--  membership-list for admin & owner-->

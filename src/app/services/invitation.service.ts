@@ -28,6 +28,9 @@ export class InvitationService implements OnDestroy{
   private readonly groupInvitationsSubject = new BehaviorSubject<Invitation[]>([]);
   public readonly groupInvitations$ = this.groupInvitationsSubject.asObservable();
 
+  private readonly groupInvitationsIdSubject = new BehaviorSubject<number[]>([]);
+  public readonly groupInvitationsId$ = this.groupInvitationsIdSubject.asObservable();
+
   owner = this.accountService.user;
 
   private readonly autoRefreshSubscription =  interval(30000).pipe(startWith(0)).subscribe(() => {
@@ -88,12 +91,32 @@ export class InvitationService implements OnDestroy{
     this.groupInvitationsSubject.next([]);
   }
 
+  get groupInvitationsId(): number[] {
+    return this.groupInvitationsIdSubject.value;
+  }
+
+  addGroupInvitationsId(newGroupInvitationsId: number): void {
+    this.groupInvitationsIdSubject.next([
+      ...this.groupInvitationsId,
+      newGroupInvitationsId
+    ]);
+  }
+
+  clearGroupInvitationsId(): void {
+    this.groupInvitationsIdSubject.next([]);
+  }
+
+  addFusionGroupInvitations(groupInvitation: GroupInvitation): void{
+    this.addGroupInvitationsId(groupInvitation.id);
+    this.addGroupInvitations(new Invitation(groupInvitation.mail, groupInvitation.grantAdmin));
+  }
+
   loadGroupInvitations(groupId: number): void {
     this.clearGroupInvitations();
+    this.clearGroupInvitationsId();
     const subscription = this.httpInvitationService.loadInvitationsByGroupId(groupId).subscribe({
       next: groupInvitations => {
-        groupInvitations.forEach(groupInvitation => this.addGroupInvitations(
-          new Invitation(groupInvitation.mail, groupInvitation.grantAdmin)));
+        groupInvitations.forEach(groupInvitation => this.addFusionGroupInvitations(groupInvitation));
       },
       error: error => {
         this.errorService.handleError(error);

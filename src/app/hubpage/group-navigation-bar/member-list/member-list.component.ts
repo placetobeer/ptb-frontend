@@ -10,6 +10,7 @@ import {OwnerPopoverComponent} from "../../../popups/popover/owner-popover/owner
 import {AdminPopoverComponent} from "../../../popups/popover/admin-popover/admin-popover.component";
 import {GroupsMembership} from "../../../entities/groupsMembership.model";
 import {NgForm} from "@angular/forms";
+import {InvitationPopoverComponent} from "../../../popups/popover/invitation-popover/invitation-popover.component";
 
 @Component({
   selector: 'app-member-list',
@@ -21,6 +22,7 @@ export class MemberListComponent implements OnInit {
   owner: User = this.accountService.user;
   @Input() showInvitations;
   @Input() newGroup;
+  @Input() pendInv;
   display;
   popover: PopoverItem;
   userMembership: GroupsMembership;
@@ -57,18 +59,33 @@ export class MemberListComponent implements OnInit {
   }
 
   private createPopoverItem(): void {
-    switch (this.checkGroupRole()) {
-      case GroupRole.OWNER: {
-        this.popover = new PopoverItem(OwnerPopoverComponent, this.userMembership);
-        break;
+    if (!this.newGroup){
+      switch (this.checkGroupRole()) {
+        case GroupRole.OWNER: {
+          this.popover = new PopoverItem(OwnerPopoverComponent, this.userMembership);
+          break;
+        }
+        case GroupRole.ADMIN: {
+          this.popover = new PopoverItem(AdminPopoverComponent, this.userMembership);
+          break;
+        }
+        default: {
+          this.display = false;
+          break;
+        }
       }
-      case GroupRole.ADMIN: {
-        this.popover = new PopoverItem(AdminPopoverComponent, this.userMembership);
-        break;
-      }
-      default: {
-        this.display = false;
-        break;
+    }
+    else {
+      switch (this.checkGroupRole()) {
+        case GroupRole.OWNER:
+        case GroupRole.ADMIN:
+        { // this.popover = new PopoverItem(InvitationPopoverComponent, this.invitationId);
+          break;
+        }
+        default: {
+          this.display = false;
+          break;
+        }
       }
     }
   }

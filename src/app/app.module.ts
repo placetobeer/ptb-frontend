@@ -35,6 +35,7 @@ import { PopoverDirective } from './popups/popover/popover.directive';
 import { OwnerPopoverComponent } from './popups/popover/owner-popover/owner-popover.component';
 import { AdminPopoverComponent } from './popups/popover/admin-popover/admin-popover.component';
 import { AddMemberComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/add-member/add-member.component';
+import { InvitationPopoverComponent } from './popups/popover/invitation-popover/invitation-popover.component';
 
 @NgModule({
     declarations: [
@@ -67,7 +68,8 @@ import { AddMemberComponent } from './hubpage/group-navigation-bar/group-list/gr
         RoutingPopupComponent,
         PopoverDirective,
         OwnerPopoverComponent,
-        AdminPopoverComponent
+        AdminPopoverComponent,
+        InvitationPopoverComponent
     ],
     imports: [
         AppRoutingModule,

@@ -22,6 +22,7 @@ export class GroupEditPopupComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   initialValues;
   showInvitations;
+  pendInv;
 
   constructor(private groupService: GroupService, public membershipService: MembershipService,
               private popupHelperService: PopupHelperService, private httpGroupService: HttpGroupService,
@@ -34,6 +35,7 @@ export class GroupEditPopupComponent implements OnInit, OnDestroy {
       groupName : this.groupService.currentGroup.name
     };
     this.showInvitations = false;
+    this.pendInv = false;
     this.invitationService.loadGroupInvitations(this.group.id);
   }
 
