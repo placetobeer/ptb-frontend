@@ -14,7 +14,9 @@
 <div *ngIf="showInvitations && pendInv">
   <app-member-item *ngFor="let invitation of (invitationService.groupInvitations$ | async); let i = index"
                    [invitation]="invitation" [showInvitations]="true"
-                   [invitationId]="invitationService.groupInvitationsId[i]"></app-member-item>
+                   [invitationId]="invitationService.groupInvitationsId[i]"
+                   (click)="onClickInv(invitationService.groupInvitationsId[i])"
+  ></app-member-item>
 </div>
 
 <!--  membership-list for admin & owner-->
