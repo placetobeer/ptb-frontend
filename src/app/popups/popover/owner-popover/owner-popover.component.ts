@@ -14,7 +14,7 @@ import {Subscription} from "rxjs";
   templateUrl: './owner-popover.component.html'
 })
 export class OwnerPopoverComponent implements OnInit, PopoverInterface, OnDestroy {
-  @Input() userMembership: GroupsMembership;
+  @Input() data: any;
   @Input() popoverComponentRef: PopoverComponent;
   private subscriptions: Subscription[] = [];
   adminMessage;
@@ -24,18 +24,18 @@ export class OwnerPopoverComponent implements OnInit, PopoverInterface, OnDestro
               private errorService: ErrorService, private popupHelperService: PopupHelperService) {}
 
   ngOnInit(): void {
-    if (this.userMembership.role === GroupRole.ADMIN) {
+    if (this.data.role === GroupRole.ADMIN) {
       this.adminMessage = "Revoke admin role";
       this.grantAdmin = false;
     }
-    if (this.userMembership.role === GroupRole.MEMBER) {
+    if (this.data.role === GroupRole.MEMBER) {
       this.adminMessage = "Grant admin role";
       this.grantAdmin = true;
     }
   }
 
   onKickMember(): void {
-    this.kickMember(this.userMembership);
+    this.kickMember(this.data);
   }
 
   onChangeAdminRole(): void {
@@ -43,7 +43,7 @@ export class OwnerPopoverComponent implements OnInit, PopoverInterface, OnDestro
   }
 
   private setRole(role: GroupRole): void {
-    const subscription = this.httpMembershipService.setRole(this.userMembership.membershipId, JSON.stringify(role))
+    const subscription = this.httpMembershipService.setRole(this.data.membershipId, JSON.stringify(role))
       .subscribe(
         {
           next: response => {
