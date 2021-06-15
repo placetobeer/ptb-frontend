@@ -25,7 +25,7 @@ export class InvitationService implements OnDestroy{
   private readonly invitationsSubject = new BehaviorSubject<Invitation[]>([]);
   public readonly invitations$ = this.invitationsSubject.asObservable();
 
-  private readonly groupInvitationsSubject = new BehaviorSubject<GroupInvitation[]>([]);
+  private readonly groupInvitationsSubject = new BehaviorSubject<Invitation[]>([]);
   public readonly groupInvitations$ = this.groupInvitationsSubject.asObservable();
 
   owner = this.accountService.user;
@@ -73,11 +73,11 @@ export class InvitationService implements OnDestroy{
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  get groupInvitations(): GroupInvitation[] {
+  get groupInvitations(): Invitation[] {
     return this.groupInvitationsSubject.value;
   }
 
-  addGroupInvitations(newGroupInvitation: GroupInvitation): void {
+  addGroupInvitations(newGroupInvitation: Invitation): void {
     this.groupInvitationsSubject.next([
       ...this.groupInvitations,
       newGroupInvitation
@@ -92,7 +92,8 @@ export class InvitationService implements OnDestroy{
     this.clearGroupInvitations();
     const subscription = this.httpInvitationService.loadInvitationsByGroupId(groupId).subscribe({
       next: groupInvitations => {
-        groupInvitations.forEach(groupInvitation => this.addGroupInvitations(groupInvitation));
+        groupInvitations.forEach(groupInvitation => this.addGroupInvitations(
+          new Invitation(groupInvitation.mail, groupInvitation.grantAdmin)));
       },
       error: error => {
         this.errorService.handleError(error);

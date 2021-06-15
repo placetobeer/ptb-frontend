@@ -27,6 +27,7 @@ export class CreateGroupPopupComponent implements OnInit, OnDestroy {
               private routingService: RoutingService) {}
 
   ngOnInit(): void {
+    this.invitationService.clearGroupInvitations();
     this.showInvitations = true;
   }
 
