@@ -1,0 +1,8 @@
+<!--  pending-groupInvitation list-->
+<app-member-item *ngFor="let invitation of (invitationService.groupInvitations$ | async)"
+                 [invitation]="invitation"
+                 (click)="onClickInv(invitation.id)"
+></app-member-item>
+
+
+
