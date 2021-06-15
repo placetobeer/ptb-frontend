@@ -5,6 +5,6 @@ export enum ActivityType {
   GAMES = 'GAMES',
   SWIMMING_AREA = 'SWIMMING AREA',
   CLUB = 'CLUB',
-  PARC = 'PARC',
+  PARK = 'PARK',
   OTHER = 'OTHER'
 }

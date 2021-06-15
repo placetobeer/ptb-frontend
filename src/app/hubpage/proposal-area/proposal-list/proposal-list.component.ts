@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ProposalService} from "../../../services/proposal.service";
 
 @Component({
   selector: 'app-proposal-list',
@@ -6,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProposalListComponent implements OnInit {
 
-  constructor() { }
+  constructor(public proposalService: ProposalService) { }
 
   ngOnInit(): void {
+    console.log(this.proposalService.proposalList$);
   }
 
 }
