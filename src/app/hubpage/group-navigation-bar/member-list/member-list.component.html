@@ -5,7 +5,7 @@
 
 <!--  invitation-member list-->
 <div *ngIf="showInvitations">
-  <app-member-item *ngFor="let invitation of (invitationService.invitations$ | async)"
+  <app-member-item *ngFor="let invitation of (invitationService.groupInvitations$ | async)"
                    [invitation]="invitation" [showInvitations]="true"></app-member-item>
 </div>
 

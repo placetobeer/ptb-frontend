@@ -9,6 +9,7 @@ import {MembershipService} from "../../../../../services/membership.service";
 import {Router} from "@angular/router";
 import {RoutingService} from "../../../../../services/routing.service";
 import {Subscription} from "rxjs";
+import {InvitationService} from "../../../../../services/invitation.service";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -24,7 +25,8 @@ export class GroupEditPopupComponent implements OnInit, OnDestroy {
 
   constructor(private groupService: GroupService, public membershipService: MembershipService,
               private popupHelperService: PopupHelperService, private httpGroupService: HttpGroupService,
-              private errorService: ErrorService, private routingService: RoutingService) { }
+              private errorService: ErrorService, private routingService: RoutingService,
+              private invitationService: InvitationService) { }
 
   ngOnInit(): void {
     this.group = this.groupService.currentGroup;
@@ -32,6 +34,7 @@ export class GroupEditPopupComponent implements OnInit, OnDestroy {
       groupName : this.groupService.currentGroup.name
     };
     this.showInvitations = false;
+    this.invitationService.loadGroupInvitations(this.group.id);
   }
 
   private applyGroupChanges(): void {
