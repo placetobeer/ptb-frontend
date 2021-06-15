@@ -19,6 +19,7 @@ export class CreateGroupPopupComponent implements OnInit, OnDestroy {
   @ViewChild('f', {static: false}) form: NgForm;
   ownerId = this.accountService.user.id;
   showInvitations;
+  newGroup;
   private subscriptions: Subscription[] = [];
 
   constructor(private accountService: AccountService, private httpGroupService: HttpGroupService,
@@ -29,6 +30,7 @@ export class CreateGroupPopupComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.invitationService.clearGroupInvitations();
     this.showInvitations = true;
+    this.newGroup = true;
   }
 
   onSubmit(): void {

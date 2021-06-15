@@ -20,6 +20,7 @@ export class MemberListComponent implements OnInit {
   @ViewChild('f', {static: false}) form: NgForm;
   owner: User = this.accountService.user;
   @Input() showInvitations;
+  @Input() newGroup;
   display;
   popover: PopoverItem;
   userMembership: GroupsMembership;
