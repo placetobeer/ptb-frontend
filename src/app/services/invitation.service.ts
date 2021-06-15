@@ -10,6 +10,7 @@ import {Group} from "../entities/group.model";
 import {ErrorService} from "./error.service";
 import {distinctUntilChanged, filter, map, startWith} from "rxjs/operators";
 import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
+import {GroupInvitation} from "../entities/groupInvitation.model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,9 @@ export class InvitationService implements OnDestroy{
 
   private readonly invitationsSubject = new BehaviorSubject<Invitation[]>([]);
   public readonly invitations$ = this.invitationsSubject.asObservable();
+
+  private readonly groupInvitationsSubject = new BehaviorSubject<GroupInvitation[]>([]);
+  public readonly groupInvitations$ = this.groupInvitationsSubject.asObservable();
 
   owner = this.accountService.user;
 
@@ -69,4 +73,31 @@ export class InvitationService implements OnDestroy{
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
+  get groupInvitations(): GroupInvitation[] {
+    return this.groupInvitationsSubject.value;
+  }
+
+  addGroupInvitations(newGroupInvitation: GroupInvitation): void {
+    this.groupInvitationsSubject.next([
+      ...this.groupInvitations,
+      newGroupInvitation
+    ]);
+  }
+
+  clearGroupInvitations(): void {
+    this.groupInvitationsSubject.next([]);
+  }
+
+  loadGroupInvitations(groupId: number): void {
+    this.clearGroupInvitations();
+    const subscription = this.httpInvitationService.loadInvitationsByGroupId(groupId).subscribe({
+      next: groupInvitations => {
+        groupInvitations.forEach(groupInvitation => this.addGroupInvitations(groupInvitation));
+      },
+      error: error => {
+        this.errorService.handleError(error);
+      }
+    });
+    this.subscriptions.push(subscription);
+  }
 }
