@@ -32,6 +32,7 @@ export class GroupInvitationListComponent implements OnInit {
 
   onClickInv(invitationId: number): void {
     this.invitationId = invitationId;
+    this.display = true;
     this.createPopoverItem();
   }
 
