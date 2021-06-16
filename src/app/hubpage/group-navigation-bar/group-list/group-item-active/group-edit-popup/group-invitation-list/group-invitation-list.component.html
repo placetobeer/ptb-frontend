@@ -1,0 +1,14 @@
+<!--  pending-groupInvitation list-->
+<div class="grid grid-cols-2 gap-2">
+  <div>
+    <app-group-invitation-item *ngFor="let invitation of (invitationService.groupInvitations$ | async)"
+                               [groupInvitation]="invitation"
+                               (click)="onClickInv(invitation.id)"
+    ></app-group-invitation-item>
+  </div>
+  <div *ngIf="display" class="w-2/5">
+    <app-popover [popover]="popover"></app-popover>
+  </div>
+</div>
+
+

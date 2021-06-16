@@ -24,11 +24,11 @@ export class GenericConfirmationPopupComponent implements OnInit {
       next: message => {this.confirmationMessage = message; }
     });
   }
-  confirm(): void {
+  onConfirm(): void {
     this.popuphelperService.onConfirm(true);
     this.popupService.close(this.id);
   }
-  cancel(): void {
+  onCancel(): void {
     this.popuphelperService.onConfirm(false);
     this.popupService.close(this.id);
   }

@@ -14,7 +14,7 @@ import {List} from "postcss/lib/list";
   templateUrl: './admin-popover.component.html'
 })
 export class AdminPopoverComponent implements OnInit, PopoverInterface, OnDestroy {
-  @Input() userMembership: GroupsMembership;
+  @Input() data: any;
   @Input() popoverComponentRef: PopoverComponent;
   private subscriptions: Subscription[] = [];
 
@@ -25,7 +25,7 @@ export class AdminPopoverComponent implements OnInit, PopoverInterface, OnDestro
   }
 
   onKickMember(): void {
-    this.kickMember(this.userMembership);
+    this.kickMember(this.data);
   }
 
   kickMember(userMembership: GroupsMembership): void{

@@ -29,7 +29,7 @@ export class PopoverComponent implements OnInit, OnChanges{
     viewContainerRef.clear();
 
     this.componentRef = viewContainerRef.createComponent<PopoverInterface>(componentFactory);
-    this.componentRef.instance.userMembership = this.popover.userMembership;
+    this.componentRef.instance.data = this.popover.data;
 
     const component = this.componentRef.instance;
     component.popoverComponentRef = this;

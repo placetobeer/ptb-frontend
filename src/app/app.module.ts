@@ -31,7 +31,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { RoutingPopupComponent } from './popups/routing-popup/routing-popup.component';
 import { PopoverComponent } from './popups/popover/popover.component';
-import {PopoverDirective} from "./popups/popover/popover.directive";
+import { PopoverDirective } from './popups/popover/popover.directive';
 import { OwnerPopoverComponent } from './popups/popover/owner-popover/owner-popover.component';
 import { AdminPopoverComponent } from './popups/popover/admin-popover/admin-popover.component';
 import { ProposalAreaComponent } from './hubpage/proposal-area/proposal-area.component';
@@ -40,6 +40,10 @@ import { ProposalItemComponent } from './hubpage/proposal-area/proposal-item/pro
 import { AddProposalPopupComponent } from './hubpage/proposal-area/add-proposal-popup/add-proposal-popup.component';
 import { StartpageComponent } from './startpage/startpage.component';
 import { InfoPopupComponent } from './popups/info-popup/info-popup.component';
+import { AddMemberComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/add-member/add-member.component';
+import { InvitationPopoverComponent } from './popups/popover/invitation-popover/invitation-popover.component';
+import { GroupInvitationListComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-invitation-list/group-invitation-list.component';
+import { GroupInvitationItemComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-invitation-list/group-invitation-item/group-invitation-item.component';
 
 @NgModule({
   declarations: [
@@ -65,8 +69,6 @@ import { InfoPopupComponent } from './popups/info-popup/info-popup.component';
     AddMemberBarComponent,
     ErrorPageComponent,
     GenericConfirmationPopupComponent,
-    LoginComponent,
-    RegisterComponent,
     RoutingPopupComponent,
     PopoverComponent,
     PopoverDirective,
@@ -77,7 +79,12 @@ import { InfoPopupComponent } from './popups/info-popup/info-popup.component';
     ProposalItemComponent,
     AddProposalPopupComponent,
     StartpageComponent,
-    InfoPopupComponent
+    InfoPopupComponent,
+    InvitationPopoverComponent,
+    GroupInvitationListComponent,
+    GroupInvitationItemComponent,
+    RegisterComponent,
+    LoginComponent
   ],
     imports: [
         AppRoutingModule,

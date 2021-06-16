@@ -1,0 +1,8 @@
+<div class="border border-ptb-gray-800 py-3 px-6 bg-white flex flex-grow flex-wrap items-center max-w-md cursor-pointer">
+  <div class="text-md">
+    {{ groupInvitation.mail }}
+  </div>
+  <div class="text-md text-ptb-orange-600 ml-auto">
+    {{ groupInvitation.grantAdmin ? role.ADMIN : role.MEMBER }}
+  </div>
+</div>
