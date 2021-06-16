@@ -13,14 +13,7 @@
       <div class="text-md italic">Choose an activity type</div>
       <div class="relative inline-flex">
         <select id="activityType" name="activityType" class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none" ngModel>
-          <option>Bar</option>
-          <option>Restaurant</option>
-          <option>Sport</option>
-          <option>Games</option>
-          <option>Swimming Area</option>
-          <option>Club</option>
-          <option>Park</option>
-          <option>Other</option>
+          <option *ngFor="let activityType of keys(activityTypes)">{{activityType}}</option>
         </select>
       </div>
 

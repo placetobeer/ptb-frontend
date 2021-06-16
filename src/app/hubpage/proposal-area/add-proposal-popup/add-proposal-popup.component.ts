@@ -7,29 +7,31 @@ import {HttpProposalService} from "../../../services/httpServices/http-proposal.
 import {ProposalService} from "../../../services/proposal.service";
 import {ErrorService} from "../../../services/error.service";
 import {AccountService} from "../../../services/account.service";
+import {Proposal} from "../../../entities/proposal.model";
+import {Group} from "../../../entities/group.model";
+import {GroupService} from "../../../services/group.service";
 
 @Component({
   selector: 'app-add-proposal-popup',
   templateUrl: './add-proposal-popup.component.html'
 })
-export class AddProposalPopupComponent implements OnInit, OnDestroy {
+export class AddProposalPopupComponent implements OnDestroy {
   @ViewChild('f', {static: false}) form: NgForm;
   navigateToStartpage = false;
   private subscriptions: Subscription[] = [];
+  keys = Object.keys;
+  activityTypes = ActivityType;
 
   constructor(private routingService: RoutingService, private httpProposalService: HttpProposalService,
               private proposalService: ProposalService, private errorService: ErrorService,
-              private accountService: AccountService) { }
+              private groupService: GroupService) { }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  ngOnInit(): void {
-  }
-
   onSubmit(): void {
-    this.createProposal(this.accountService.user.id, this.form.value.proposalName, this.form.value.activityType);
+    this.createProposal(this.groupService.currentGroup.id, this.form.value.proposalName, this.form.value.activityType);
     this.form.reset();
   }
 
@@ -38,8 +40,9 @@ export class AddProposalPopupComponent implements OnInit, OnDestroy {
     this.routingService.navigateToHubpage();
   }
 
-  private createProposal(currentUserId: number, proposalName: string, activityType: ActivityType): void {
-    const subscription = this.httpProposalService.createProposalByUserId(currentUserId, proposalName, activityType)
+  private createProposal(currentGroupId: number, proposalName: string, activityType: ActivityType): void {
+    const newProposal = new Proposal(proposalName, currentGroupId, activityType);
+    const subscription = this.httpProposalService.createProposalByUserId(newProposal)
       .subscribe({
         next: proposal => {
           this.proposalService.addProposal(proposal);
