@@ -74,7 +74,9 @@ import { GroupInvitationItemComponent } from './hubpage/group-navigation-bar/gro
     InfoPopupComponent,
     InvitationPopoverComponent,
     GroupInvitationListComponent,
-    GroupInvitationItemComponent
+    GroupInvitationItemComponent,
+    RegisterComponent,
+    LoginComponent
   ],
     imports: [
         AppRoutingModule,
