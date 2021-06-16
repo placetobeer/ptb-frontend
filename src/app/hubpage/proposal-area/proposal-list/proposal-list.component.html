@@ -1,0 +1,14 @@
+<div class="flex flex-col space-y-2 py-4">
+
+  <div *ngIf="(proposalService.proposalList$ | async).length == 0">
+    <div class="flex h-32 items-center justify-center heropattern-fallingtriangles-ptb-gray-600 opacity-50">
+      <div class="text-3xl font-semibold">No proposals yet!</div>
+    </div>
+  </div>
+
+  <div *ngIf="(proposalService.proposalList$ | async).length != 0">
+    <app-proposal-item *ngFor="let proposal of (proposalService.proposalList$ | async)" [proposalName]="proposal.name"
+                       [activityType]="proposal.activityType"></app-proposal-item>
+  </div>
+</div>
+

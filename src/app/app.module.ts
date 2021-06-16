@@ -34,47 +34,60 @@ import { PopoverComponent } from './popups/popover/popover.component';
 import { PopoverDirective } from './popups/popover/popover.directive';
 import { OwnerPopoverComponent } from './popups/popover/owner-popover/owner-popover.component';
 import { AdminPopoverComponent } from './popups/popover/admin-popover/admin-popover.component';
+import { ProposalAreaComponent } from './hubpage/proposal-area/proposal-area.component';
+import { ProposalListComponent } from './hubpage/proposal-area/proposal-list/proposal-list.component';
+import { ProposalItemComponent } from './hubpage/proposal-area/proposal-item/proposal-item.component';
+import { AddProposalPopupComponent } from './hubpage/proposal-area/add-proposal-popup/add-proposal-popup.component';
+import { StartpageComponent } from './startpage/startpage.component';
+import { InfoPopupComponent } from './popups/info-popup/info-popup.component';
+import { AddMemberComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/add-member/add-member.component';
 import { InvitationPopoverComponent } from './popups/popover/invitation-popover/invitation-popover.component';
 import { GroupInvitationListComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-invitation-list/group-invitation-list.component';
 import { GroupInvitationItemComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-invitation-list/group-invitation-item/group-invitation-item.component';
 import { AddMemberPopoverComponent } from './popups/popover/add-member-popover/add-member-popover.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        HubpageComponent,
-        PlaceholderComponent,
-        GroupNavigationBarComponent,
-        GroupListComponent,
-        GroupItemComponent,
-        GroupItemActiveComponent,
-        GroupItemActiveUserItemComponent,
-        PopupComponent,
-        BasePopupComponent,
-        BasePopupHeaderComponent,
-        GroupEditPopupComponent,
-        CreateGroupPopupComponent,
-        GenericErrorPopupComponent,
-        InvitationListComponent,
-        InvitationItemComponent,
-        MemberItemComponent,
-        MemberListComponent,
-        AddMemberBarComponent,
-        ErrorPageComponent,
-        GenericConfirmationPopupComponent,
-        LoginComponent,
-        RegisterComponent,
-        PopoverComponent,
-        RoutingPopupComponent,
-        PopoverDirective,
-        OwnerPopoverComponent,
-        AdminPopoverComponent,
-        InvitationPopoverComponent,
-        GroupInvitationListComponent,
-        GroupInvitationItemComponent,
-        AddMemberPopoverComponent
-    ],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    HubpageComponent,
+    PlaceholderComponent,
+    GroupNavigationBarComponent,
+    GroupListComponent,
+    GroupItemComponent,
+    GroupItemActiveComponent,
+    GroupItemActiveUserItemComponent,
+    PopupComponent,
+    BasePopupComponent,
+    BasePopupHeaderComponent,
+    GroupEditPopupComponent,
+    CreateGroupPopupComponent,
+    GenericErrorPopupComponent,
+    InvitationListComponent,
+    InvitationItemComponent,
+    MemberItemComponent,
+    MemberListComponent,
+    AddMemberBarComponent,
+    ErrorPageComponent,
+    GenericConfirmationPopupComponent,
+    RoutingPopupComponent,
+    PopoverComponent,
+    PopoverDirective,
+    OwnerPopoverComponent,
+    AdminPopoverComponent,
+    ProposalAreaComponent,
+    ProposalListComponent,
+    ProposalItemComponent,
+    AddProposalPopupComponent,
+    StartpageComponent,
+    InfoPopupComponent,
+    InvitationPopoverComponent,
+    GroupInvitationListComponent,
+    GroupInvitationItemComponent,
+    RegisterComponent,
+    LoginComponent,
+    AddMemberPopoverComponent
+  ],
     imports: [
         AppRoutingModule,
         BrowserModule,

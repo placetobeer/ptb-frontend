@@ -1,0 +1,29 @@
+<app-routing-popup [navigateToStartpage]="navigateToStartpage">
+
+  <form (ngSubmit)="onSubmit()" class="bg-ptb-gray-500 m-2 p-5 rounded-md h-full object-fill" #f="ngForm">
+    <div class="grid grid-cols-1 gap-4">
+      <div class="div-input-field" [ngClass]="{'border-red-700':proposalName.touched && proposalName.invalid}">
+        <input id="proposalName" name="proposalName" class="input-field" type="text" ngModel required #proposalName="ngModel"/>
+        <label class="label-input-field" [ngClass]="{'text-red-700':proposalName.touched && proposalName.invalid}" for="proposalName">
+          Proposal name
+        </label>
+      </div>
+
+      <!-- dropdown -->
+      <div class="text-md italic">Choose an activity type</div>
+      <div class="relative inline-flex">
+        <select id="activityType" name="activityType" class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none" ngModel>
+          <option *ngFor="let activityType of keys(activityTypes)">{{activityType}}</option>
+        </select>
+      </div>
+
+      <div class="flex flex-row justify-end space-x-4">
+        <button type="submit" class="btn btn-create" [disabled]="!f.valid">Create</button>
+        <button type="button" (click)="onCancel()" class="btn btn-cancel">Cancel</button>
+      </div>
+
+    </div>
+
+  </form>
+
+</app-routing-popup>

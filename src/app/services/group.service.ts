@@ -10,6 +10,7 @@ import {MembershipService} from './membership.service';
 import {CurrentGroupSelector} from "../state-management/currentGroupSelector.context";
 import {CurrentGroupEmpty} from "../state-management/currentGroupEmpty.state";
 import {CurrentGroupSelected} from "../state-management/currentGroupSelected.state";
+import {ProposalService} from "./proposal.service";
 
 @Injectable({
   providedIn: 'root'

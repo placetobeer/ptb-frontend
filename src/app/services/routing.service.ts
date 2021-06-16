@@ -17,4 +17,8 @@ export class RoutingService {
       this.router.navigate(['/hubpage']);
     }
   }
+
+  navigateToStartpage(): void {
+    this.router.navigate(['startpage']);
+  }
 }

@@ -96,7 +96,7 @@ export class GroupEditPopupComponent implements OnInit, OnDestroy {
   }
 
   onDeleteGroup(): void {
-    this.popupHelperService.openConfirmation('');
+    this.popupHelperService.openConfirmation('Do you really want to delete the group?');
     const subscription = this.popupHelperService.confirmationSubject.subscribe({
       next: confirmation => {
         if (confirmation){
