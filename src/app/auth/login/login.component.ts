@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   onCancel(): void {
     this.subForm.reset();
-    // navigate to startpage?
+    this.router.navigate(['']);
   }
 
   onRegister(): void {
