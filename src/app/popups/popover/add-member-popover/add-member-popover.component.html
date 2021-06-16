@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" class="bg-ptb-gray-700 m-2 p-5 rounded-md h-full object-fill" #subForm="ngForm">
+<form (ngSubmit)="onSubmit()" class="bg-ptb-gray-800 pt-4 h-full object-fill" #subForm="ngForm">
 <div class="">
   <svg (click)="onCancel()" class="h-4 w-4 fill-current text-white ml-auto mr-4 cursor-pointer" xmlns="http://www.w3.org/2000/svg"
        viewBox="0 0 20 20" fill="currentColor">
@@ -7,16 +7,16 @@
           clip-rule="evenodd"/>
   </svg>
 
-  <div class="grid grid-cols-1 gap-4">
-    <div class="div-input-field" [ngClass]="{'border-red-700':emailControl.touched && emailControl.invalid}">
+  <div class="flex flex-col pt-5 gap-4 pl-3">
+    <div class="div-input-field w-3/4 border-ptb-gray-300" [ngClass]="{'border-red-700':emailControl.touched && emailControl.invalid}">
       <input id="email" name="email" class="input-field" type="text" ngModel pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required #emailControl="ngModel"/>
-      <label class="label-input-field" [ngClass]="{'text-red-700':emailControl.touched && emailControl.invalid}" for="email">
+      <label class="label-input-field text-white" [ngClass]="{'text-red-700':emailControl.touched && emailControl.invalid}" for="email">
         Email address
       </label>
     </div>
     <div *ngIf="isOwner" class="my-auto space-x-3">
       <input id="grantAdminRole" name="grantAdminRole" type="checkbox" ngModel>
-      <label class="text-ptb-gray-100 text-sm" for="grantAdminRole">
+      <label class="text-sm text-white" for="grantAdminRole">
         Grant admin role
       </label>
     </div>

@@ -61,6 +61,11 @@ export class InvitationService implements OnDestroy{
     const subscription = this.httpInvitationService.sendInvitations(invitationRequest)
       .subscribe({
         next: invitations => {
+          console.log(invitations);
+          for (const invitation of invitations){
+            console.log(invitation);
+            this.addGroupInvitations(new GroupInvitation(invitation.id, invitation.email, null, invitation.role));
+          }
         },
         error: error => {
           this.errorService.handleError(error);

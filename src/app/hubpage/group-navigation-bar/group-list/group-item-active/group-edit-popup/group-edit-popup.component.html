@@ -19,12 +19,14 @@
         <div class="text-md italic">Group members</div>
         <app-member-list [showInvitations]="false" [newGroup]="false"></app-member-list>
         <div class="grid grid-cols-2 gap-4">
-          <div class="max-w-md flex">
+          <div class="max-w-md h-10 flex">
             <button (click)="onAddSingleMember()" type="button" class="btn btn-add ml-auto">Add member</button>
+            <div class="max-h-md flex"></div>
           </div>
           <div *ngIf="displayInvitation" class="w-2/5">
             <app-popover [popover]="popover"></app-popover>
           </div>
+
         </div>
       </div>
       <div class="grid grid-cols-1 gap-4">

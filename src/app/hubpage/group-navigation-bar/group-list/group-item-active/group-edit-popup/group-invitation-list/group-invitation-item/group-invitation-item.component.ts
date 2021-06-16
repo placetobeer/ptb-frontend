@@ -16,11 +16,12 @@ export class GroupInvitationItemComponent implements OnInit {
 
   @Input() groupInvitation: GroupInvitation;
   @Input() invitationId: number;
-  role = GroupRole;
+  role: GroupRole;
 
   constructor(public invitationService: InvitationService, public membershipService: MembershipService) { }
 
   ngOnInit(): void {
+    this.role = this.groupInvitation.role;
   }
 
 }
