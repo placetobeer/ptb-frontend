@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {InvitationResponse} from '../../../entities/invitationResponse.model';
 import {UserInvitationService} from '../../../services/user-invitation.service';
-import {AccountService} from "../../../services/account.service";
 
 @Component({
   selector: 'app-invitation-list',
@@ -10,10 +9,9 @@ import {AccountService} from "../../../services/account.service";
 })
 export class InvitationListComponent implements OnInit {
 
-  constructor(public userInvitationService: UserInvitationService, private accountService: AccountService) { }
+  constructor(public userInvitationService: UserInvitationService) { }
 
   public pendingInvitations: InvitationResponse[];
-  private currentUserId = this.accountService.user.id;
 
   ngOnInit(): void {}
 

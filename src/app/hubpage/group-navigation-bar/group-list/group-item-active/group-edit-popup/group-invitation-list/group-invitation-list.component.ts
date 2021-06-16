@@ -2,7 +2,6 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {InvitationService} from "../../../../../../services/invitation.service";
 import {MembershipService} from "../../../../../../services/membership.service";
 import {GroupService} from "../../../../../../services/group.service";
-import {AccountService} from "../../../../../../services/account.service";
 import {GroupsMembership} from "../../../../../../entities/groupsMembership.model";
 import {GroupRole} from "../../../../../../entities/groupRole.enum";
 import {PopoverItem} from "../../../../../../popups/popover/popover-item";
@@ -19,13 +18,11 @@ import {User} from "../../../../../../entities/user.model";
 })
 export class GroupInvitationListComponent implements OnInit {
   @ViewChild('f', {static: false}) form: NgForm;
-  owner: User = this.accountService.user;
   display;
   popover: PopoverItem;
   invitationId: number;
 
-  constructor(public invitationService: InvitationService, public membershipService: MembershipService,
-              private accountService: AccountService) { }
+  constructor(public invitationService: InvitationService, public membershipService: MembershipService) { }
 
   ngOnInit(): void {
   }

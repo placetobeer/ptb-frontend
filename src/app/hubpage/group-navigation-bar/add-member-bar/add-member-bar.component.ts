@@ -3,7 +3,6 @@ import {User} from '../../../entities/user.model';
 import {InvitationService} from '../../../services/invitation.service';
 import {Invitation} from '../../../entities/invitation.model';
 import {NgForm} from '@angular/forms';
-import {AccountService} from "../../../services/account.service";
 import {InvitationItemComponent} from "../invitation-list/invitation-item/invitation-item.component";
 
 @Component({
@@ -14,8 +13,7 @@ import {InvitationItemComponent} from "../invitation-list/invitation-item/invita
 export class AddMemberBarComponent implements OnInit {
   @ViewChild('subForm', {static: false}) subForm: NgForm;
   errorMessage = 'No valid email address';
-  owner = this.accountService.user;
-  constructor(private invitationService: InvitationService, private accountService: AccountService) { }
+  constructor(private invitationService: InvitationService) { }
 
   ngOnInit(): void {}
 
