@@ -10,6 +10,9 @@ import {Router} from "@angular/router";
 import {RoutingService} from "../../../../../services/routing.service";
 import {Subscription} from "rxjs";
 import {InvitationService} from "../../../../../services/invitation.service";
+import {PopoverItem} from "../../../../../popups/popover/popover-item";
+import {InvitationPopoverComponent} from "../../../../../popups/popover/invitation-popover/invitation-popover.component";
+import {AddMemberPopoverComponent} from "../../../../../popups/popover/add-member-popover/add-member-popover.component";
 
 @Component({
   selector: 'app-group-edit-popup',
@@ -22,7 +25,8 @@ export class GroupEditPopupComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   initialValues;
   showInvitations;
-  pendInv;
+  displayInvitation;
+  popover: PopoverItem;
 
   constructor(private groupService: GroupService, public membershipService: MembershipService,
               private popupHelperService: PopupHelperService, private httpGroupService: HttpGroupService,
@@ -83,6 +87,12 @@ export class GroupEditPopupComponent implements OnInit, OnDestroy {
 
   onCancel(): void {
     this.closePopup();
+  }
+
+  onAddSingleMember(): void{
+    this.displayInvitation = true;
+    this.popover = new PopoverItem(AddMemberPopoverComponent,
+      this.groupService.currentGroup.id);
   }
 
   onDeleteGroup(): void {
