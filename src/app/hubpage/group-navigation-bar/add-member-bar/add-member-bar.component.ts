@@ -3,7 +3,6 @@ import {User} from '../../../entities/user.model';
 import {InvitationService} from '../../../services/invitation.service';
 import {Invitation} from '../../../entities/invitation.model';
 import {NgForm} from '@angular/forms';
-import {AccountService} from "../../../services/account.service";
 import {InvitationItemComponent} from "../invitation-list/invitation-item/invitation-item.component";
 
 @Component({
