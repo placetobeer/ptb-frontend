@@ -28,8 +28,8 @@ jobs:
       
       - name: Generate coverage-report
         run: |
-            npm i
-            ng test
+            npm ci
+            npm run test
             
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@v1
