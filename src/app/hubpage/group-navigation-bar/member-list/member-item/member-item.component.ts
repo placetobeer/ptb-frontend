@@ -16,6 +16,8 @@ export class MemberItemComponent implements OnInit {
   @Input() invitation: Invitation;
   @Input() membership: GroupsMembership;
   @Input() showInvitations;
+  @Input() invitationId: number;
+  @Input() pendInv;
   role = GroupRole;
   userNotOwner;
 

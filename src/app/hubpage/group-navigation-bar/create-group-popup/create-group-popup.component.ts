@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {InvitationService} from '../../../services/invitation.service';
 import {HttpGroupService} from "../../../services/httpServices/http-group.service";
@@ -8,16 +8,19 @@ import {AccountService} from '../../../services/account.service';
 import {ErrorService} from '../../../services/error.service';
 import {MembershipService} from "../../../services/membership.service";
 import {RoutingService} from "../../../services/routing.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-create-group-popup',
   templateUrl: './create-group-popup.component.html',
   styleUrls: ['./create-group-popup.component.css']
 })
-export class CreateGroupPopupComponent implements OnInit {
+export class CreateGroupPopupComponent implements OnInit, OnDestroy {
   @ViewChild('f', {static: false}) form: NgForm;
   ownerId = this.accountService.user.id;
   showInvitations;
+  newGroup;
+  private subscriptions: Subscription[] = [];
 
   constructor(private accountService: AccountService, private httpGroupService: HttpGroupService,
               private errorService: ErrorService, private groupService: GroupService,
@@ -25,7 +28,9 @@ export class CreateGroupPopupComponent implements OnInit {
               private routingService: RoutingService) {}
 
   ngOnInit(): void {
+    this.invitationService.clearGroupInvitations();
     this.showInvitations = true;
+    this.newGroup = true;
   }
 
   onSubmit(): void {
@@ -34,7 +39,7 @@ export class CreateGroupPopupComponent implements OnInit {
   }
 
   createGroup(currentUserId: number, groupName: string): void {
-    this.httpGroupService.createGroupByUserIdAndGroupName(currentUserId, groupName)
+    const subscription = this.httpGroupService.createGroupByUserIdAndGroupName(currentUserId, groupName)
       .subscribe({
         next: group => {
           this.groupService.addGroup(group);
@@ -47,6 +52,7 @@ export class CreateGroupPopupComponent implements OnInit {
           this.errorService.handleError(error);
         }
       });
+    this.subscriptions.push(subscription);
   }
 
   sendInvitationList(groupId: number): void {
@@ -58,5 +64,9 @@ export class CreateGroupPopupComponent implements OnInit {
     this.form.reset();
     this.invitationService.removeAllInvitations();
     this.routingService.navigateToHubpage();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }

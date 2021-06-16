@@ -8,13 +8,20 @@ import {GroupEditPopupComponent} from "./hubpage/group-navigation-bar/group-list
 import {RoutingPopupComponent} from "./popups/routing-popup/routing-popup.component";
 import {StartpageComponent} from "./startpage/startpage.component";
 import {InfoPopupComponent} from "./popups/info-popup/info-popup.component";
+import {LoginComponent} from "./auth/login/login.component";
+import {RegisterComponent} from "./auth/register/register.component";
+import {AddMemberComponent} from "./hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/add-member/add-member.component";
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'hubpage', component: HubpageComponent, children: [
       {path: 'new', component: CreateGroupPopupComponent}
     ]},
   {path: 'hubpage/:id', component: HubpageComponent, children: [
-      {path: 'edit', component: GroupEditPopupComponent}
+      {path: 'edit', component: GroupEditPopupComponent, children: [
+          {path: 'add', component: AddMemberComponent}
+        ]}
     ]},
   {path: 'error', component: ErrorPageComponent},
   {path: 'startpage', component: StartpageComponent, children: [

@@ -13,11 +13,12 @@ export class MockHttpMembershipService {
   }
 
   loadUserMembershipsByGroupId(groupId: number): Observable<GroupsMembership[]> {
-    const mockUserMembership: GroupsMembership[] = Array(new GroupsMembership(new User(1, 'Patrick'), GroupRole.OWNER),
-      new GroupsMembership(new User(2, 'Bea'), GroupRole.ADMIN),
-      new GroupsMembership(new User(3, 'Lucie'), GroupRole.ADMIN),
-      new GroupsMembership(new User(4, 'Katja'), GroupRole.MEMBER),
-      new GroupsMembership(new User(5, 'Tom'), GroupRole.MEMBER));
+    const mockUserMembership: GroupsMembership[] = Array(
+      new GroupsMembership(1, new User(1, 'Patrick', "patrick@mail.com", "", new Date()), GroupRole.OWNER),
+      new GroupsMembership(2, new User(2, 'Bea', "bea@mail.com", "", new Date()), GroupRole.ADMIN),
+      new GroupsMembership(3, new User(3, 'Lucie', "lucie@mail.com", "", new Date()), GroupRole.ADMIN),
+      new GroupsMembership(4, new User(4, 'Katja', "katja@mail.com", "", new Date()), GroupRole.MEMBER),
+      new GroupsMembership(5, new User(5, 'Tom', "tom@mail.com", "", new Date()), GroupRole.MEMBER));
     return new Observable(observer => observer.next(mockUserMembership));
   }
 }

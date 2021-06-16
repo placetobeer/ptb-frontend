@@ -1,0 +1,37 @@
+<div>
+  <h1> Login to PlaceToBeer!</h1>
+  <form (ngSubmit)="onLogin()" #subForm="ngForm">
+
+
+    <div class="flex flex-col div-input-field"
+         [ngClass]="{'border-red-700': emailControl.touched && emailControl.invalid}">
+      <label class="label-input-field" [ngClass]="{'border-red-700': emailControl.touched && emailControl.invalid}"
+             for="email">
+        email </label>
+      <input id="email" name="email" class="input-field"
+             type="text" placeholder="email" ngModel pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
+             #emailControl="ngModel"/>
+    </div>
+    <div class="flex flex-col div-input-field"
+         [ngClass]="{'border-red-700': pwControl.invalid}">
+      <label class="label-input-field" [ngClass]="{'border-red-700': pwControl.invalid}"
+             for="pw"
+      >Password </label>
+      <input class="input-field" id="pw" name="pw"
+             type="password" placeholder="" ngModel minlength="8" #pwControl="ngModel"/>
+    </div>
+    <div class="flex flex-row">
+      <button class="btn btn-create cursor-pointer"
+              type="submit" [disabled]="(pwControl.invalid||!pwControl.touched)||emailControl.invalid">
+        Login
+      </button>
+      <button class="btn btn-cancel cursor-pointer" type="button" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+    <button class="btn bg-ptb-blue-600 cursor-pointer" type="button" (click)="onRegister()">
+      No Account yet? Register Here!
+    </button>
+  </form>
+</div>
+

@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, ComponentRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {PopoverDirective} from "./popover.directive";
 import {PopoverItem} from "./popover-item";
 import {PopoverInterface} from "./popover.interface";
@@ -7,13 +7,16 @@ import {PopoverInterface} from "./popover.interface";
   selector: 'app-popover',
   templateUrl: './popover.component.html',
 })
-export class PopoverComponent implements OnInit{
+export class PopoverComponent implements OnInit, OnChanges{
   @Input() popover: PopoverItem;
   @ViewChild(PopoverDirective, {static: true}) popupHost!: PopoverDirective;
+  componentRef: ComponentRef<PopoverInterface>;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnChanges(): void {
     if (this.popover !== undefined) {
       this.loadComponent();
     }
@@ -25,8 +28,17 @@ export class PopoverComponent implements OnInit{
     const viewContainerRef = this.popupHost.viewContainerRef;
     viewContainerRef.clear();
 
-    const componentRef = viewContainerRef.createComponent<PopoverInterface>(componentFactory);
-    componentRef.instance.data = this.popover.data;
+    this.componentRef = viewContainerRef.createComponent<PopoverInterface>(componentFactory);
+    this.componentRef.instance.data = this.popover.data;
+
+    const component = this.componentRef.instance;
+    component.popoverComponentRef = this;
   }
 
+  removeComponent(): void {
+    const viewContainerRef = this.popupHost.viewContainerRef;
+    if (viewContainerRef.length < 1) {return; }
+
+    viewContainerRef.remove();
+  }
 }
