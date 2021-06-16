@@ -17,7 +17,6 @@ import {Subscription} from "rxjs";
 })
 export class CreateGroupPopupComponent implements OnInit, OnDestroy {
   @ViewChild('f', {static: false}) form: NgForm;
-  ownerId = this.accountService.user.id;
   showInvitations;
   newGroup;
   private subscriptions: Subscription[] = [];
@@ -34,7 +33,7 @@ export class CreateGroupPopupComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.createGroup(this.ownerId, this.form.value.groupName);
+    this.createGroup(this.accountService.user.id, this.form.value.groupName);
     this.form.reset();
   }
 
