@@ -23,7 +23,6 @@ export class MemberListComponent implements OnInit {
   owner: User = this.accountService.user;
   @Input() showInvitations;
   @Input() newGroup;
-  @Input() pendInv;
   display;
   popover: PopoverItem;
   userMembership: GroupsMembership;
@@ -66,7 +65,6 @@ export class MemberListComponent implements OnInit {
   }
 
   private createPopoverItem(): void {
-    if (!this.pendInv){
       switch (this.checkGroupRole()) {
         case GroupRole.OWNER: {
           this.popover = new PopoverItem(OwnerPopoverComponent, this.userMembership);
@@ -81,20 +79,5 @@ export class MemberListComponent implements OnInit {
           break;
         }
       }
-    }
-    else {
-      switch (this.checkGroupRole()) {
-        case GroupRole.OWNER:
-        case GroupRole.ADMIN:
-        { this.popover = new PopoverItem(InvitationPopoverComponent,
-          this.invitationId);
-          break;
-        }
-        default: {
-          this.display = false;
-          break;
-        }
-      }
-    }
   }
 }

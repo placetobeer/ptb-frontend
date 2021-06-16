@@ -4,7 +4,7 @@
 </div>
 
 <!--  invitation-member list-->
-<div *ngIf="showInvitations && !pendInv">
+<div *ngIf="showInvitations">
   <app-member-item *ngFor="let invitation of (invitationService.invitations$ | async)"
     [invitation]="invitation" [showInvitations]="true"
   ></app-member-item>
