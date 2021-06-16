@@ -7,7 +7,6 @@ import {PopupComponent} from "./popups/abstract-popup/popup.component";
 import {GroupEditPopupComponent} from "./hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-edit-popup.component";
 import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
-import {AddMemberComponent} from "./hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/add-member/add-member.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -16,9 +15,7 @@ const routes: Routes = [
       {path: 'new', component: CreateGroupPopupComponent}
     ]},
   {path: 'hubpage/:id', component: HubpageComponent, children: [
-      {path: 'edit', component: GroupEditPopupComponent, children: [
-          {path: 'add', component: AddMemberComponent}
-        ]}
+      {path: 'edit', component: GroupEditPopupComponent}
     ]},
   {path: 'error', component: ErrorPageComponent},
   {path: '', redirectTo: '/hubpage', pathMatch: 'full'},

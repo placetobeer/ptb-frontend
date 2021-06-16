@@ -34,7 +34,6 @@ import { PopoverComponent } from './popups/popover/popover.component';
 import { PopoverDirective } from './popups/popover/popover.directive';
 import { OwnerPopoverComponent } from './popups/popover/owner-popover/owner-popover.component';
 import { AdminPopoverComponent } from './popups/popover/admin-popover/admin-popover.component';
-import { AddMemberComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/add-member/add-member.component';
 import { InvitationPopoverComponent } from './popups/popover/invitation-popover/invitation-popover.component';
 import { GroupInvitationListComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-invitation-list/group-invitation-list.component';
 import { GroupInvitationItemComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-invitation-list/group-invitation-item/group-invitation-item.component';
@@ -66,7 +65,6 @@ import { AddMemberPopoverComponent } from './popups/popover/add-member-popover/a
         GenericConfirmationPopupComponent,
         LoginComponent,
         RegisterComponent,
-        AddMemberComponent,
         PopoverComponent,
         RoutingPopupComponent,
         PopoverDirective,
