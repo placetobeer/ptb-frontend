@@ -31,8 +31,6 @@ export class InvitationService implements OnDestroy{
   // private readonly groupInvitationsIdSubject = new BehaviorSubject<number[]>([]);
   // public readonly groupInvitationsId$ = this.groupInvitationsIdSubject.asObservable();
 
-  owner = this.accountService.user;
-
   private readonly autoRefreshSubscription =  interval(30000).pipe(startWith(0)).subscribe(() => {
     // this.loadInvitations();
   });
@@ -59,7 +57,7 @@ export class InvitationService implements OnDestroy{
   }
 
   sendInvitationRequest(groupId: number): void {
-    const invitationRequest = new InvitationRequest(groupId, this.owner, this.invitations);
+    const invitationRequest = new InvitationRequest(groupId, this.accountService.user, this.invitations);
     const subscription = this.httpInvitationService.sendInvitations(invitationRequest)
       .subscribe({
         next: invitations => {
