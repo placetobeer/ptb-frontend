@@ -16,4 +16,8 @@ export class StartpageComponent implements OnInit {
   onLearnMore(): void {
     this.router.navigate(['startpage/info']);
   }
+
+  onLogin(): void {
+    this.router.navigate(['login']);
+  }
 }
