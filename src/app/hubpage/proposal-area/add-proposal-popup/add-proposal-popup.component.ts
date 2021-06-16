@@ -10,6 +10,7 @@ import {AccountService} from "../../../services/account.service";
 import {Proposal} from "../../../entities/proposal.model";
 import {Group} from "../../../entities/group.model";
 import {GroupService} from "../../../services/group.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-proposal-popup',
@@ -24,7 +25,7 @@ export class AddProposalPopupComponent implements OnDestroy {
 
   constructor(private routingService: RoutingService, private httpProposalService: HttpProposalService,
               private proposalService: ProposalService, private errorService: ErrorService,
-              private groupService: GroupService) { }
+              private groupService: GroupService, private router: Router) { }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
@@ -46,6 +47,7 @@ export class AddProposalPopupComponent implements OnDestroy {
       .subscribe({
         next: proposal => {
           this.proposalService.addProposal(proposal);
+          this.router.navigate(['/hubpage/' + this.groupService.currentGroup.id]);
         },
         error: error => {
           this.errorService.handleError(error);
