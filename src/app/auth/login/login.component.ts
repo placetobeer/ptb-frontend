@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
+import {RoutingService} from "../../services/routing.service";
 
 @Component({
   selector: 'app-auth',
@@ -10,22 +12,25 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   @ViewChild('subForm', {static: false}) subForm: NgForm;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+              private authService: AuthService, private routingService: RoutingService) { }
 
   ngOnInit(): void {
   }
 
 
   onLogin(): void {
-    // TODO: add functionality wen Login button pressed
+    this.authService.authenticate(4, this.subForm.value.email, "Patrick", "", 12000);
+    this.subForm.reset();
+    this.routingService.navigateToHubpage();
   }
 
   onCancel(): void {
-    // TODO: resetForm()
+    this.subForm.reset();
+    this.router.navigate(['']);
   }
 
   onRegister(): void {
     this.router.navigate(['/register']);
-    // TODO: route to /register - register.component
   }
 }
