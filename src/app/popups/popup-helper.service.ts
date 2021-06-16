@@ -25,7 +25,7 @@ export class PopupHelperService {
     if (confirmationMessage !== ''){
       this.confirmationMessageSubject.next(confirmationMessage);
     }else {
-      this.confirmationMessageSubject.next('you sure bro?');
+      this.confirmationMessageSubject.next('Are you sure?');
     }
     this.popupservice.open('generic-confirmation-popup');
   }
