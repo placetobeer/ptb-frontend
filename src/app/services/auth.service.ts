@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {User} from "../entities/user.model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AccountService} from "./account.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user =  new User(id, name, email, token, expirationDate);
     this.currentUser.next(user);
+    this.accountService.setNewUser(user);
     this.router.navigate(['/hubpage']);
     // localStorage.setItem('P2BToken', user.token);
     localStorage.setItem('P2BUserData', JSON.stringify(user));
@@ -45,7 +47,7 @@ export class AuthService {
     }
   }
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private accountService: AccountService) { }
 
 
 }

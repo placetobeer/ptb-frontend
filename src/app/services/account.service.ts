@@ -9,4 +9,8 @@ export class AccountService {
   user: User = new User(4, 'Patrick', 'patrick.mail@gmail.com', "", new Date());
 
   constructor() { }
+
+  setNewUser(user: User): void{
+    this.user = user;
+  }
 }
