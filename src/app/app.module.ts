@@ -40,7 +40,6 @@ import { ProposalItemComponent } from './hubpage/proposal-area/proposal-item/pro
 import { AddProposalPopupComponent } from './hubpage/proposal-area/add-proposal-popup/add-proposal-popup.component';
 import { StartpageComponent } from './startpage/startpage.component';
 import { InfoPopupComponent } from './popups/info-popup/info-popup.component';
-import { AddMemberComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/add-member/add-member.component';
 import { InvitationPopoverComponent } from './popups/popover/invitation-popover/invitation-popover.component';
 import { GroupInvitationListComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-invitation-list/group-invitation-list.component';
 import { GroupInvitationItemComponent } from './hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-invitation-list/group-invitation-item/group-invitation-item.component';
