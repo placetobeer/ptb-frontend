@@ -1,6 +1,5 @@
 # PtbFrontend
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/369534b6d5b947b08c35f99ec518ae4d)](https://www.codacy.com/gh/placetobeer/ptb-frontend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=placetobeer/ptb-frontend&amp;utm_campaign=Badge_Grade)
-![Travis (.org)](https://img.shields.io/travis/placetobeer/ptb-frontend)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
 
