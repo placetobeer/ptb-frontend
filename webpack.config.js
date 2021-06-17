@@ -13,7 +13,8 @@ module.exports = {
               require('tailwindcss'),
               require('autoprefixer'),
               /*delete the part till && if you want tailwind to load faster in dev mode*/
-              process.env.NODE_ENV === 'production' && require('@fullhuman/postcss-purgecss')({
+              /*process.env.NODE_ENV === 'production' &&*/
+              require('@fullhuman/postcss-purgecss')({
                 content: [
                   './**/*.html',
                   './**/*.ts',
