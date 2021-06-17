@@ -39,6 +39,7 @@ export class GroupEditPopupComponent implements OnInit, OnDestroy {
       groupName : this.groupService.currentGroup.name
     };
     this.showInvitations = false;
+    this.invitationService.clearGroupInvitations();
     this.invitationService.loadGroupInvitations(this.group.id);
   }
 
