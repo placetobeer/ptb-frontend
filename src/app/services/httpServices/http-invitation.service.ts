@@ -15,24 +15,24 @@ export class HttpInvitationService {
   }
 
   loadInvitationsByUserId(userId: number): Observable<InvitationResponse[]>{
-    return this.http.get<InvitationResponse[]>('http://localhost:8080/invitations/byUser',
+    return this.http.get<InvitationResponse[]>('/api/invitations/byUser',
       {params: new HttpParams().set('userId', String(userId))});
   }
 
   answerInvitationByInvitationId(invitationId: number, decision: boolean): Observable<any>{
-    return this.http.put('http://localhost:8080/invitations/' + invitationId + '/answer', decision, { headers: new HttpHeaders({
+    return this.http.put('/api/invitations/' + invitationId + '/answer', decision, { headers: new HttpHeaders({
         'Content-Type': 'application/json;charset=UTF-8',
       })});
   }
 
   sendInvitations(invitationRequest: InvitationRequest): Observable<any> {
-    return this.http.post('http://localhost:8080/invitations', invitationRequest, { headers: new HttpHeaders({
+    return this.http.post('/api/invitations', invitationRequest, { headers: new HttpHeaders({
         'Content-Type': 'application/json;charset=UTF-8',
       })});
   }
 
   loadInvitationsByGroupId(groupId: number): Observable<GroupInvitation[]>{
-    return this.http.get<GroupInvitation[]>('http://localhost:8080/invitations/byGroup',
+    return this.http.get<GroupInvitation[]>('/api/invitations/byGroup',
       {params: new HttpParams().set('groupId', String(groupId))});
   }
 }

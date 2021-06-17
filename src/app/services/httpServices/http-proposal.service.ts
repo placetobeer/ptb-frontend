@@ -12,11 +12,11 @@ export class HttpProposalService {
   }
 
   loadProposalsByGroupId(groupId: number): Observable<Proposal[]> {
-    return this.http.get<Proposal[]>('http://localhost:8080/proposals', {params: new HttpParams().set('groupId', String(groupId))});
+    return this.http.get<Proposal[]>('/api/proposals', {params: new HttpParams().set('groupId', String(groupId))});
   }
 
   createProposalByUserId(proposalRequest: Proposal): Observable<Proposal> {
-    return this.http.post<Proposal>('http://localhost:8080/proposals', proposalRequest,
+    return this.http.post<Proposal>('/api/proposals', proposalRequest,
       {headers: new HttpHeaders({
           'Content-Type': 'application/json;charset=UTF-8',
         })});

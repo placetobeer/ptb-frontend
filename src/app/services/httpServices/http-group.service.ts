@@ -12,23 +12,23 @@ export class HttpGroupService{
   }
 
   loadGroupsByUserId(userId: number): Observable<Group[]> {
-    return this.http.get<Group[]>('http://localhost:8080/groups', {params: new HttpParams().set('userId', String(userId))});
+    return this.http.get<Group[]>('/api/groups', {params: new HttpParams().set('userId', String(userId))});
   }
 
   createGroupByUserIdAndGroupName(userId: number, groupName: string): Observable<Group> {
-    return this.http.post<Group>('http://localhost:8080/groups', groupName,
+    return this.http.post<Group>('/api/groups', groupName,
       { params: new HttpParams().set('userId', String(userId)), headers: new HttpHeaders({
           'Content-Type': 'application/json;charset=UTF-8',
         })});
   }
 
   setGroupNameByGroupId(groupId: number, groupName: string): Observable<any> {
-    return this.http.put('http://localhost:8080/groups/' + groupId + '/name', groupName, { headers: new HttpHeaders({
+    return this.http.put('/api/groups/' + groupId + '/name', groupName, { headers: new HttpHeaders({
         'Content-Type': 'application/json;charset=UTF-8',
       })});
   }
 
   deleteGroupByGroupId(groupId: number): Observable<any> {
-    return this.http.delete('http://localhost:8080/groups/' + groupId);
+    return this.http.delete('/api/groups/' + groupId);
   }
 }
