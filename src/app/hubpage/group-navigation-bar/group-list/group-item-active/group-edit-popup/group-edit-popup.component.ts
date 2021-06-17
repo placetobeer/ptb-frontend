@@ -31,7 +31,7 @@ export class GroupEditPopupComponent implements OnInit, OnDestroy {
   constructor(private groupService: GroupService, public membershipService: MembershipService,
               private popupHelperService: PopupHelperService, private httpGroupService: HttpGroupService,
               private errorService: ErrorService, private routingService: RoutingService,
-              private invitationService: InvitationService) { }
+              private invitationService: InvitationService, private router: Router) { }
 
   ngOnInit(): void {
     this.group = this.groupService.currentGroup;

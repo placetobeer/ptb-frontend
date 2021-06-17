@@ -32,7 +32,9 @@ export class AddProposalPopupComponent implements OnDestroy {
   }
 
   onSubmit(): void {
-    this.createProposal(this.groupService.currentGroup.id, this.form.value.proposalName, this.form.value.activityType);
+    if (this.groupService.currentGroup.id !== null){
+      this.createProposal(this.groupService.currentGroup.id, this.form.value.proposalName, this.form.value.activityType);
+    }
     this.form.reset();
   }
 
@@ -47,7 +49,7 @@ export class AddProposalPopupComponent implements OnDestroy {
       .subscribe({
         next: proposal => {
           this.proposalService.addProposal(proposal);
-          this.router.navigate(['/hubpage/' + this.groupService.currentGroup.id]);
+          this.routingService.navigateToHubpage();
         },
         error: error => {
           this.errorService.handleError(error);

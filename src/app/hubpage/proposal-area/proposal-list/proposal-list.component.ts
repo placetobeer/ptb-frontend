@@ -10,7 +10,6 @@ export class ProposalListComponent implements OnInit {
   constructor(public proposalService: ProposalService) { }
 
   ngOnInit(): void {
-    console.log(this.proposalService.proposalList$);
   }
 
 }

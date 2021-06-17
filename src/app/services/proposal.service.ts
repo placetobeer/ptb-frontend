@@ -15,16 +15,22 @@ export class ProposalService implements OnDestroy {
 
   constructor(private errorService: ErrorService, private groupService: GroupService,
               private httpProposalService: HttpProposalService) {
-    this.loadProposals();
+    if (this.checkIfCurrentGroupExists()){
+      this.loadProposals();
+    }
     this.subscriptions.push(this.groupService.currentGroup$.subscribe({
       next: currentGroup => {
-        this.loadProposals();
+        if (this.checkIfCurrentGroupExists()){
+          this.loadProposals();
+        }
       }
     }));
   }
 
   private readonly autoRefreshSubscription =  interval(30000).pipe(startWith(0)).subscribe(() => {
-    this.loadProposals();
+    if (this.checkIfCurrentGroupExists()){
+      this.loadProposals();
+    }
   });
 
   private readonly proposalListSubject = new BehaviorSubject<Proposal[]>([]);
@@ -32,6 +38,10 @@ export class ProposalService implements OnDestroy {
 
   get proposals(): Proposal[] {
     return this.proposalListSubject.value;
+  }
+
+  private checkIfCurrentGroupExists(): boolean {
+    return this.groupService.currentGroup !== null;
   }
 
   addProposal(proposal: Proposal): void{
