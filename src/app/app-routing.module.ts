@@ -1,15 +1,15 @@
 import {RouterModule, Routes} from '@angular/router';
-import {ErrorPageComponent} from './error/error-page/error-page.component';
+import {ErrorPageComponent} from './views/error-page/error-page.component';
 import {NgModule} from '@angular/core';
-import {HubpageComponent} from './hubpage/hubpage.component';
-import {CreateGroupPopupComponent} from "./hubpage/group-navigation-bar/create-group-popup/create-group-popup.component";
-import {GroupEditPopupComponent} from "./hubpage/group-navigation-bar/group-list/group-item-active/group-edit-popup/group-edit-popup.component";
-import {RoutingPopupComponent} from "./popups/routing-popup/routing-popup.component";
+import {HubpageComponent} from './views/hubpage/hubpage.component';
+import {CreateGroupPopupComponent} from "./views/popups/routing-popups/create-group-popup/create-group-popup.component";
+import {GroupEditPopupComponent} from "./views/popups/routing-popups/group-edit-popup/group-edit-popup.component";
+import {RoutingPopupComponent} from "./views/popups/routing-popup/routing-popup.component";
 import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
-import {StartpageComponent} from "./startpage/startpage.component";
-import {InfoPopupComponent} from "./popups/info-popup/info-popup.component";
-import {AddProposalPopupComponent} from "./hubpage/proposal-area/add-proposal-popup/add-proposal-popup.component";
+import {StartpageComponent} from "./views/startpage/startpage.component";
+import {InfoPopupComponent} from "./views/popups/routing-popups/info-popup/info-popup.component";
+import {AddProposalPopupComponent} from "./views/popups/routing-popups/add-proposal-popup/add-proposal-popup.component";
 
 
 const routes: Routes = [

@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../../services/auth.service";
-import {RoutingService} from "../../services/routing.service";
-import {GroupService} from "../../services/group.service";
+import {AuthService} from "../../core/services/auth.service";
+import {RoutingService} from "../../core/services/routing.service";
+import {GroupService} from "../../core/services/group.service";
 
 @Component({
   selector: 'app-auth',

@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {AuthService} from "../../services/auth.service";
-import {RoutingService} from "../../services/routing.service";
+import {AuthService} from "../../core/services/auth.service";
+import {RoutingService} from "../../core/services/routing.service";
 import {Router} from "@angular/router";
-import {GroupService} from "../../services/group.service";
+import {GroupService} from "../../core/services/group.service";
 
 @Component({
   selector: 'app-register',
