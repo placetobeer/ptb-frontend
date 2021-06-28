@@ -94,26 +94,6 @@ export class InvitationService implements OnDestroy{
     this.groupInvitationsSubject.next([]);
   }
 
-  /*get groupInvitationsId(): number[] {
-    return this.groupInvitationsIdSubject.value;
-  }
-
-  addGroupInvitationsId(newGroupInvitationsId: number): void {
-    this.groupInvitationsIdSubject.next([
-      ...this.groupInvitationsId,
-      newGroupInvitationsId
-    ]);
-  }
-
-  clearGroupInvitationsId(): void {
-    this.groupInvitationsIdSubject.next([]);
-  }
-
-  addFusionGroupInvitations(groupInvitation: GroupInvitation): void{
-    this.addGroupInvitationsId(groupInvitation.id);
-    this.addGroupInvitations(new Invitation(groupInvitation.mail, groupInvitation.grantAdmin));
-  }*/
-
   loadGroupInvitations(groupId: number): void {
     this.clearGroupInvitations();
     const subscription = this.httpInvitationService.loadInvitationsByGroupId(groupId).subscribe({
